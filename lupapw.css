@@ -1,0 +1,223 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+@font-face {
+  font-family: "Coolvetica";
+  src: url("assets/Coolvetica Rg.otf") format("opentype");
+}
+
+/* Reset dasar */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f3f3f3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Coolvetica", "Montserrat", sans-serif;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 15px;
+  width: 90vw;
+  height: 90vh;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  margin: 0;
+}
+
+/* Left side */
+.left-side {
+  background: url(gmbr_lupapw/Gambar.png) center/cover no-repeat;
+  border-radius: 15px;
+  position: relative;
+  width: 50%;
+  height: 100%;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 15px 20px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 5px 15px;
+}
+
+.overlay button {
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  border-radius: 15px;
+  margin-top: 5px;
+  padding: 5px 15px;
+  cursor: pointer;
+}
+
+.overlay a {
+  color: #000000;
+  text-decoration: none;
+}
+
+/* Right side */
+.right-side {
+  width: 50%;
+  margin-left: 25px;
+  padding: 40px 50px;
+}
+
+.right-side h1 {
+  margin-bottom: 10px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.right-side p {
+  color: #555;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  margin-bottom: 25px;
+}
+
+.right-side label {
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+}
+
+.right-side a {
+  color: #0047ff;
+  text-decoration: none;
+  font-style: italic;
+}
+
+.right-side a:hover {
+  text-decoration: underline;
+}
+
+form input {
+  color: #000000;
+  background-color: #f3c27a;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  font-size: 16px;
+  width: 100%;
+  padding: 15px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.submit {
+  color: #ffffff;
+  background-color: #a77944;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  font-size: 16px;
+  width: 100%;
+  padding: 15px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #8b581e;
+}
+
+/* Desktop (min-width: 1024px) */
+@media (min-width: 1024px) {
+}
+
+/* Tablet (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+    padding: 20px;
+    width: 95vw;
+  }
+
+  .left-side {
+    width: 100%;
+    height: 250px;
+    border-radius: 10px;
+  }
+
+  .overlay {
+    padding: 10px 15px;
+  }
+
+  .right-side {
+    width: 100%;
+    margin-left: 0;
+    padding: 25px 30px;
+  }
+
+  form input,
+  .submit-button {
+    font-size: 14px;
+    padding: 12px;
+  }
+}
+
+/* Smartphone (max-width: 600px) */
+@media (max-width: 600px) {
+  body {
+    height: auto;
+    min-height: 100vh;
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .container {
+    width: 95vw;
+    height: auto;
+    flex-direction: column;
+    padding: 15px;
+    margin: auto;
+  }
+
+  .left-side {
+    width: 100%;
+    height: 180px;
+    border-radius: 10px;
+    background: url(assets/login.png) center/cover no-repeat;
+  }
+
+  .overlay {
+    padding: 10px;
+  }
+
+  .right-side {
+    width: 100%;
+    margin-left: 0;
+    padding: 25px 15px;
+  }
+
+  form input,
+  .submit-button {
+    padding: 12px;
+    font-size: 15px;
+  }
+}

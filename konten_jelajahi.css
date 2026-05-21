@@ -1,0 +1,173 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+@font-face {
+  font-family: "Coolvetica";
+  src: url("coolvetica/Coolvetica\ Rg.otf") format("opentype");
+}
+
+.hero {
+  height: 50vh;
+  background: url("gmbr_kontenjljh/heroKarawitan.png") center/cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+
+.nama {
+  margin-top: 50px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.nama h1 {
+  font-family: "Coolvetica", sans-serif;
+  font-weight: 400;
+  font-size: 32px;
+}
+
+.nama h3 {
+  font-size: 18px;
+  font-weight: 500;
+  font-family: "Montserrat", sans-serif;
+}
+
+.nama hr {
+  width: 300px;
+  margin: 0 auto;
+}
+
+.konten {
+  margin-left: 170px;
+  margin-right: 170px;
+  margin-top: 50px;
+  margin-bottom: 86px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.konten h2 {
+  margin-bottom: 15px;
+  font-size: 22px;
+  font-family: "Coolvetica", sans-serif;
+  font-weight: 400;
+  color: #543a14;
+}
+
+.konten p {
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+}
+
+.instrumen-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-top: 15px;
+}
+
+.chip {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 100px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align: center;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+}
+
+.galeri-karawitan ul {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.galeri-karawitan .gambar1 img,
+.galeri-karawitan .gambar2 img,
+.galeri-karawitan .gambar3 img {
+  border-radius: 10px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .konten {
+    margin-left: 50px;
+    margin-right: 50px;
+    gap: 50px;
+  }
+
+  .nama hr {
+    width: 250px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .hero {
+    height: 40vh;
+  }
+
+  .nama {
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+
+  .nama h1 {
+    font-size: 24px;
+  }
+
+  .nama h3 {
+    font-size: 16px;
+  }
+
+  .nama hr {
+    width: 200px;
+  }
+
+  .konten {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    gap: 40px;
+  }
+
+  .konten h2 {
+    font-size: 21px;
+  }
+
+  .konten p {
+    font-size: 15px;
+  }
+
+  .instrumen-container {
+    gap: 10px;
+  }
+
+  .chip {
+    font-size: 14px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .galeri-karawitan ul {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .galeri-karawitan .gambar1 img,
+  .galeri-karawitan .gambar2 img,
+  .galeri-karawitan .gambar3 img {
+    width: 100%;
+  }
+}

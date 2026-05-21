@@ -1,0 +1,302 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+@font-face {
+  font-family: "Coolvetica";
+  src: url("assets/Coolvetica Rg.otf") format("opentype");
+}
+
+/* Reset dasar */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f3f3f3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Coolvetica", "Montserrat", sans-serif;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 15px;
+  width: 90vw;
+  height: 90vh;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  margin: 0;
+}
+
+/* Left side */
+.left-side {
+  background: url(assets/login.png) center/cover no-repeat;
+  border-radius: 15px;
+  position: relative;
+  width: 50%;
+  height: 100%;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 15px 20px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 5px 0;
+}
+
+.logo p {
+  font-size: 20px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+}
+
+.overlay button {
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  border-radius: 15px;
+  font-size: 12px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  margin: 10px 0;
+  padding: 5px 15px;
+  cursor: pointer;
+}
+
+.overlay a {
+  color: #000000;
+  text-decoration: none;
+}
+
+/* Right side */
+.right-side {
+  width: 50%;
+  margin-left: 25px;
+  padding: 40px 50px;
+}
+
+.right-side h1 {
+  font-size: 40px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.right-side p {
+  color: #555;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  margin-bottom: 25px;
+}
+
+.right-side a {
+  color: #0047ff;
+  text-decoration: none;
+  font-style: italic;
+}
+
+.right-side a:hover {
+  text-decoration: underline;
+}
+
+form input {
+  color: #000000;
+  background-color: #f3c27a;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  font-size: 16px;
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.name-group {
+  display: flex;
+  gap: 10px;
+}
+
+.submit-button {
+  color: #ffffff;
+  background-color: #a77944;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  font-size: 16px;
+  width: 100%;
+  padding: 15px;
+  margin-top: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #8b581e;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  opacity: 60%;
+  font-size: 16px;
+}
+
+.divider hr {
+  flex: 1;
+  border: 1px solid #000000 60%;
+}
+
+.divider p {
+  color: #000000;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  margin: 0 10px;
+}
+
+.social-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.social-buttons button {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #000000;
+  background-color: #f0bb78;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  font-size: 16px;
+  padding: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.social-buttons button:hover {
+  background-color: #e0a64d;
+}
+
+.social-buttons img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Desktop (min-width: 1024px) */
+@media (min-width: 1024px) {
+}
+
+/* Tablet (max-width: 1024px) */
+@media (max-width: 1024px) {
+  body {
+    height: auto;
+    min-height: 100vh;
+    padding: 30px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .container {
+    width: 95vw;
+    height: auto;
+    flex-direction: column;
+    padding: 20px;
+    margin: auto;
+  }
+
+  .left-side {
+    width: 100%;
+    height: 260px;
+    border-radius: 12px;
+  }
+
+  .right-side {
+    width: 100%;
+    margin-left: 0;
+    padding: 30px 20px;
+  }
+
+  .name-group {
+    flex-direction: column;
+    gap: 5px;
+  }
+}
+
+/* Smartphone (max-width: 600px) */
+@media (max-width: 600px) {
+  body {
+    height: auto;
+    min-height: 100vh;
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .container {
+    width: 95vw;
+    height: auto;
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  .left-side {
+    width: 100%;
+    height: 180px;
+    border-radius: 10px;
+    background: url(../swaranusa_project/assets/login.png) center/cover
+      no-repeat;
+  }
+
+  .right-side {
+    width: 100%;
+    padding: 25px 15px;
+    margin-left: 0;
+  }
+
+  form input,
+  .submit-button,
+  .social-buttons button {
+    padding: 12px;
+    font-size: 15px;
+  }
+
+  .name-group {
+    gap: 0;
+  }
+
+  .error-msg {
+  color: #cc0000;
+  font-size: 13px;
+  margin-bottom: 10px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.success-msg {
+  color: #1a7a1a;
+  font-size: 13px;
+  margin-bottom: 10px;
+  font-family: "Montserrat", sans-serif;
+}
+}

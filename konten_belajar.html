@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <title>Belajar SwaraNusa</title>
+    <link rel="stylesheet" href="konten_belajar.css" />
+    <link rel="stylesheet" href="navbar.css" />
+    <script src="konten_belajar.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <ul class="logo-navbar">
+        <li>
+          <img src="gmbr_gnrl/logo.svg" width="20px" height="30px" />
+        </li>
+        <li><h1>SwaraNusa</h1></li>
+      </ul>
+
+      <div class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <nav id="navMenu">
+        <ul>
+          <li><a href="index.html" onclick="closeMenu()">Beranda</a></li>
+          <li><a href="jelajahi.html" onclick="closeMenu()">Jelajahi</a></li>
+          <li><a href="belajar.html" onclick="closeMenu()">Belajar</a></li>
+          <li><a href="tentang.html" onclick="closeMenu()">Tentang</a></li>
+          <li>
+            <a href="register.html" onclick="closeMenu()"
+              ><img src="gmbr_gnrl/usr.png" width="20px" height="20px"
+            /></a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="hero" id="home"></section>
+
+    <section class="isi">
+      <div class="nama">
+        <h1>Angklung</h1>
+        <hr />
+        <h3>Alat Musik dari Jawa Barat</h3>
+      </div>
+      <div class="konten">
+        <div class="pengertian">
+          <h2>Pengertian</h2>
+          <p>
+            Angklung adalah alat musik dari Jawa Barat yang dimainkan dengan
+            cara digoyang untuk menghasilkan suara. Alat<br />
+            musik ini terbuat dari bahan bambu dan terdiri atas 2 sampai 4
+            tabung bambu. Angklung bisa dimainkan secara solo <br />
+            atau kelompok untuk memainkan nada dalam pola atau melodi tertentu.
+          </p>
+        </div>
+        <div class="ayo-belajar">
+          <h2>Ayo Belajar!</h2>
+          <p>
+            Angklung dapat dimainkan dengan dua prinsip yakni digoyang atau
+            dipukul. Kedua prinsip ini pada dasarnya sama yaitu dilakukan
+            <br />
+            untuk menggerakkan angklung dan menghasilkan suara.
+          </p>
+        </div>
+
+        <h2>Tentang Angklung</h2>
+        <div class="tentang-angklung">
+          <ul>
+            <li>
+              <div class="gambar1">
+                <img
+                  src="gmbr_kontenbljr/Gambar Bagian Angklung.png"
+                  alt="Gambar Angklung 1"
+                />
+                <ul>
+                  <li>
+                    <p>
+                      1. Tabung badag <br />
+                      2. Tabung leutik <br />
+                      3. Tabung dasar
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      4. Jejer (Tihang) <br />
+                      5. Palang gantung <br />
+                      6. Tabung sora
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <div class="gambar2">
+                <img
+                  src="gmbr_kontenbljr/Gambar Belajar Angklung.png"
+                  alt="Gambar Angklung 2"
+                />
+                <p>
+                  Notasi berfungsi sebagai panduan <br />
+                  ketika memainkan angklung
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="audio-video">
+        <div class="suara-angklung">
+          <h2>Dengarkan Lantunan Suara Angklung!</h2>
+          <div class="audio-wrapper">
+            <audio controls>
+              <source
+                src="gmbr_kontenbljr/ANGKLUNG - ALAT MUSIK TRADISONAL JAWA BARAT.mp3"
+                type="audio/mpeg"
+              />
+              Your browser does not support the audio element.
+            </audio>
+          </div>
+          <br />
+          <div class="audio-wrapper">
+            <audio controls>
+              <source
+                src="gmbr_kontenbljr/Zeldas Lullaby on Angklung (an instrument from Indonesia).mp3"
+                type="audio/mpeg"
+              />
+              Your browser does not support the audio element.
+            </audio>
+          </div>
+        </div>
+        <h2>Video Tutorial</h2>
+        <div class="video-angklung">
+          <video controls>
+            <source src="gmbr_kontenbljr/angklung.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </section>
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-section brand">
+          <h2 class="logo">
+            <img src="gmbr_gnrl/logoputih.svg" />
+            SwaraNusa
+          </h2>
+          <p>
+            SwaraNusa menghadirkan literatur, foto, audio, dan video untuk
+            membuka akses ke kekayaan musik Indonesia dan mengapresiasi warisan
+            budayanya.
+          </p>
+        </div>
+
+        <div class="footer-section nav">
+          <h2>Navigasi</h2>
+          <ul>
+            <li><a href="#">Beranda</a></li>
+            <li><a href="#">Jelajahi</a></li>
+            <li><a href="#">Belajar</a></li>
+            <li><a href="#">Kontak</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section social">
+          <h2>Ikuti Kami</h2>
+          <div class="icons">
+            <a href="https://www.facebook.com/"
+              ><img src="gmbr_gnrl/fb.svg" alt="Facebook"
+            /></a>
+            <a href="https://twitter.com/"
+              ><img src="gmbr_gnrl/twt.svg" alt="Twitter"
+            /></a>
+            <a href="https://www.instagram.com/"
+              ><img src="gmbr_gnrl/ig.svg" alt="Instagram"
+            /></a>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="footer-bottom">
+        <p>
+          © 2025 SwaraNusa. All rights reserved. Made with
+          <span class="heart">❤️</span> in Indonesia.
+        </p>
+      </div>
+    </footer>
+    <script src="konten_belajar.js"></script>
+    <script src="burger.js"></script>
+  </body>
+</html>
