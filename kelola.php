@@ -68,7 +68,7 @@ $stmt->close();
 
         <nav id="navMenu">
           <ul>
-            <li><a href="index.html" onclick="closeMenu()">Beranda</a></li>
+            <li><a href="landing.html" onclick="closeMenu()">Beranda</a></li>
             <li><a href="jelajahi.html" onclick="closeMenu()">Jelajahi</a></li>
             <li><a href="belajar.html" onclick="closeMenu()">Belajar</a></li>
             <li><a href="tentang.html" onclick="closeMenu()">Tentang</a></li>
