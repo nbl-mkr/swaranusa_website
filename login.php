@@ -22,9 +22,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       $_SESSION["role"] = $user["role"];
 
       if ($_SESSION["role"] === "admin") {
-        header("Location: /belajar_html/pjbl/SwaraNusa-Web-Project-main/kelola.php");
+        header("Location: /belajar_html/swaranusa_website/kelola.php");
       } else {
-        header("Location: /belajar_html/pjbl/SwaraNusa-Web-Project-main/menu_user/kelola_user.php");
+        header("Location: /belajar_html/swaranusa_website/menu_user/kelola_user.php");
       }
       exit;
     } else {
