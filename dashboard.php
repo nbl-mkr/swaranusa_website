@@ -4,6 +4,51 @@ if (!isset($_SESSION["isLoggedIn"]) || $_SESSION["role"] !== "admin") {
     header("Location: /belajar_html/swaranusa_website/login.php");
     exit;
 }
+require_once "koneksi.php";
+
+if (isset($_POST["hapus_id"])) {
+    $hapus = $conn->prepare("DELETE FROM konten WHERE id = ?");
+    $hapus->bind_param("i", $_POST["hapus_id"]);
+    $hapus->execute();
+    $hapus->close();
+    header("Location: dashboard.php");
+    exit;
+}
+
+if (isset($_POST["tambah_judul"])) {
+    $judul = trim($_POST["tambah_judul"]);
+    $daerah = trim($_POST["tambah_daerah"]);
+    $kategori = trim($_POST["tambah_kategori"]);
+    $deskripsi = trim($_POST["tambah_deskripsi"]);
+    $diperbarui = date("Y-m-d");
+
+    $tambah = $conn->prepare("INSERT INTO konten (judul, daerah, kategori, deskripsi, diperbarui) VALUES (?, ?, ?, ?, ?)");
+    $tambah->bind_param("sssss", $judul, $daerah, $kategori, $deskripsi, $diperbarui);
+    $tambah->execute();
+    $tambah->close();
+    header("Location: dashboard.php");
+    exit;
+}
+
+if (isset($_POST["edit_id"])) {
+    $id = $_POST["edit_id"];
+    $judul = trim($_POST["edit_judul"]);
+    $deskripsi = trim($_POST["edit_deskripsi"]);
+    $diperbarui = date("Y-m-d");
+
+    $edit = $conn->prepare("UPDATE konten SET judul = ?, deskripsi = ?, diperbarui = ? WHERE id = ?");
+    $edit->bind_param("sssi", $judul, $deskripsi, $diperbarui, $id);
+    $edit->execute();
+    $edit->close();
+    header("Location: dashboard.php");
+    exit;
+}
+
+$result = $conn->query("SELECT * FROM konten ORDER BY diperbarui DESC");
+$konten_list = $result->fetch_all(MYSQLI_ASSOC);
+
+$total_konten = count($konten_list);
+$total_user = $conn->query("SELECT COUNT(*) as total FROM users WHERE role = 'user'")->fetch_assoc()["total"];
 ?>
 
 <!DOCTYPE html>
@@ -79,24 +124,28 @@ if (!isset($_SESSION["isLoggedIn"]) || $_SESSION["role"] !== "admin") {
                     <div class="container-top">
                         <div class="card">
                             <h3>Total Konten</h3>
-                            <p>123</p>
+                            <p><?= $total_konten ?></p>
                         </div>
                         <div class="card">
                             <h3>Pengguna Aktif</h3>
-                            <p>54</p>
+                            <p><?= $total_user ?></p>
                         </div>
                         <div class="card">
                             <h3>Favorit Disimpan</h3>
-                            <p>321</p>
+                            <p>0</p>
                         </div>
                         <div class="card">
                             <h3>Konten Baru Bulan Ini</h3>
-                            <p>9</p>
+                            <p><?= array_reduce($konten_list, function ($carry, $item) {
+                                return $carry + (date("Y-m") === substr($item["diperbarui"], 0, 7) ? 1 : 0);
+                            }, 0) ?></p>
                         </div>
                     </div>
+
                     <div class="container-bottom">
                         <h3>Manajemen Konten</h3>
-                        <button>+ Tambah Konten Baru</button>
+                        <button onclick="document.getElementById('popup-tambah').classList.add('active')">+ Tambah
+                            Konten Baru</button>
                         <div class="container-flex">
                             <div class="row1">
                                 <h3>Judul</h3>
@@ -105,41 +154,50 @@ if (!isset($_SESSION["isLoggedIn"]) || $_SESSION["role"] !== "admin") {
                                 <h3>Diperbarui</h3>
                                 <h3>Aksi</h3>
                             </div>
-                            <div class="row2">
-                                <p>Gamelan</p>
-                                <p>Jawa Tengah</p>
-                                <p>Ansambel</p>
-                                <p>12/09/2025</p>
-                                <div>
-                                    <button>Edit</button>
-                                    <button>Hapus</button>
+                            <?php foreach ($konten_list as $konten): ?>
+                                <div class="row2">
+                                    <p><?= htmlspecialchars($konten["judul"]) ?></p>
+                                    <p><?= htmlspecialchars($konten["daerah"]) ?></p>
+                                    <p><?= htmlspecialchars($konten["kategori"]) ?></p>
+                                    <p><?= date("d/m/Y", strtotime($konten["diperbarui"])) ?></p>
+                                    <div>
+                                        <button class="btn-edit"
+                                            onclick="bukaEdit(<?= $konten['id'] ?>, '<?= htmlspecialchars($konten['judul'], ENT_QUOTES) ?>', '<?= htmlspecialchars($konten['deskripsi'], ENT_QUOTES) ?>')">Edit</button>
+                                        <form method="POST" style="display:inline">
+                                            <input type="hidden" name="hapus_id" value="<?= $konten['id'] ?>" />
+                                            <button type="submit" class="btn-hapus"
+                                                onclick="return confirm('Hapus konten ini?')">Hapus</button>
+                                        </form>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row3">
-                                <p>Angklung</p>
-                                <p>Jawa Barat</p>
-                                <p>Ansambel</p>
-                                <p>10/09/2025</p>
-                                <div>
-                                    <button>Edit</button>
-                                    <button>Hapus</button>
-                                </div>
-                            </div>
-                            <div class="row4">
-                                <p>Sasando</p>
-                                <p>NTT</p>
-                                <p>Ansambel</p>
-                                <p>08/09/2025</p>
-                                <div>
-                                    <button>Edit</button>
-                                    <button>Hapus</button>
-                                </div>
-                            </div>
+                            <?php endforeach; ?>
                         </div>
                     </div>
                 </div>
             </section>
         </main>
+    </div>
+
+    <div id="popup-tambah" class="popup-overlay">
+        <div class="popup-container">
+            <div class="right-content" style="padding: 25px; width: 100%">
+                <form method="POST" action="dashboard.php">
+                    <h3>Judul</h3>
+                    <input type="text" name="tambah_judul" required />
+                    <h3>Daerah</h3>
+                    <input type="text" name="tambah_daerah" required />
+                    <h3>Kategori</h3>
+                    <input type="text" name="tambah_kategori" required />
+                    <h3>Deskripsi</h3>
+                    <textarea name="tambah_deskripsi" rows="4"></textarea>
+                    <div class="popup-bottom">
+                        <button type="submit">Simpan</button>
+                        <button type="button"
+                            onclick="document.getElementById('popup-tambah').classList.remove('active')">Batal</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
     <div id="popup-edit" class="popup-overlay">
@@ -148,14 +206,18 @@ if (!isset($_SESSION["isLoggedIn"]) || $_SESSION["role"] !== "admin") {
                 <img src="assets/gambar-gamelan.png" alt="Gambar Gamelan" />
             </div>
             <div class="right-content">
-                <h3>Judul</h3>
-                <input id="popup-judul" type="text" />
-                <h3>Deskripsi</h3>
-                <textarea id="popup-deskripsi" rows="4"></textarea>
-                <div class="popup-bottom">
-                    <button onclick="closePopup()">Simpan</button>
-                    <img src="assets/upload.png" alt="Logo Upload" />
-                </div>
+                <form method="POST" action="dashboard.php">
+                    <input type="hidden" name="edit_id" id="edit-id" />
+                    <h3>Judul</h3>
+                    <input type="text" name="edit_judul" id="edit-judul" required />
+                    <h3>Deskripsi</h3>
+                    <textarea name="edit_deskripsi" id="edit-deskripsi" rows="4"></textarea>
+                    <div class="popup-bottom">
+                        <button type="submit">Simpan</button>
+                        <button type="button"
+                            onclick="document.getElementById('popup-edit').classList.remove('active')">Batal</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -186,16 +248,11 @@ if (!isset($_SESSION["isLoggedIn"]) || $_SESSION["role"] !== "admin") {
             }
         });
 
-        const popup = document.getElementById("popup-edit");
-
-        document.querySelectorAll(".container-flex button:first-child").forEach((btn) => {
-            btn.addEventListener("click", function () {
-                popup.classList.add("active");
-            });
-        });
-
-        function closePopup() {
-            popup.classList.remove("active");
+        function bukaEdit(id, judul, deskripsi) {
+            document.getElementById("edit-id").value = id;
+            document.getElementById("edit-judul").value = judul;
+            document.getElementById("edit-deskripsi").value = deskripsi;
+            document.getElementById("popup-edit").classList.add("active");
         }
     </script>
 </body>

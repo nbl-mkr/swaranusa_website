@@ -263,8 +263,9 @@ nav ul li a.active {
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px;
     font-family: "Coolvetica", sans-serif;
+    font-weight: 700;
     max-width: 175px;
     padding: 10px 0;
     transition: 0.3s;
@@ -324,9 +325,7 @@ nav ul li a.active {
     gap: 10px;
 }
 
-.row2 div button:first-child,
-.row3 div button:first-child,
-.row4 div button:first-child {
+.container-bottom .btn-edit {
     color: #000000;
     background-color: #f0bb78;
     border: none;
@@ -336,27 +335,21 @@ nav ul li a.active {
     transition: 0.3s;
 }
 
-.row2 div button:first-child:hover,
-.row3 div button:first-child:hover,
-.row4 div button:first-child:hover {
+.container-bottom .btn-edit:hover {
     background-color: #d9a76a;
 }
 
-.row2 div button:last-child,
-.row3 div button:last-child,
-.row4 div button:last-child {
+.container-bottom .btn-hapus {
     color: #ffffff;
     background-color: #e57373;
     border: none;
     border-radius: 10px;
-    padding: 5px 10px;
+    padding: 10px;
     cursor: pointer;
     transition: 0.3s;
 }
 
-.row2 div button:last-child:hover,
-.row3 div button:last-child:hover,
-.row4 div button:last-child:hover {
+.container-bottom .btn-hapus:hover {
     background-color: #d15f5f;
 }
 

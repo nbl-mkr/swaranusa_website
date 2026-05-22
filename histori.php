@@ -87,7 +87,7 @@ if (!isset($_SESSION["isLoggedIn"]) || $_SESSION["role"] !== "admin") {
                             </div>
                             <div class="card-bottom">
                                 <p>Jawa</p>
-                                <button>Pelajari</button>
+                                <a href="konten_belajar.html" class="btn-pelajari">Pelajari</a>
                             </div>
                         </div>
                     </div>
@@ -102,7 +102,7 @@ if (!isset($_SESSION["isLoggedIn"]) || $_SESSION["role"] !== "admin") {
                             </div>
                             <div class="card-bottom">
                                 <p>Sunda</p>
-                                <button>Pelajari</button>
+                                <a href="konten_belajar.html" class="btn-pelajari">Pelajari</a>
                             </div>
                         </div>
                     </div>
@@ -115,8 +115,8 @@ if (!isset($_SESSION["isLoggedIn"]) || $_SESSION["role"] !== "admin") {
                                 <p>Sasando berasal dari Pulau Rote, Nusa Tenggara Timur yang memiliki suara khas.</p>
                             </div>
                             <div class="card-bottom">
-                                <p>NTT</p>
-                                <button>Pelajari</button>
+                                <p>Jawa</p>
+                                <a href="konten_belajar.html" class="btn-pelajari">Pelajari</a>
                             </div>
                         </div>
                     </div>

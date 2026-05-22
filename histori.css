@@ -171,7 +171,7 @@ nav ul li {
     position: relative;
 }
 
-nav ul li a {
+#navMenu ul li a {
     color: #131010;
     text-decoration: none;
     transition: color 0.3s ease;
@@ -274,7 +274,7 @@ nav ul li a.active {
     padding: 5px 10px;
 }
 
-.card-bottom button {
+.card-bottom .btn-pelajari {
     color: #000000;
     background-color: #f0bb78;
     border: none;
@@ -282,12 +282,13 @@ nav ul li a.active {
     font-size: 14px;
     font-family: "Montserrat", sans-serif;
     font-weight: 700;
+    text-decoration: none;
     padding: 5px 10px;
     cursor: pointer;
     transition: 0.3s;
 }
 
-.card-bottom button:hover {
+.card-bottom .btn-pelajari:hover {
     background-color: #d9a76a;
 }
 
