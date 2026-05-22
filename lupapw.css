@@ -220,4 +220,18 @@ form input {
     padding: 12px;
     font-size: 15px;
   }
+
+  .error-msg {
+  color: #cc0000;
+  font-size: 13px;
+  margin-bottom: 10px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.success-msg {
+  color: #1a7a1a;
+  font-size: 13px;
+  margin-bottom: 10px;
+  font-family: "Montserrat", sans-serif;
+}
 }

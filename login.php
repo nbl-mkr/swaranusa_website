@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <input type="email" name="email" placeholder="Email" required />
         <input type="password" name="password" placeholder="Password" required />
 
-        <a href="lupapw.html">Lupa password?</a>
+        <a href="lupapw.php">Lupa password?</a>
 
         <button type="submit" class="submit-button">Login</button>
 
