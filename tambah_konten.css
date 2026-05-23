@@ -1,0 +1,88 @@
+.form-container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    padding: 32px;
+    width: 100%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+}
+
+.form-group small {
+    font-size: 12px;
+    font-family: "Montserrat", sans-serif;
+    color: #6c6c6c;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+    border: 1.5px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+    padding: 8px 12px;
+    resize: none;
+    outline: none;
+}
+
+.form-group input[type="file"] {
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+}
+
+.preview-gambar {
+    width: 200px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.preview-galeri {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.preview-galeri img {
+    width: 100px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.form-btn {
+    display: flex;
+    gap: 15px;
+}
+
+.form-btn button {
+    background-color: #f0bb78;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    padding: 10px 25px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.form-btn button:hover {
+    background-color: #d9a76a;
+}
+
+.form-btn a {
+    text-decoration: none;
+}

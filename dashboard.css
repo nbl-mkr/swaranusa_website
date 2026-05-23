@@ -67,6 +67,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex: 1;
+    width: 100%;
 }
 
 .sidebar-menu div {
@@ -91,6 +93,29 @@ body {
     font-weight: 500;
     width: 100%;
     transition: 0.3s;
+}
+
+.sidebar-menu .logout {
+    margin-top: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 15px 25px;
+}
+
+.sidebar-menu .logout a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    text-align: center;
+}
+
+.sidebar-menu .logout:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
 }
 
 .main-content {
@@ -267,7 +292,7 @@ nav ul li a.active {
     font-family: "Coolvetica", sans-serif;
     font-weight: 700;
     max-width: 175px;
-    padding: 10px 0;
+    padding: 10px;
     transition: 0.3s;
 }
 

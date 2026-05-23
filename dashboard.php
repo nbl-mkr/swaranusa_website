@@ -85,6 +85,9 @@ $total_user = $conn->query("SELECT COUNT(*) as total FROM users WHERE role = 'us
                     <img src="assets/logo_kelola.png" alt="Logo Kelola" width="15px" height="15px" />
                     <a href="kelola.php">Kelola Akun</a>
                 </div>
+                <div class="logout">
+                    <a href="logout.php">Logout</a>
+                </div>
             </nav>
         </div>
 
@@ -144,8 +147,7 @@ $total_user = $conn->query("SELECT COUNT(*) as total FROM users WHERE role = 'us
 
                     <div class="container-bottom">
                         <h3>Manajemen Konten</h3>
-                        <button onclick="document.getElementById('popup-tambah').classList.add('active')">+ Tambah
-                            Konten Baru</button>
+                        <a href="tambah_konten.php"><button>+ Tambah Konten Baru</button></a>
                         <div class="container-flex">
                             <div class="row1">
                                 <h3>Judul</h3>
@@ -161,8 +163,8 @@ $total_user = $conn->query("SELECT COUNT(*) as total FROM users WHERE role = 'us
                                     <p><?= htmlspecialchars($konten["kategori"]) ?></p>
                                     <p><?= date("d/m/Y", strtotime($konten["diperbarui"])) ?></p>
                                     <div>
-                                        <button class="btn-edit"
-                                            onclick="bukaEdit(<?= $konten['id'] ?>, '<?= htmlspecialchars($konten['judul'], ENT_QUOTES) ?>', '<?= htmlspecialchars($konten['deskripsi'], ENT_QUOTES) ?>')">Edit</button>
+                                        <a href="edit_konten.php?id=<?= $konten['id'] ?>"><button
+                                                class="btn-edit">Edit</button></a>
                                         <form method="POST" style="display:inline">
                                             <input type="hidden" name="hapus_id" value="<?= $konten['id'] ?>" />
                                             <button type="submit" class="btn-hapus"
@@ -176,50 +178,6 @@ $total_user = $conn->query("SELECT COUNT(*) as total FROM users WHERE role = 'us
                 </div>
             </section>
         </main>
-    </div>
-
-    <div id="popup-tambah" class="popup-overlay">
-        <div class="popup-container">
-            <div class="right-content" style="padding: 25px; width: 100%">
-                <form method="POST" action="dashboard.php">
-                    <h3>Judul</h3>
-                    <input type="text" name="tambah_judul" required />
-                    <h3>Daerah</h3>
-                    <input type="text" name="tambah_daerah" required />
-                    <h3>Kategori</h3>
-                    <input type="text" name="tambah_kategori" required />
-                    <h3>Deskripsi</h3>
-                    <textarea name="tambah_deskripsi" rows="4"></textarea>
-                    <div class="popup-bottom">
-                        <button type="submit">Simpan</button>
-                        <button type="button"
-                            onclick="document.getElementById('popup-tambah').classList.remove('active')">Batal</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div id="popup-edit" class="popup-overlay">
-        <div class="popup-container">
-            <div class="left-content">
-                <img src="assets/gambar-gamelan.png" alt="Gambar Gamelan" />
-            </div>
-            <div class="right-content">
-                <form method="POST" action="dashboard.php">
-                    <input type="hidden" name="edit_id" id="edit-id" />
-                    <h3>Judul</h3>
-                    <input type="text" name="edit_judul" id="edit-judul" required />
-                    <h3>Deskripsi</h3>
-                    <textarea name="edit_deskripsi" id="edit-deskripsi" rows="4"></textarea>
-                    <div class="popup-bottom">
-                        <button type="submit">Simpan</button>
-                        <button type="button"
-                            onclick="document.getElementById('popup-edit').classList.remove('active')">Batal</button>
-                    </div>
-                </form>
-            </div>
-        </div>
     </div>
 
     <script>
@@ -247,13 +205,6 @@ $total_user = $conn->query("SELECT COUNT(*) as total FROM users WHERE role = 'us
                 closeMenu();
             }
         });
-
-        function bukaEdit(id, judul, deskripsi) {
-            document.getElementById("edit-id").value = id;
-            document.getElementById("edit-judul").value = judul;
-            document.getElementById("edit-deskripsi").value = deskripsi;
-            document.getElementById("popup-edit").classList.add("active");
-        }
     </script>
 </body>
 

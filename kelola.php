@@ -48,6 +48,9 @@ $stmt->close();
           <img src="assets/logo_kelola.png" alt="Logo Kelola" width="15px" height="15px" />
           <a href="kelola.php">Kelola Akun</a>
         </div>
+        <div class="logout">
+          <a href="logout.php">Logout</a>
+        </div>
       </nav>
     </div>
 

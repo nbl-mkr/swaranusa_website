@@ -4,6 +4,38 @@ if (!isset($_SESSION["isLoggedIn"]) || $_SESSION["role"] !== "user") {
   header("Location: /belajar_html/swaranusa_website/login.php");
   exit;
 }
+require_once "../koneksi.php";
+
+$user_id = $_SESSION["user_id"];
+$stmt = $conn->prepare("
+    SELECT k.id, k.judul, k.daerah, k.kategori, k.deskripsi, k.gambar, h.dilihat_pada
+    FROM histori h
+    JOIN konten k ON h.konten_id = k.id
+    WHERE h.user_id = ?
+    ORDER BY h.dilihat_pada DESC
+");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$histori_list = $result->fetch_all(MYSQLI_ASSOC);
+$stmt->close();
+
+function waktu_lalu($datetime)
+{
+  $sekarang = new DateTime();
+  $dilihat = new DateTime($datetime);
+  $selisih = $sekarang->diff($dilihat);
+
+  if ($selisih->days == 0)
+    return "Hari ini";
+  if ($selisih->days == 1)
+    return "1 hari lalu";
+  if ($selisih->days < 7)
+    return $selisih->days . " hari lalu";
+  if ($selisih->days < 30)
+    return floor($selisih->days / 7) . " minggu lalu";
+  return floor($selisih->days / 30) . " bulan lalu";
+}
 ?>
 
 <!DOCTYPE html>
@@ -32,6 +64,9 @@ if (!isset($_SESSION["isLoggedIn"]) || $_SESSION["role"] !== "user") {
           <img src="../assets/logo_kelola.png" alt="Logo Kelola" width="15px" height="15px" />
           <a href="kelola_user.php">Kelola Akun</a>
         </div>
+        <div class="logout">
+          <a href="../logout.php">Logout</a>
+        </div>
       </nav>
     </div>
 
@@ -43,16 +78,12 @@ if (!isset($_SESSION["isLoggedIn"]) || $_SESSION["role"] !== "user") {
             <h1></h1>
           </li>
         </ul>
-
         <div class="hamburger" onclick="toggleMenu()">
-          <span></span>
-          <span></span>
-          <span></span>
+          <span></span><span></span><span></span>
         </div>
-
         <nav id="navMenu">
           <ul>
-            <li><a href="../index.html" onclick="closeMenu()">Beranda</a></li>
+            <li><a href="../landing.html" onclick="closeMenu()">Beranda</a></li>
             <li><a href="../jelajahi.html" onclick="closeMenu()">Jelajahi</a></li>
             <li><a href="../belajar.html" onclick="closeMenu()">Belajar</a></li>
             <li><a href="../tentang.html" onclick="closeMenu()">Tentang</a></li>
@@ -68,48 +99,27 @@ if (!isset($_SESSION["isLoggedIn"]) || $_SESSION["role"] !== "user") {
       <section class="content-area">
         <h1>Histori</h1>
         <div class="cards-container">
-          <div class="card">
-            <img src="../assets/gambar-gamelan.png" alt="Gambar Gamelan" />
-            <div class="card-content">
-              <div class="card-top">
-                <h3>Gamelan</h3>
-                <p>Ansambel musik tradisional Jawa Tengah • 2 hari lalu</p>
-                <p>Koleksi lengkap gamelan yang berisi berbagai instrumen seperti gong, bonang, saron, dan kendang.</p>
+          <?php if (empty($histori_list)): ?>
+            <p>Belum ada histori.</p>
+          <?php else: ?>
+            <?php foreach ($histori_list as $item): ?>
+              <div class="card">
+                <img src="../gmbr_kontenjljh/<?= htmlspecialchars($item["gambar"]) ?>"
+                  alt="<?= htmlspecialchars($item["judul"]) ?>" />
+                <div class="card-content">
+                  <div class="card-top">
+                    <h3><?= htmlspecialchars($item["judul"]) ?></h3>
+                    <p><?= htmlspecialchars($item["kategori"]) ?> • <?= waktu_lalu($item["dilihat_pada"]) ?></p>
+                    <p><?= htmlspecialchars($item["deskripsi"]) ?></p>
+                  </div>
+                  <div class="card-bottom">
+                    <p><?= htmlspecialchars($item["daerah"]) ?></p>
+                    <a href="../konten_jelajahi.php?id=<?= $item['id'] ?>" class="btn-pelajari">Pelajari</a>
+                  </div>
+                </div>
               </div>
-              <div class="card-bottom">
-                <p>Jawa</p>
-                <button>Pelajari</button>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <img src="../assets/gambar-angklung.png" alt="Gambar Angklung" />
-            <div class="card-content">
-              <div class="card-top">
-                <h3>Angklung</h3>
-                <p>Alat musik bambu • 5 hari lalu</p>
-                <p>Alat musik dari Jawa Barat yang dimainkan dengan cara digoyang untuk menghasilkan suara.</p>
-              </div>
-              <div class="card-bottom">
-                <p>Sunda</p>
-                <button>Pelajari</button>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <img src="../assets/gambar-sasando.png" alt="Gambar Sasando" />
-            <div class="card-content">
-              <div class="card-top">
-                <h3>Sasando</h3>
-                <p>Instrumen petik tradisional • 1 minggu lalu</p>
-                <p>Sasando berasal dari Pulau Rote, Nusa Tenggara Timur yang memiliki suara khas.</p>
-              </div>
-              <div class="card-bottom">
-                <p>NTT</p>
-                <button>Pelajari</button>
-              </div>
-            </div>
-          </div>
+            <?php endforeach; ?>
+          <?php endif; ?>
         </div>
       </section>
     </main>
@@ -135,7 +145,6 @@ if (!isset($_SESSION["isLoggedIn"]) || $_SESSION["role"] !== "user") {
       const hamburger = document.querySelector(".hamburger");
       const isClickInsideNav = nav.contains(event.target);
       const isClickOnHamburger = hamburger.contains(event.target);
-
       if (!isClickInsideNav && !isClickOnHamburger && nav.classList.contains("active")) {
         closeMenu();
       }
