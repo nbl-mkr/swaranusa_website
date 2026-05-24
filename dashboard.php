@@ -15,40 +15,34 @@ if (isset($_POST["hapus_id"])) {
     exit;
 }
 
-if (isset($_POST["tambah_judul"])) {
-    $judul = trim($_POST["tambah_judul"]);
-    $daerah = trim($_POST["tambah_daerah"]);
-    $kategori = trim($_POST["tambah_kategori"]);
-    $deskripsi = trim($_POST["tambah_deskripsi"]);
-    $diperbarui = date("Y-m-d");
+$sort = isset($_GET["sort"]) ? $_GET["sort"] : "diperbarui";
+$order = isset($_GET["order"]) ? $_GET["order"] : "DESC";
+$page = isset($_GET["page"]) ? (int) $_GET["page"] : 1;
+$per_page = 5;
+$offset = ($page - 1) * $per_page;
 
-    $tambah = $conn->prepare("INSERT INTO konten (judul, daerah, kategori, deskripsi, diperbarui) VALUES (?, ?, ?, ?, ?)");
-    $tambah->bind_param("sssss", $judul, $daerah, $kategori, $deskripsi, $diperbarui);
-    $tambah->execute();
-    $tambah->close();
-    header("Location: dashboard.php");
-    exit;
-}
+$allowed_sort = ["judul", "daerah", "kategori", "diperbarui"];
+$allowed_order = ["ASC", "DESC"];
+if (!in_array($sort, $allowed_sort))
+    $sort = "diperbarui";
+if (!in_array($order, $allowed_order))
+    $order = "DESC";
 
-if (isset($_POST["edit_id"])) {
-    $id = $_POST["edit_id"];
-    $judul = trim($_POST["edit_judul"]);
-    $deskripsi = trim($_POST["edit_deskripsi"]);
-    $diperbarui = date("Y-m-d");
+$total_result = $conn->query("SELECT COUNT(*) as total FROM konten")->fetch_assoc()["total"];
+$total_pages = ceil($total_result / $per_page);
 
-    $edit = $conn->prepare("UPDATE konten SET judul = ?, deskripsi = ?, diperbarui = ? WHERE id = ?");
-    $edit->bind_param("sssi", $judul, $deskripsi, $diperbarui, $id);
-    $edit->execute();
-    $edit->close();
-    header("Location: dashboard.php");
-    exit;
-}
-
-$result = $conn->query("SELECT * FROM konten ORDER BY diperbarui DESC");
+$result = $conn->query("SELECT * FROM konten ORDER BY $sort $order LIMIT $per_page OFFSET $offset");
 $konten_list = $result->fetch_all(MYSQLI_ASSOC);
 
-$total_konten = count($konten_list);
+$all_result = $conn->query("SELECT * FROM konten ORDER BY diperbarui DESC");
+$all_konten = $all_result->fetch_all(MYSQLI_ASSOC);
+
+$total_konten = $conn->query("SELECT COUNT(*) as total FROM konten")->fetch_assoc()["total"];
 $total_user = $conn->query("SELECT COUNT(*) as total FROM users WHERE role = 'user'")->fetch_assoc()["total"];
+$total_histori = $conn->query("SELECT COUNT(*) as total FROM histori")->fetch_assoc()["total"];
+$konten_bulan_ini = $conn->query("SELECT COUNT(*) as total FROM konten WHERE DATE_FORMAT(diperbarui, '%Y-%m') = DATE_FORMAT(NOW(), '%Y-%m')")->fetch_assoc()["total"];
+
+$next_order = $order === "ASC" ? "DESC" : "ASC";
 ?>
 
 <!DOCTYPE html>
@@ -99,13 +93,9 @@ $total_user = $conn->query("SELECT COUNT(*) as total FROM users WHERE role = 'us
                         <h1></h1>
                     </li>
                 </ul>
-
                 <div class="hamburger" onclick="toggleMenu()">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                    <span></span><span></span><span></span>
                 </div>
-
                 <nav id="navMenu">
                     <ul>
                         <li><a href="landing.html" onclick="closeMenu()">Beranda</a></li>
@@ -134,30 +124,69 @@ $total_user = $conn->query("SELECT COUNT(*) as total FROM users WHERE role = 'us
                             <p><?= $total_user ?></p>
                         </div>
                         <div class="card">
-                            <h3>Favorit Disimpan</h3>
-                            <p>0</p>
+                            <h3>Total Histori</h3>
+                            <p>
+                                <?= $total_histori ?>
+                            </p>
                         </div>
                         <div class="card">
                             <h3>Konten Baru Bulan Ini</h3>
-                            <p><?= array_reduce($konten_list, function ($carry, $item) {
-                                return $carry + (date("Y-m") === substr($item["diperbarui"], 0, 7) ? 1 : 0);
-                            }, 0) ?></p>
+                            <p><?= $konten_bulan_ini ?></p>
                         </div>
                     </div>
 
                     <div class="container-bottom">
                         <h3>Manajemen Konten</h3>
-                        <a href="tambah_konten.php"><button>+ Tambah Konten Baru</button></a>
+                        <a href="tambah_konten.php" class="btn-tambah">+ Tambah Konten Baru</a>
+
+                        <div class="table-controls">
+                            <input type="text" id="search-input" placeholder="Cari judul, daerah, kategori..." />
+                            <select id="filter-kategori">
+                                <option value="">Semua Kategori</option>
+                                <?php
+                                $kategori_list = $conn->query("SELECT DISTINCT kategori FROM konten ORDER BY kategori ASC");
+                                while ($k = $kategori_list->fetch_assoc()):
+                                    ?>
+                                    <option value="<?= htmlspecialchars($k['kategori']) ?>">
+                                        <?= htmlspecialchars($k['kategori']) ?>
+                                    </option>
+                                <?php endwhile; ?>
+                            </select>
+                        </div>
+
                         <div class="container-flex">
                             <div class="row1">
-                                <h3>Judul</h3>
-                                <h3>Daerah</h3>
-                                <h3>Kategori</h3>
-                                <h3>Diperbarui</h3>
+                                <h3 class="col-no">No</h3>
+                                <h3 class="col-sort">
+                                    <a href="?sort=judul&order=<?= $sort === 'judul' ? $next_order : 'ASC' ?>&page=1">
+                                        Judul <?= $sort === 'judul' ? ($order === 'ASC' ? '↑' : '↓') : '' ?>
+                                    </a>
+                                </h3>
+                                <h3 class="col-sort">
+                                    <a href="?sort=daerah&order=<?= $sort === 'daerah' ? $next_order : 'ASC' ?>&page=1">
+                                        Daerah <?= $sort === 'daerah' ? ($order === 'ASC' ? '↑' : '↓') : '' ?>
+                                    </a>
+                                </h3>
+                                <h3 class="col-sort">
+                                    <a
+                                        href="?sort=kategori&order=<?= $sort === 'kategori' ? $next_order : 'ASC' ?>&page=1">
+                                        Kategori <?= $sort === 'kategori' ? ($order === 'ASC' ? '↑' : '↓') : '' ?>
+                                    </a>
+                                </h3>
+                                <h3 class="col-sort">
+                                    <a
+                                        href="?sort=diperbarui&order=<?= $sort === 'diperbarui' ? $next_order : 'DESC' ?>&page=1">
+                                        Diperbarui <?= $sort === 'diperbarui' ? ($order === 'ASC' ? '↑' : '↓') : '' ?>
+                                    </a>
+                                </h3>
                                 <h3>Aksi</h3>
                             </div>
-                            <?php foreach ($konten_list as $konten): ?>
-                                <div class="row2">
+
+                            <?php foreach ($konten_list as $i => $konten): ?>
+                                <div class="row2" data-judul="<?= strtolower(htmlspecialchars($konten['judul'])) ?>"
+                                    data-daerah="<?= strtolower(htmlspecialchars($konten['daerah'])) ?>"
+                                    data-kategori="<?= strtolower(htmlspecialchars($konten['kategori'])) ?>">
+                                    <p class="col-no-angka"><?= $offset + $i + 1 ?></p>
                                     <p><?= htmlspecialchars($konten["judul"]) ?></p>
                                     <p><?= htmlspecialchars($konten["daerah"]) ?></p>
                                     <p><?= htmlspecialchars($konten["kategori"]) ?></p>
@@ -173,6 +202,21 @@ $total_user = $conn->query("SELECT COUNT(*) as total FROM users WHERE role = 'us
                                     </div>
                                 </div>
                             <?php endforeach; ?>
+                        </div>
+
+                        <div class="pagination">
+                            <?php if ($page > 1): ?>
+                                <a href="?sort=<?= $sort ?>&order=<?= $order ?>&page=<?= $page - 1 ?>">&#8249;</a>
+                            <?php endif; ?>
+
+                            <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                                <a href="?sort=<?= $sort ?>&order=<?= $order ?>&page=<?= $i ?>"
+                                    class="<?= $i === $page ? 'active' : '' ?>"><?= $i ?></a>
+                            <?php endfor; ?>
+
+                            <?php if ($page < $total_pages): ?>
+                                <a href="?sort=<?= $sort ?>&order=<?= $order ?>&page=<?= $page + 1 ?>">&#8250;</a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -200,11 +244,33 @@ $total_user = $conn->query("SELECT COUNT(*) as total FROM users WHERE role = 'us
             const hamburger = document.querySelector(".hamburger");
             const isClickInsideNav = nav.contains(event.target);
             const isClickOnHamburger = hamburger.contains(event.target);
-
             if (!isClickInsideNav && !isClickOnHamburger && nav.classList.contains("active")) {
                 closeMenu();
             }
         });
+
+        const searchInput = document.getElementById("search-input");
+        const filterKategori = document.getElementById("filter-kategori");
+        const rows = document.querySelectorAll(".row2");
+
+        function filterTable() {
+            const keyword = searchInput.value.toLowerCase();
+            const kategori = filterKategori.value.toLowerCase();
+
+            rows.forEach((row) => {
+                const judul = row.dataset.judul;
+                const daerah = row.dataset.daerah;
+                const rowKategori = row.dataset.kategori;
+
+                const matchSearch = judul.includes(keyword) || daerah.includes(keyword) || rowKategori.includes(keyword);
+                const matchKategori = kategori === "" || rowKategori === kategori;
+
+                row.style.display = matchSearch && matchKategori ? "flex" : "none";
+            });
+        }
+
+        searchInput.addEventListener("input", filterTable);
+        filterKategori.addEventListener("change", filterTable);
     </script>
 </body>
 

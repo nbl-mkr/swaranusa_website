@@ -300,6 +300,26 @@ nav ul li a.active {
     background-color: #d9a76a;
 }
 
+.btn-tambah {
+    display: inline-block;
+    color: #000000;
+    background-color: #f0bb78;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: "Coolvetica", sans-serif;
+    font-weight: 700;
+    padding: 10px 15px;
+    width: fit-content;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-tambah:hover {
+    background-color: #d9a76a;
+}
+
 .container-flex {
     display: flex;
     flex-direction: column;
@@ -376,6 +396,83 @@ nav ul li a.active {
 
 .container-bottom .btn-hapus:hover {
     background-color: #d15f5f;
+}
+
+.table-controls {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.table-controls input {
+    border: 1.5px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+    padding: 8px 12px;
+    outline: none;
+    width: 300px;
+}
+
+.table-controls select {
+    border: 1.5px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+    padding: 8px 12px;
+    outline: none;
+    cursor: pointer;
+}
+
+.col-no {
+    max-width: 40px;
+}
+
+.col-no-angka {
+    padding-left: 10px;
+    max-width: 40px;
+}
+
+.col-sort a {
+    color: #6c6c6c;
+    text-decoration: none;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.col-sort a:hover {
+    color: #543a14;
+}
+
+.pagination {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.pagination a {
+    color: #131010;
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+    padding: 6px 12px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.pagination a:hover {
+    background-color: #f0bb78;
+    border-color: #f0bb78;
+}
+
+.pagination a.active {
+    background-color: #f0bb78;
+    border-color: #f0bb78;
+    font-weight: 700;
 }
 
 /* Desktop (min-width: 1024px) */
