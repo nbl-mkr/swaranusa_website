@@ -220,14 +220,6 @@ body {
 
 /* Tablet */
 @media (max-width: 1024px) {
-  header {
-    padding: 18px 30px;
-  }
-
-  nav ul li {
-    margin-left: 40px;
-  }
-
   .hero {
     height: 45vh;
     padding: 0 30px;
@@ -269,22 +261,6 @@ body {
 
 /* Mobile */
 @media (max-width: 600px) {
-  header {
-    padding: 15px 15px;
-  }
-
-  header h1 {
-    font-size: 14px;
-  }
-
-  nav ul li {
-    margin-left: 20px;
-  }
-
-  nav ul li a {
-    font-size: 14px;
-  }
-
   .hero {
     height: auto;
     min-height: 45vh;
