@@ -1,3 +1,34 @@
+<?php require_once "koneksi.php";
+
+$daerah_filter = isset($_GET["daerah"]) ? $_GET["daerah"] : "";
+$search = isset($_GET["search"]) ? $_GET["search"] : "";
+
+$query = "SELECT * FROM konten WHERE 1=1";
+$params = [];
+$types = "";
+
+if ($daerah_filter && $daerah_filter !== "Semua Daerah") {
+  $query .= " AND daerah LIKE ?";
+  $params[] = "%" . $daerah_filter . "%";
+  $types .= "s";
+}
+
+if ($search) {
+  $query .= " AND (judul LIKE ? OR daerah LIKE ?)";
+  $params[] = "%" . $search . "%";
+  $params[] = "%" . $search . "%";
+  $types .= "ss";
+}
+
+$stmt = $conn->prepare($query);
+if ($params) {
+  $stmt->bind_param($types, ...$params);
+}
+$stmt->execute();
+$konten_list = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+$stmt->close();
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -19,13 +50,11 @@
         <h1>SwaraNusa</h1>
       </li>
     </ul>
-
     <div class="hamburger" onclick="toggleMenu()">
       <span></span>
       <span></span>
       <span></span>
     </div>
-
     <?php include 'navbar.php'; ?>
   </header>
 
@@ -38,17 +67,21 @@
     <div class="search-filter">
       <div class="search-bar">
         <img src="gmbr_jljh/search.svg" />
-        <input id="search-input" type="search" placeholder="Cari judul, daerah, atau alat musik..." />
+        <input id="search-input" type="search" placeholder="Cari judul, daerah, atau alat musik..."
+          value="<?= htmlspecialchars($search) ?>" />
       </div>
       <div class="filter">
-        <button class="dropdown-btn" id="dropdownBtn">Semua Daerah</button>
+        <button class="dropdown-btn" id="dropdownBtn">
+          <?= $daerah_filter ? htmlspecialchars($daerah_filter) : "Semua Daerah" ?>
+        </button>
         <div class="dropdown-menu" id="dropdownMenu">
-          <div class="dropdown-item">Semua Daerah</div>
-          <div class="dropdown-item">Jawa</div>
-          <div class="dropdown-item">Sumatra</div>
-          <div class="dropdown-item">Sulawesi</div>
-          <div class="dropdown-item">Kalimantan</div>
-          <div class="dropdown-item">Papua</div>
+          <div class="dropdown-item <?= $daerah_filter === '' ? 'selected' : '' ?>">Semua Daerah</div>
+          <div class="dropdown-item <?= $daerah_filter === 'Jawa' ? 'selected' : '' ?>">Jawa</div>
+          <div class="dropdown-item <?= $daerah_filter === 'Sumatra' ? 'selected' : '' ?>">Sumatra</div>
+          <div class="dropdown-item <?= $daerah_filter === 'Sulawesi' ? 'selected' : '' ?>">Sulawesi</div>
+          <div class="dropdown-item <?= $daerah_filter === 'Kalimantan' ? 'selected' : '' ?>">Kalimantan</div>
+          <div class="dropdown-item <?= $daerah_filter === 'Papua' ? 'selected' : '' ?>">Papua</div>
+          <div class="dropdown-item <?= $daerah_filter === 'NTT' ? 'selected' : '' ?>">NTT</div>
         </div>
       </div>
     </div>
@@ -57,173 +90,26 @@
   <section class="isi">
     <div class="container">
       <div class="grid" id="card-grid">
-        <div class="card" data-title="karawitan" data-region="jawa">
-          <div class="image-wrapper">
-            <img src="gmbr_jljh/Gambar Karawitan.png" />
-            <div class="region-tag">Jawa Tengah</div>
-          </div>
-          <div class="card-content">
-            <h3 class="card-title">Karawitan</h3>
-            <p class="card-description">Seni musik Jawa Tengah</p>
-            <a href="konten_jelajahi.php?id=4">
-              <button class="btn-learn">Pelajari</button>
-            </a>
-          </div>
-        </div>
-
-        <div class="card" data-title="keroncong" data-region="jawa">
-          <div class="image-wrapper">
-            <img src="gmbr_jljh/Gambar Keroncong.png" />
-            <div class="region-tag">Jawa Barat</div>
-          </div>
-          <div class="card-content">
-            <h3 class="card-title">Keroncong</h3>
-            <p class="card-description">Seni musik Jawa Barat</p>
-            <a href="konten_jelajahi.php?id=5">
-              <button class="btn-learn">Pelajari</button>
-            </a>
-          </div>
-        </div>
-
-        <div class="card" data-title="panting" data-region="kalimantan">
-          <div class="image-wrapper">
-            <img src="gmbr_jljh/Gambar Panting.png" />
-            <div class="region-tag">Kalimantan Selatan</div>
-          </div>
-          <div class="card-content">
-            <h3 class="card-title">Panting</h3>
-            <p class="card-description">Seni musik Kalimantan Selatan</p>
-            <a href="konten_jelajahi.php?id=6">
-              <button class="btn-learn">Pelajari</button>
-            </a>
-          </div>
-        </div>
-
-        <div class="card" data-title="angklung reog" data-region="jawa">
-          <div class="image-wrapper">
-            <img src="gmbr_jljh/Gambar Angklung Reog.png" />
-            <div class="region-tag">Jawa Timur</div>
-          </div>
-          <div class="card-content">
-            <h3 class="card-title">Angklung Reog</h3>
-            <p class="card-description">Seni musik Jawa Timur</p>
-            <a href="konten_jelajahi.php?id=7">
-              <button class="btn-learn">Pelajari</button>
-            </a>
-          </div>
-        </div>
-
-        <div class="card" data-title="gamelan" data-region="jawa">
-          <div class="image-wrapper">
-            <img src="gmbr_jljh/Gambar Gamelan.jpg" />
-            <div class="region-tag">Jawa Tengah</div>
-          </div>
-          <div class="card-content">
-            <h3 class="card-title">Gamelan</h3>
-            <p class="card-description">Ansambel musik Jawa Tengah</p>
-            <a href="konten_jelajahi.php?id=1">
-              <button class="btn-learn">Pelajari</button>
-            </a>
-          </div>
-        </div>
-
-        <div class="card" data-title="sasando" data-region="ntt">
-          <div class="image-wrapper">
-            <img src="gmbr_jljh/Gambar Sasando.png" />
-            <div class="region-tag">NTT</div>
-          </div>
-          <div class="card-content">
-            <h3 class="card-title">Sasando</h3>
-            <p class="card-description">Ansambel musik NTT</p>
-            <a href="konten_jelajahi.php?id=3">
-              <button class="btn-learn">Pelajari</button>
-            </a>
-          </div>
-        </div>
-
-        <div class="card" data-title="kolintang" data-region="sulawesi">
-          <div class="image-wrapper">
-            <img src="gmbr_jljh/Gambar Kolintang.png" />
-            <div class="region-tag">Sulawesi Utara</div>
-          </div>
-          <div class="card-content">
-            <h3 class="card-title">Kolintang</h3>
-            <p class="card-description">Musik Sulawesi Utara</p>
-            <a href="konten_jelajahi.php?id=8">
-              <button class="btn-learn">Pelajari</button>
-            </a>
-          </div>
-        </div>
-
-        <div class="card" data-title="angklung" data-region="jawa">
-          <div class="image-wrapper">
-            <img src="gmbr_jljh/Gambar Angklung.jpg" />
-            <div class="region-tag">Jawa Barat</div>
-          </div>
-          <div class="card-content">
-            <h3 class="card-title">Angklung</h3>
-            <p class="card-description">Ansambel musik Jawa Barat</p>
-            <a href="konten_jelajahi.php?id=2">
-              <button class="btn-learn">Pelajari</button>
-            </a>
-          </div>
-        </div>
-
-        <div class="card" data-title="tifa" data-region="papua">
-          <div class="image-wrapper">
-            <img src="gmbr_jljh/Gambar Tifa.png" />
-            <div class="region-tag">Papua</div>
-          </div>
-          <div class="card-content">
-            <h3 class="card-title">Tifa</h3>
-            <p class="card-description">Alat musik Papua</p>
-            <a href="konten_jelajahi.php?id=9">
-              <button class="btn-learn">Pelajari</button>
-            </a>
-          </div>
-        </div>
-
-        <div class="card" data-title="gambus" data-region="kalimantan">
-          <div class="image-wrapper">
-            <img src="gmbr_jljh/Gambar Gambus.png" />
-            <div class="region-tag">Kalimantan Timur</div>
-          </div>
-          <div class="card-content">
-            <h3 class="card-title">Gambus</h3>
-            <p class="card-description">Alat musik Kalimantan Timur</p>
-            <a href="konten_jelajahi.php?id=10">
-              <button class="btn-learn">Pelajari</button>
-            </a>
-          </div>
-        </div>
-
-        <div class="card" data-title="sape" data-region="kalimantan">
-          <div class="image-wrapper">
-            <img src="gmbr_jljh/Gambar Sape.png" />
-            <div class="region-tag">Kalimantan Timur</div>
-          </div>
-          <div class="card-content">
-            <h3 class="card-title">Sape</h3>
-            <p class="card-description">Alat musik Kalimantan Timur</p>
-            <a href="konten_jelajahi.php?id=11">
-              <button class="btn-learn">Pelajari</button>
-            </a>
-          </div>
-        </div>
-
-        <div class="card" data-title="gendang" data-region="jawa">
-          <div class="image-wrapper">
-            <img src="gmbr_jljh/Gambar Gendang.png" />
-            <div class="region-tag">Jawa Barat</div>
-          </div>
-          <div class="card-content">
-            <h3 class="card-title">Gendang</h3>
-            <p class="card-description">Alat musik Jawa Barat</p>
-            <a href="konten_jelajahi.php?id=12">
-              <button class="btn-learn">Pelajari</button>
-            </a>
-          </div>
-        </div>
+        <?php if (empty($konten_list)): ?>
+          <p>Tidak ada konten yang ditemukan.</p>
+        <?php else: ?>
+          <?php foreach ($konten_list as $konten): ?>
+            <div class="card">
+              <div class="image-wrapper">
+                <img src="gmbr_jljh/Gambar <?= htmlspecialchars($konten['judul']) ?>.png"
+                  onerror="this.src='gmbr_jljh/Gambar <?= htmlspecialchars($konten['judul']) ?>.jpg'" />
+                <div class="region-tag"><?= htmlspecialchars($konten['daerah']) ?></div>
+              </div>
+              <div class="card-content">
+                <h3 class="card-title"><?= htmlspecialchars($konten['judul']) ?></h3>
+                <p class="card-description"><?= htmlspecialchars($konten['deskripsi']) ?></p>
+                <a href="konten_jelajahi.php?id=<?= $konten['id'] ?>">
+                  <button class="btn-learn">Pelajari</button>
+                </a>
+              </div>
+            </div>
+          <?php endforeach; ?>
+        <?php endif; ?>
       </div>
     </div>
   </section>
