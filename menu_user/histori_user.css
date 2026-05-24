@@ -145,14 +145,14 @@ header {
     flex: 1;
     flex-direction: column;
     justify-content: center;
-    gap: 15px;
+    gap: 10px;
     margin: 20px;
 }
 
 .card-top {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
 }
 
 .card-top h3 {
