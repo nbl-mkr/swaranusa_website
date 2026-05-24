@@ -3,7 +3,7 @@ session_start();
 require_once "koneksi.php";
 
 if (!isset($_GET["id"])) {
-    header("Location: jelajahi.html");
+    header("Location: jelajahi.php");
     exit;
 }
 
@@ -15,7 +15,7 @@ $konten = $stmt->get_result()->fetch_assoc();
 $stmt->close();
 
 if (!$konten) {
-    header("Location: jelajahi.html");
+    header("Location: jelajahi.php");
     exit;
 }
 
@@ -71,19 +71,7 @@ $galeri_list = $konten['galeri'] ? explode(",", $konten['galeri']) : [];
         <div class="hamburger" onclick="toggleMenu()">
             <span></span><span></span><span></span>
         </div>
-        <nav id="navMenu">
-            <ul>
-                <li><a href="landing.html" onclick="closeMenu()">Beranda</a></li>
-                <li><a href="jelajahi.html" onclick="closeMenu()">Jelajahi</a></li>
-                <li><a href="belajar.html" onclick="closeMenu()">Belajar</a></li>
-                <li><a href="tentang.html" onclick="closeMenu()">Tentang</a></li>
-                <li>
-                    <a href="kelola.php" onclick="closeMenu()">
-                        <img src="gmbr_gnrl/usr.png" width="15px" height="15px" />
-                    </a>
-                </li>
-            </ul>
-        </nav>
+        <?php include 'navbar.php'; ?>
     </header>
 
     <section class="hero" id="home"
@@ -154,39 +142,7 @@ $galeri_list = $konten['galeri'] ? explode(",", $konten['galeri']) : [];
         </div>
     </section>
 
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-section brand">
-                <h2 class="logo">
-                    <img src="gmbr_gnrl/logoputih.svg" />
-                    SwaraNusa
-                </h2>
-                <p>SwaraNusa menghadirkan literatur, foto, audio, dan video untuk membuka akses ke kekayaan musik
-                    Indonesia dan mengapresiasi warisan budayanya.</p>
-            </div>
-            <div class="footer-section nav">
-                <h2>Navigasi</h2>
-                <ul>
-                    <li><a href="landing.html">Beranda</a></li>
-                    <li><a href="jelajahi.html">Jelajahi</a></li>
-                    <li><a href="belajar.html">Belajar</a></li>
-                    <li><a href="tentang.html">Tentang</a></li>
-                </ul>
-            </div>
-            <div class="footer-section social">
-                <h2>Ikuti Kami</h2>
-                <div class="icons">
-                    <a href="https://www.facebook.com/"><img src="gmbr_gnrl/fb.svg" alt="Facebook" /></a>
-                    <a href="https://twitter.com/"><img src="gmbr_gnrl/twt.svg" alt="Twitter" /></a>
-                    <a href="https://www.instagram.com/"><img src="gmbr_gnrl/ig.svg" alt="Instagram" /></a>
-                </div>
-            </div>
-        </div>
-        <hr />
-        <div class="footer-bottom">
-            <p>© 2025 SwaraNusa. All rights reserved. Made with <span class="heart">❤️</span> in Indonesia.</p>
-        </div>
-    </footer>
+    <?php include 'footer.php'; ?>
     <script src="burger.js"></script>
 </body>
 
