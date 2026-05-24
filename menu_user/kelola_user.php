@@ -21,6 +21,7 @@ $stmt->close();
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Menu - Kelola Akun</title>
+  <link rel="stylesheet" href="../navbar.css" />
   <link rel="stylesheet" href="kelola_user.css" />
 </head>
 
@@ -31,19 +32,7 @@ $stmt->close();
         <img src="../assets/logo_white.png" alt="Logo SwaraNusa" />
         <h1>SwaraNusa</h1>
       </div>
-      <nav class="sidebar-menu">
-        <div>
-          <img src="../assets/logo_histori.png" alt="Logo Histori" />
-          <a href="histori_user.php">Histori</a>
-        </div>
-        <div>
-          <img src="../assets/logo_kelola.png" alt="Logo Kelola" width="15px" height="15px" />
-          <a href="kelola_user.php">Kelola Akun</a>
-        </div>
-        <div class="logout">
-          <a href="../logout.php">Logout</a>
-        </div>
-      </nav>
+      <?php include 'sidebar_user.php'; ?>
     </div>
 
     <main class="main-content">
@@ -61,19 +50,7 @@ $stmt->close();
           <span></span>
         </div>
 
-        <nav id="navMenu">
-          <ul>
-            <li><a href="../index.html" onclick="closeMenu()">Beranda</a></li>
-            <li><a href="../jelajahi.html" onclick="closeMenu()">Jelajahi</a></li>
-            <li><a href="../belajar.html" onclick="closeMenu()">Belajar</a></li>
-            <li><a href="../tentang.html" onclick="closeMenu()">Tentang</a></li>
-            <li>
-              <a href="../kelola.php" onclick="closeMenu()">
-                <img src="../assets/user.png" alt="User" />
-              </a>
-            </li>
-          </ul>
-        </nav>
+        <?php include 'navbar_menu.php'; ?>
       </header>
 
       <section class="content-area">

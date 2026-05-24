@@ -152,7 +152,7 @@ body {
   margin-top: 60px;
 }
 
-/* TABLET */
+/* Tablet */
 @media (max-width: 1024px) {
   .hero h2 {
     font-size: 36px;
@@ -191,7 +191,7 @@ body {
   }
 }
 
-/* MOBILE */
+/* Mobile */
 @media (max-width: 600px) {
   .hero {
     height: 40vh;

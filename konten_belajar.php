@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta charset="utf-8" />
   <title>Belajar SwaraNusa</title>
-  <link rel="stylesheet" href="konten_belajar.css" />
   <link rel="stylesheet" href="navbar.css" />
+  <link rel="stylesheet" href="konten_belajar.css" />
   <script src="konten_belajar.js" defer></script>
 </head>
 
@@ -27,7 +27,7 @@
       <span></span>
     </div>
 
-      <?php include 'navbar.php'; ?>
+    <?php include 'navbar.php'; ?>
   </header>
 
   <section class="hero" id="home"></section>

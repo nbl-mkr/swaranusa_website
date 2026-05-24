@@ -25,7 +25,12 @@ body {
     min-height: 100vh;
 }
 
-/* Letf Side (Sidebar) */
+header {
+    background: #ffffff;
+}
+
+/* Left Side (Sidebar) */
+
 .left-side {
     display: flex;
     flex-direction: column;
@@ -79,11 +84,6 @@ body {
     padding: 15px 25px;
 }
 
-.sidebar-menu div:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
-}
-
 .sidebar-menu div a {
     color: #ffffff;
     text-align: left;
@@ -95,29 +95,6 @@ body {
     transition: 0.3s;
 }
 
-.sidebar-menu .logout {
-    margin-top: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 15px 25px;
-}
-
-.sidebar-menu .logout a {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 14px;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 500;
-    text-align: center;
-}
-
-.sidebar-menu .logout:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
-}
-
 .main-content {
     display: flex;
     flex: 1;
@@ -125,97 +102,7 @@ body {
     margin-left: 200px;
 }
 
-/* Right Side (Navbar + Content) */
-
-/* Hamburger */
-.hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    gap: 5px;
-    z-index: 1001;
-}
-
-.hamburger span {
-    width: 25px;
-    height: 3px;
-    background-color: #131010;
-    transition: 0.3s;
-    border-radius: 3px;
-}
-
-.hamburger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(6px, 6px);
-}
-
-.hamburger.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(5.5px, -5.5px);
-}
-
-header {
-    background: #ffffff;
-    color: #131010;
-    padding: 20px 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 2001;
-}
-
-header h1 {
-    font-size: 16px;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 500;
-}
-
-ul {
-    list-style: none;
-    display: flex;
-    align-items: center;
-}
-
-nav ul {
-    display: flex;
-    list-style: none;
-    position: relative;
-}
-
-.logo-navbar {
-    height: 37px;
-}
-
-nav ul li {
-    margin-left: 55px;
-    position: relative;
-}
-
-nav ul li a {
-    color: #131010;
-    text-decoration: none;
-    transition: color 0.3s ease;
-    position: relative;
-    padding-bottom: 5px;
-    display: inline-block;
-}
-
-nav ul li a:hover {
-    color: #543a14;
-}
-
-nav ul li a.active {
-    color: #543a14;
-}
-
-#navMenu {
-    font-family: "Montserrat", sans-serif;
-    font-weight: 500;
-}
+/* Right Side (Content) */
 
 .content-area {
     padding: 32px 48px;
@@ -307,11 +194,13 @@ nav ul li a.active {
     border-bottom: none;
 }
 
-/* Desktop (min-width: 1024px) */
+/* Desktop */
+
 @media (min-width: 1024px) {
 }
 
-/* Tablet (max-width: 1024px) */
+/* Tablet */
+
 @media (max-width: 1024px) {
     .left-side {
         position: relative;
@@ -337,21 +226,6 @@ nav ul li a.active {
         margin-left: 0;
     }
 
-    .top-navbar {
-        justify-content: flex-end;
-        padding: 12px 16px;
-        left: 0;
-        width: 100%;
-    }
-
-    .top-navbar ul {
-        gap: 20px;
-    }
-
-    .top-navbar ul li a {
-        font-size: 12px;
-    }
-
     .analisis-container {
         flex-direction: column;
         gap: 24px;
@@ -372,7 +246,8 @@ nav ul li a.active {
     }
 }
 
-/* Smartphone (max-width: 600px) */
+/* Mobile */
+
 @media (max-width: 600px) {
     .left-side {
         width: 80px;
@@ -401,60 +276,6 @@ nav ul li a.active {
 
     .main-content {
         margin-left: 0;
-    }
-
-    header {
-        padding: 15px 20px;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-    header h1 {
-        font-size: 14px;
-    }
-
-    .hamburger {
-        display: flex;
-    }
-
-    #navMenu {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 70%;
-        height: 100vh;
-        background-color: #ffffff;
-        transition: 0.3s;
-        z-index: 1000;
-        box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    #navMenu.active {
-        right: 0;
-    }
-
-    #navMenu ul {
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-        padding: 80px 30px;
-    }
-
-    #navMenu ul li {
-        margin: 0;
-        width: 100%;
-        padding: 15px 0;
-        border-bottom: 1px solid #e0e0e0;
-    }
-
-    #navMenu ul li a {
-        font-size: 16px;
-        display: block;
-        width: 100%;
-    }
-
-    #navMenu ul::after {
-        display: none;
     }
 
     .content-area {

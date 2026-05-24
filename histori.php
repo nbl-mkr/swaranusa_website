@@ -45,6 +45,7 @@ function waktu_lalu($datetime)
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Menu - Histori</title>
+    <link rel="stylesheet" href="navbar.css" />
     <link rel="stylesheet" href="histori.css" />
 </head>
 

@@ -6,8 +6,6 @@ if (!isset($_SESSION["isLoggedIn"]) || $_SESSION["role"] !== "admin") {
 }
 require_once "koneksi.php";
 
-$error = "";
-
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $judul = trim($_POST["judul"]);
     $subjudul = trim($_POST["subjudul"]);
@@ -21,8 +19,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $diperbarui = date("Y-m-d");
 
     $gambar = "";
-    $galeri = "";
-
     if (isset($_FILES["gambar"]) && $_FILES["gambar"]["error"] === 0) {
         $ext = pathinfo($_FILES["gambar"]["name"], PATHINFO_EXTENSION);
         $nama_gambar = "hero" . str_replace(" ", "", ucwords($judul)) . "." . $ext;
@@ -60,6 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tambah Konten</title>
+    <link rel="stylesheet" href="navbar.css" />
     <link rel="stylesheet" href="dashboard.css" />
     <link rel="stylesheet" href="tambah_konten.css" />
 </head>
@@ -71,24 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <img src="assets/logo_white.png" alt="Logo SwaraNusa" />
                 <h1>SwaraNusa</h1>
             </div>
-            <nav class="sidebar-menu">
-                <div>
-                    <img src="assets/logo_dashboard.png" alt="Logo Dashboard" />
-                    <a href="dashboard.php">Dashboard</a>
-                </div>
-                <div>
-                    <img src="assets/logo_analisis.png" alt="Logo Analisis" />
-                    <a href="analisis.php">Analisis</a>
-                </div>
-                <div>
-                    <img src="assets/logo_histori.png" alt="Logo Histori" />
-                    <a href="histori.php">Histori</a>
-                </div>
-                <div>
-                    <img src="assets/logo_kelola.png" alt="Logo Kelola" width="15px" height="15px" />
-                    <a href="kelola.php">Kelola Akun</a>
-                </div>
-            </nav>
+            <?php include 'sidebar_admin.php'; ?>
         </div>
 
         <main class="main-content">
@@ -102,19 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <div class="hamburger" onclick="toggleMenu()">
                     <span></span><span></span><span></span>
                 </div>
-                <nav id="navMenu">
-                    <ul>
-                        <li><a href="landing.html" onclick="closeMenu()">Beranda</a></li>
-                        <li><a href="jelajahi.html" onclick="closeMenu()">Jelajahi</a></li>
-                        <li><a href="belajar.html" onclick="closeMenu()">Belajar</a></li>
-                        <li><a href="tentang.html" onclick="closeMenu()">Tentang</a></li>
-                        <li>
-                            <a href="kelola.php" onclick="closeMenu()">
-                                <img src="assets/user.png" alt="User" />
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+                <?php include 'navbar_menu.php'; ?>
             </header>
 
             <section class="content-area">
