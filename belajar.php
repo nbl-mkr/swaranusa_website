@@ -33,10 +33,8 @@
     <h2>Belajar Musik Tradisional Nusantara</h2>
     <p>
       Pilih instrumen favoritmu dan ikuti pembelajaran lengkap dengan notasi,
-      audio, <br />
-      dan video interaktif. Dibuat dengan desain elegan agar belajar jadi
-      pengalaman <br />
-      menyenangkan.
+      audio, dan video interaktif. Dibuat dengan desain elegan agar belajar jadi
+      pengalaman menyenangkan.
     </p>
   </section>
 

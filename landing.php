@@ -47,7 +47,7 @@
       <h3>Populer Minggu Ini</h3>
       <div class="populer-container">
         <div class="populer-top">
-          <a href="konten_jelajahi.php">
+          <a href="konten_jelajahi.php?id=8">
             <div class="img-wrapper">
               <img src="assets/original-hero/gambar-kolintang.png" alt="Gambar Kolintang" />
               <div class="img-overlay">
@@ -58,7 +58,7 @@
           </a>
 
           <div class="top-right">
-            <a href="konten_jelajahi.php">
+            <a href="konten_jelajahi.php?id=11">
               <div class="img-wrapper">
                 <img src="assets/original-hero/gambar-sape.png" alt="Gambar Sape" />
                 <div class="img-overlay">
@@ -67,7 +67,7 @@
                 </div>
               </div>
             </a>
-            <a href="konten_jelajahi.php">
+            <a href="konten_jelajahi.php?id=10">
               <div class="img-wrapper">
                 <img src="assets/original-hero/gambar-gambus.png" alt="Gambar Gambus" />
                 <div class="img-overlay">
@@ -79,38 +79,46 @@
           </div>
         </div>
         <div class="populer-bottom">
-          <div class="img-wrapper">
-            <img src="assets/original-hero/gambar-angklung.jpg" alt="Gambar Angklung" />
-            <div class="img-overlay">
-              <h3>Angklung</h3>
-              <p>Jawa Barat</p>
+          <a href="konten_jelajahi.php?id=2">
+            <div class="img-wrapper">
+              <img src="assets/original-hero/gambar-angklung.jpg" alt="Gambar Angklung" />
+              <div class="img-overlay">
+                <h3>Angklung</h3>
+                <p>Jawa Barat</p>
+              </div>
             </div>
-          </div>
+          </a>
 
           <div class="bottom-container">
             <div class="bottom-right-top">
+              <a href="konten_jelajahi.php">
+                <div class="img-wrapper">
+                  <img src="assets/original-hero/gambar-rebab.png" alt="Gambar Rebab" />
+                  <div class="img-overlay">
+                    <h3>Rebab</h3>
+                    <p>Jawa Barat</p>
+                  </div>
+                </div>
+              </a>
+              <a href="konten_jelajahi.php?id=1">
+                <div class="img-wrapper">
+                  <img src="assets/original-hero/gambar-gamelan.jpg" alt="Gambar Gamelan" />
+                  <div class="img-overlay">
+                    <h3>Gamelan</h3>
+                    <p>Jawa Tengah</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <a href="konten_jelajahi.php?id=9">
               <div class="img-wrapper">
-                <img src="assets/original-hero/gambar-rebab.png" alt="Gambar Rebab" />
+                <img src="assets/original-hero/gambar-tifa.png" alt="Gambar Tifa" />
                 <div class="img-overlay">
-                  <h3>Rebab</h3>
-                  <p>Jawa Barat</p>
+                  <h3>Tifa</h3>
+                  <p>Papua</p>
                 </div>
               </div>
-              <div class="img-wrapper">
-                <img src="assets/original-hero/gambar-gamelan.jpg" alt="Gambar Gamelan" />
-                <div class="img-overlay">
-                  <h3>Gamelan</h3>
-                  <p>Jawa Tengah</p>
-                </div>
-              </div>
-            </div>
-            <div class="img-wrapper">
-              <img src="assets/original-hero/gambar-tifa.png" alt="Gambar Tifa" />
-              <div class="img-overlay">
-                <h3>Tifa</h3>
-                <p>Papua</p>
-              </div>
-            </div>
+            </a>
           </div>
         </div>
       </div>
