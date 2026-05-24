@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tambah Konten</title>
+    <title>Menu - Tambah Konten</title>
     <link rel="stylesheet" href="navbar.css" />
     <link rel="stylesheet" href="dashboard.css" />
     <link rel="stylesheet" href="tambah_konten.css" />

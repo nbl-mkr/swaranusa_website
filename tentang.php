@@ -4,7 +4,7 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta charset="utf-8" />
-  <title>Belajar SwaraNusa</title>
+  <title>Halaman Tentang SwaraNusa</title>
   <link rel="stylesheet" href="navbar.css" />
   <link rel="stylesheet" href="tentang.css" />
 </head>
