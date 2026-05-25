@@ -123,8 +123,8 @@ header {
 }
 
 .tab-btn {
-    background-color: transparent;
-    border: 2px solid #131010;
+    background-color: #f0bb78;
+    border: none;
     border-radius: 10px;
     font-size: 14px;
     font-family: "Montserrat", sans-serif;
@@ -135,12 +135,12 @@ header {
 }
 
 .tab-btn.active {
-    background-color: #131010;
+    background-color: #543a14;
     color: #ffffff;
 }
 
 .tab-btn:hover {
-    background-color: #131010;
+    background-color: #543a14;
     color: #ffffff;
 }
 
@@ -197,6 +197,11 @@ header {
     font-size: 14px;
     font-family: "Montserrat", sans-serif;
     font-weight: 400;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-clamp: 2;
 }
 
 .card-bottom {

@@ -113,6 +113,34 @@ header {
     margin-bottom: 20px;
 }
 
+.tab {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    background-color: #f0bb78;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    padding: 6px 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.tab-btn.active {
+    background-color: #543a14;
+    color: #ffffff;
+}
+
+.tab-btn:hover {
+    background-color: #543a14;
+    color: #ffffff;
+}
+
 .cards-container {
     display: flex;
     flex-direction: column;
@@ -165,6 +193,11 @@ header {
     font-size: 14px;
     font-family: "Montserrat", sans-serif;
     font-weight: 400;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-clamp: 2;
 }
 
 .card-bottom {
