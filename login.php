@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
           <img src="assets/logo_white.png" alt="SwaraNusa Logo" />
           <p>SwaraNusa</p>
         </div>
-        <button><a href="index.html">Kembali ke website</a></button>
+        <button><a href="landing.php">Kembali ke website</a></button>
       </div>
     </div>
 

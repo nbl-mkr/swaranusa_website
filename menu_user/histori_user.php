@@ -70,7 +70,7 @@ function waktu_lalu($datetime)
         <div class="hamburger" onclick="toggleMenu()">
           <span></span><span></span><span></span>
         </div>
-        <?php include 'navbar_menu.php'; ?>
+        <?php include '../navbar_menu_user.php'; ?>
       </header>
 
       <section class="content-area">

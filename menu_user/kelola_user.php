@@ -50,7 +50,7 @@ $stmt->close();
           <span></span>
         </div>
 
-        <?php include 'navbar_menu.php'; ?>
+        <?php include '../navbar_menu_user.php'; ?>
       </header>
 
       <section class="content-area">
