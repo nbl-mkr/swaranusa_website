@@ -1,132 +1,144 @@
+<?php
+session_start();
+require_once "koneksi.php";
+
+if (!isset($_GET["id"])) {
+  header("Location: belajar.php");
+  exit;
+}
+
+$id = $_GET["id"];
+$stmt = $conn->prepare("SELECT * FROM konten_belajar WHERE id = ?");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$konten = $stmt->get_result()->fetch_assoc();
+$stmt->close();
+
+if (!$konten) {
+  header("Location: belajar.php");
+  exit;
+}
+
+if (isset($_SESSION["user_id"])) {
+  $user_id = $_SESSION["user_id"];
+  $konten_id = $konten["konten_id"];
+  $dilihat_pada = date("Y-m-d H:i:s");
+
+  $cek = $conn->prepare("SELECT id FROM histori WHERE user_id = ? AND konten_id = ?");
+  $cek->bind_param("ii", $user_id, $konten_id);
+  $cek->execute();
+  $cek->store_result();
+
+  if ($cek->num_rows > 0) {
+    $update = $conn->prepare("UPDATE histori SET dilihat_pada = ? WHERE user_id = ? AND konten_id = ?");
+    $update->bind_param("sii", $dilihat_pada, $user_id, $konten_id);
+    $update->execute();
+    $update->close();
+  } else {
+    $insert = $conn->prepare("INSERT INTO histori (user_id, konten_id, dilihat_pada) VALUES (?, ?, ?)");
+    $insert->bind_param("iis", $user_id, $konten_id, $dilihat_pada);
+    $insert->execute();
+    $insert->close();
+  }
+  $cek->close();
+}
+
+$gambar_bagian_list = $konten['gambar_bagian'] ? explode(",", $konten['gambar_bagian']) : [];
+$keterangan_bagian_list = $konten['keterangan_bagian'] ? explode("|", $konten['keterangan_bagian']) : [];
+$audio_list = $konten['audio'] ? explode(",", $konten['audio']) : [];
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta charset="utf-8" />
-  <title>Belajar SwaraNusa</title>
+  <title><?= htmlspecialchars($konten['judul']) ?> - SwaraNusa</title>
   <link rel="stylesheet" href="navbar.css" />
   <link rel="stylesheet" href="konten_belajar.css" />
-  <script src="konten_belajar.js" defer></script>
 </head>
 
 <body>
   <header>
     <ul class="logo-navbar">
-      <li>
-        <img src="gmbr_gnrl/logo.svg" width="20px" height="30px" />
-      </li>
+      <li><img src="gmbr_gnrl/logo.svg" width="20px" height="30px" /></li>
       <li>
         <h1>SwaraNusa</h1>
       </li>
     </ul>
-
     <div class="hamburger" onclick="toggleMenu()">
-      <span></span>
-      <span></span>
-      <span></span>
+      <span></span><span></span><span></span>
     </div>
-
     <?php include 'navbar.php'; ?>
   </header>
 
-  <section class="hero" id="home"></section>
+  <section class="hero" id="home"
+    style="background: url('gmbr_kontenbljr/<?= htmlspecialchars($konten['gambar']) ?>') center/cover no-repeat;">
+  </section>
 
   <section class="isi">
     <div class="nama">
-      <h1>Angklung</h1>
+      <h1><?= htmlspecialchars($konten['judul']) ?></h1>
       <hr />
-      <h3>Alat Musik dari Jawa Barat</h3>
+      <h3><?= htmlspecialchars($konten['daerah']) ?></h3>
     </div>
     <div class="konten">
       <div class="pengertian">
         <h2>Pengertian</h2>
-        <p>
-          Angklung adalah alat musik dari Jawa Barat yang dimainkan dengan
-          cara digoyang untuk menghasilkan suara. Alat<br />
-          musik ini terbuat dari bahan bambu dan terdiri atas 2 sampai 4
-          tabung bambu. Angklung bisa dimainkan secara solo <br />
-          atau kelompok untuk memainkan nada dalam pola atau melodi tertentu.
-        </p>
+        <p><?= htmlspecialchars($konten['pengertian']) ?></p>
       </div>
       <div class="ayo-belajar">
         <h2>Ayo Belajar!</h2>
-        <p>
-          Angklung dapat dimainkan dengan dua prinsip yakni digoyang atau
-          dipukul. Kedua prinsip ini pada dasarnya sama yaitu dilakukan
-          <br />
-          untuk menggerakkan angklung dan menghasilkan suara.
-        </p>
+        <p><?= htmlspecialchars($konten['cara_main']) ?></p>
       </div>
-
-      <h2>Tentang Angklung</h2>
-      <div class="tentang-angklung">
-        <ul>
-          <li>
-            <div class="gambar1">
-              <img src="gmbr_kontenbljr/Gambar Bagian Angklung.png" alt="Gambar Angklung 1" />
-              <ul>
-                <li>
-                  <p>
-                    1. Tabung badag <br />
-                    2. Tabung leutik <br />
-                    3. Tabung dasar
-                  </p>
-                </li>
-
-                <li>
-                  <p>
-                    4. Jejer (Tihang) <br />
-                    5. Palang gantung <br />
-                    6. Tabung sora
-                  </p>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li>
-            <div class="gambar2">
-              <img src="gmbr_kontenbljr/Gambar Belajar Angklung.png" alt="Gambar Angklung 2" />
-              <p>
-                Notasi berfungsi sebagai panduan <br />
-                ketika memainkan angklung
-              </p>
-            </div>
-          </li>
-        </ul>
-      </div>
+      <?php if (!empty($gambar_bagian_list)): ?>
+        <h2>Tentang <?= htmlspecialchars($konten['judul']) ?></h2>
+        <div class="tentang">
+          <ul>
+            <?php foreach ($gambar_bagian_list as $i => $gambar): ?>
+              <li>
+                <div class="gambar<?= $i + 1 ?>">
+                  <img src="gmbr_kontenbljr/<?= htmlspecialchars(trim($gambar)) ?>"
+                    alt="Gambar <?= htmlspecialchars($konten['judul']) ?> <?= $i + 1 ?>" />
+                  <?php if (isset($keterangan_bagian_list[$i])): ?>
+                    <p><?= htmlspecialchars(trim($keterangan_bagian_list[$i])) ?></p>
+                  <?php endif; ?>
+                </div>
+              </li>
+            <?php endforeach; ?>
+          </ul>
+        </div>
+      <?php endif; ?>
     </div>
 
     <div class="audio-video">
-      <div class="suara-angklung">
-        <h2>Dengarkan Lantunan Suara Angklung!</h2>
-        <div class="audio-wrapper">
-          <audio controls>
-            <source src="gmbr_kontenbljr/ANGKLUNG - ALAT MUSIK TRADISONAL JAWA BARAT.mp3" type="audio/mpeg" />
-            Your browser does not support the audio element.
-          </audio>
+      <?php if (!empty($audio_list)): ?>
+        <div class="suara">
+          <h2>Dengarkan Lantunan Suara <?= htmlspecialchars($konten['judul']) ?>!</h2>
+          <?php foreach ($audio_list as $audio): ?>
+            <div class="audio-wrapper">
+              <audio controls>
+                <source src="gmbr_kontenbljr/<?= htmlspecialchars(trim($audio)) ?>" type="audio/mpeg" />
+                Your browser does not support the audio element.
+              </audio>
+            </div>
+          <?php endforeach; ?>
         </div>
-        <br />
-        <div class="audio-wrapper">
-          <audio controls>
-            <source src="gmbr_kontenbljr/Zeldas Lullaby on Angklung (an instrument from Indonesia).mp3"
-              type="audio/mpeg" />
-            Your browser does not support the audio element.
-          </audio>
+      <?php endif; ?>
+      <?php if ($konten['video']): ?>
+        <h2>Video Tutorial</h2>
+        <div class="video">
+          <video controls>
+            <source src="gmbr_kontenbljr/<?= htmlspecialchars($konten['video']) ?>" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </div>
-      </div>
-      <h2>Video Tutorial</h2>
-      <div class="video-angklung">
-        <video controls>
-          <source src="gmbr_kontenbljr/angklung.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      </div>
+      <?php endif; ?>
     </div>
   </section>
 
   <?php include 'footer.php'; ?>
-  <script src="konten_belajar.js"></script>
   <script src="burger.js"></script>
 </body>
 

@@ -50,7 +50,7 @@
         <div class="progress-bar">
           <div class="progress"></div>
         </div>
-        <a href="konten_belajar.php"><button class="btn">Pelajari</button>
+        <a href="konten_belajar.php?id=1"><button class="btn">Pelajari</button>
         </a>
       </div>
     </div>
@@ -65,7 +65,7 @@
         <div class="progress-bar">
           <div class="progress" style="width: 65%"></div>
         </div>
-        <a href="konten_belajar.php"><button class="btn">Pelajari</button>
+        <a href="konten_belajar.php?id=2"><button class="btn">Pelajari</button>
         </a>
       </div>
       <img src="gmbr_bljr/angklung.jpg" alt="Angklung" />
@@ -82,7 +82,7 @@
         <div class="progress-bar">
           <div class="progress" style="width: 20%"></div>
         </div>
-        <a href="konten_belajar.php"><button class="btn">Pelajari</button>
+        <a href="konten_belajar.php?id=3"><button class="btn">Pelajari</button>
         </a>
       </div>
     </div>
@@ -97,7 +97,7 @@
         <div class="progress-bar">
           <div class="progress" style="width: 60%"></div>
         </div>
-        <a href="konten_belajar.php"><button class="btn">Pelajari</button>
+        <a href="konten_belajar.php?id=4"><button class="btn">Pelajari</button>
         </a>
       </div>
       <img src="gmbr_bljr/gamelan.jpg" alt="Gamelan" />

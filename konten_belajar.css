@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: "Coolvetica";
-  src: url("coolvetica/Coolvetica\ Rg.otf") format("opentype");
+  src: url("coolvetica/Coolvetica Rg.otf") format("opentype");
 }
 
 * {
@@ -20,7 +20,6 @@ body {
 
 .hero {
   height: 50vh;
-  background: url("gmbr_kontenbljr/Gambar Angklung.jpg") center/cover no-repeat;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -85,26 +84,11 @@ body {
   text-align: center;
 }
 
-.audio-video {
-  margin-top: 6px;
-  margin-bottom: 150px;
-  text-align: center;
-  padding: 0 20px;
-}
-
-.audio-video h2 {
-  margin-top: 54px;
-  margin-bottom: 38px;
-  font-size: clamp(24px, 5vw, 32px);
-  font-family: "Coolvetica", sans-serif;
-  font-weight: 400;
-}
-
-.tentang-angklung {
+.tentang {
   margin: auto;
 }
 
-.tentang-angklung ul {
+.tentang ul {
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -132,7 +116,22 @@ body {
   border-radius: 5px;
 }
 
-.suara-angklung .audio-wrapper {
+.audio-video {
+  margin-top: 6px;
+  margin-bottom: 150px;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.audio-video h2 {
+  margin-top: 54px;
+  margin-bottom: 38px;
+  font-size: clamp(24px, 5vw, 32px);
+  font-family: "Coolvetica", sans-serif;
+  font-weight: 400;
+}
+
+.suara .audio-wrapper {
   width: 100%;
   max-width: 953px;
   margin: 10px auto;
@@ -141,12 +140,12 @@ body {
   padding: 0 10px;
 }
 
-.suara-angklung .audio-wrapper audio {
+.suara .audio-wrapper audio {
   display: block;
   width: 100%;
 }
 
-.video-angklung {
+.video {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -157,7 +156,7 @@ body {
   padding: 0 10px;
 }
 
-.video-angklung video {
+.video video {
   width: 100%;
   max-width: 952px;
   height: clamp(150px, 30vw, 187px);
@@ -168,11 +167,11 @@ body {
   display: block;
 }
 
-.video-angklung video.expand {
+.video video.expand {
   height: clamp(250px, 50vw, 500px);
 }
 
-.video-angklung::before {
+.video::before {
   content: "";
   position: absolute;
   width: calc(100% - 20px);
@@ -186,7 +185,7 @@ body {
   z-index: 0;
 }
 
-.video-angklung.playing::before {
+.video.playing::before {
   height: clamp(200px, 40vw, 340px);
 }
 
@@ -194,14 +193,13 @@ body {
   color: #543a14;
 }
 
-/* Tablet */
 @media (max-width: 1024px) {
   .konten {
     padding: 0 80px;
     gap: 30px;
   }
 
-  .tentang-angklung ul {
+  .tentang ul {
     gap: 30px;
   }
 
@@ -211,7 +209,6 @@ body {
   }
 }
 
-/* Mobile */
 @media (max-width: 600px) {
   .konten {
     padding: 0 20px;
@@ -239,7 +236,7 @@ body {
     max-width: 100%;
   }
 
-  .tentang-angklung ul {
+  .tentang ul {
     gap: 20px;
   }
 }

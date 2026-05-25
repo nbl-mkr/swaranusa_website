@@ -116,6 +116,34 @@ header {
     margin-bottom: 20px;
 }
 
+.tab {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    background-color: transparent;
+    border: 2px solid #131010;
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    padding: 6px 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.tab-btn.active {
+    background-color: #131010;
+    color: #ffffff;
+}
+
+.tab-btn:hover {
+    background-color: #131010;
+    color: #ffffff;
+}
+
 .cards-container {
     display: flex;
     flex-direction: column;
