@@ -90,11 +90,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
 
         <div class="social-buttons">
-          <button class="google-button">
+          <button type="button" class="google-button">
             <img src="assets/google.png" alt="Google" />
             Google
           </button>
-          <button class="facebook-button">
+          <button type="button" class="facebook-button">
             <img src="assets/facebook.png" alt="Facebook" />
             Facebook
           </button>
