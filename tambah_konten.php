@@ -95,7 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         </div>
                         <div class="form-group">
                             <label>Subjudul</label>
-                            <input type="text" name="subjudul" placeholder="Contoh: Seni Musik dari Jawa Tengah" />
+                            <input type="text" name="subjudul" />
                         </div>
                         <div class="form-group">
                             <label>Daerah</label>
@@ -120,7 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <div class="form-group">
                             <label>Instrumen yang Digunakan</label>
                             <input type="text" name="instrumen" placeholder="Contoh: Bonang,Gender,Gong,Kenong,Saron" />
-                            <small>Pisahkan dengan koma tanpa spasi</small>
+                            <p>Pisahkan dengan koma tanpa spasi</p>
                         </div>
                         <div class="form-group">
                             <label>Nilai Budaya</label>
@@ -129,12 +129,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <div class="form-group">
                             <label>Gambar Hero</label>
                             <input type="file" name="gambar" accept="image/*" />
-                            <small>Nama file otomatis: hero[Judul].[ext]</small>
+                            <p>Contoh nama file contoh: heroKarawitan</p>
                         </div>
                         <div class="form-group">
                             <label>Galeri (maks. 3 gambar)</label>
                             <input type="file" name="galeri[]" accept="image/*" multiple />
-                            <small>Nama file otomatis: [judul]1.[ext], [judul]2.[ext], dst</small>
+                            <p>Contoh nama file: karawitan1</p>
                         </div>
                         <div class="form-btn">
                             <button type="submit">Simpan</button>

@@ -146,8 +146,8 @@ if (!$konten) {
                         <div class="form-group">
                             <label>Instrumen yang Digunakan</label>
                             <input type="text" name="instrumen" value="<?= htmlspecialchars($konten['instrumen']) ?>"
-                                placeholder="contoh: Bonang,Gender,Gong" />
-                            <small>Pisahkan dengan koma tanpa spasi</small>
+                                placeholder="Contoh: Bonang,Gender,Gong,Kenong,Saron" />
+                            <p>Pisahkan dengan koma tanpa spasi</p>
                         </div>
                         <div class="form-group">
                             <label>Nilai Budaya</label>
@@ -161,7 +161,7 @@ if (!$konten) {
                                     class="preview-gambar" />
                             <?php endif; ?>
                             <input type="file" name="gambar" accept="image/*" />
-                            <small>Kosongkan jika tidak ingin mengubah gambar hero</small>
+                            <p>Kosongkan jika tidak ingin mengubah gambar hero</p>
                         </div>
                         <div class="form-group">
                             <label>Galeri</label>
@@ -173,7 +173,7 @@ if (!$konten) {
                                 </div>
                             <?php endif; ?>
                             <input type="file" name="galeri[]" accept="image/*" multiple />
-                            <small>Upload gambar baru untuk menambah galeri</small>
+                            <p>Upload gambar baru untuk menambah galeri</p>
                         </div>
                         <div class="form-btn">
                             <button type="submit">Simpan</button>
