@@ -53,8 +53,14 @@ $konten_belajar_list = $result_belajar->fetch_all(MYSQLI_ASSOC);
 
 $total_konten = $conn->query("SELECT COUNT(*) as total FROM konten")->fetch_assoc()["total"];
 $total_user = $conn->query("SELECT COUNT(*) as total FROM users WHERE role = 'user'")->fetch_assoc()["total"];
-$total_histori_jelajahi = $conn->query("SELECT COUNT(*) as total FROM histori h JOIN konten k ON h.konten_id = k.id")->fetch_assoc()["total"];
-$total_histori_belajar = $conn->query("SELECT COUNT(*) as total FROM histori h JOIN konten_belajar kb ON h.konten_id = kb.konten_id")->fetch_assoc()["total"];
+$total_histori_jelajahi = $conn->query("
+    SELECT COUNT(*) as total FROM histori 
+    WHERE tipe = 'jelajahi'
+")->fetch_assoc()["total"];
+$total_histori_belajar = $conn->query("
+    SELECT COUNT(*) as total FROM histori 
+    WHERE tipe = 'belajar'
+")->fetch_assoc()["total"];
 $konten_bulan_ini = $conn->query("SELECT COUNT(*) as total FROM konten WHERE DATE_FORMAT(diperbarui, '%Y-%m') = DATE_FORMAT(NOW(), '%Y-%m')")->fetch_assoc()["total"];
 $konten_belajar_bulan_ini = $conn->query("SELECT COUNT(*) as total FROM konten_belajar WHERE DATE_FORMAT(diperbarui, '%Y-%m') = DATE_FORMAT(NOW(), '%Y-%m')")->fetch_assoc()["total"];
 
