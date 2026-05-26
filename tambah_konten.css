@@ -86,3 +86,13 @@
 .form-btn a {
     text-decoration: none;
 }
+
+.form-group select {
+    border: 1.5px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+    padding: 8px 12px;
+    outline: none;
+    background-color: #ffffff;
+}

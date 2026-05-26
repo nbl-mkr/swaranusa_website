@@ -24,18 +24,18 @@ if (isset($_SESSION["user_id"])) {
   $konten_id = $konten["konten_id"];
   $dilihat_pada = date("Y-m-d H:i:s");
 
-  $cek = $conn->prepare("SELECT id FROM histori WHERE user_id = ? AND konten_id = ?");
+  $cek = $conn->prepare("SELECT id FROM histori WHERE user_id = ? AND konten_id = ? AND tipe = 'belajar'");
   $cek->bind_param("ii", $user_id, $konten_id);
   $cek->execute();
   $cek->store_result();
 
   if ($cek->num_rows > 0) {
-    $update = $conn->prepare("UPDATE histori SET dilihat_pada = ? WHERE user_id = ? AND konten_id = ?");
+    $update = $conn->prepare("UPDATE histori SET dilihat_pada = ? WHERE user_id = ? AND konten_id = ? AND tipe = 'belajar'");
     $update->bind_param("sii", $dilihat_pada, $user_id, $konten_id);
     $update->execute();
     $update->close();
   } else {
-    $insert = $conn->prepare("INSERT INTO histori (user_id, konten_id, dilihat_pada) VALUES (?, ?, ?)");
+    $insert = $conn->prepare("INSERT INTO histori (user_id, konten_id, dilihat_pada, tipe) VALUES (?, ?, ?, 'belajar')");
     $insert->bind_param("iis", $user_id, $konten_id, $dilihat_pada);
     $insert->execute();
     $insert->close();

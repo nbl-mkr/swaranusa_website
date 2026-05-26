@@ -115,6 +115,34 @@ header {
     margin-bottom: 20px;
 }
 
+.tab {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    background-color: #f0bb78;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    padding: 6px 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.tab-btn.active {
+    background-color: #543a14;
+    color: #ffffff;
+}
+
+.tab-btn:hover {
+    background-color: #543a14;
+    color: #ffffff;
+}
+
 .dashboard-container {
     display: flex;
     flex-direction: column;
@@ -214,6 +242,7 @@ header {
 
 .row1,
 .row2,
+.row2-belajar,
 .row3,
 .row4 {
     display: flex;
@@ -224,6 +253,8 @@ header {
 .row1 h3,
 .row2 p,
 .row2 div,
+.row2-belajar p,
+.row2-belajar div,
 .row3 p,
 .row3 div,
 .row4 p,
@@ -242,6 +273,7 @@ header {
 }
 
 .row2,
+.row2-belajar,
 .row3,
 .row4 {
     border-bottom: 1px solid #eeeeee;
@@ -251,6 +283,7 @@ header {
 }
 
 .row2 div,
+.row2-belajar div,
 .row3 div,
 .row4 div {
     display: flex;
@@ -414,6 +447,7 @@ header {
 
     .row1,
     .row2,
+    .row2,
     .row3,
     .row4 {
         padding: 10px 8px;
@@ -421,6 +455,7 @@ header {
 
     .row1 div button:first-child,
     .row2 div button:first-child,
+    .row2-belajar div button:first-child,
     .row3 div button:first-child,
     .row4 div button:first-child {
         font-size: 12px;
@@ -429,6 +464,7 @@ header {
 
     .row1 div button:last-child,
     .row2 div button:last-child,
+    .row2-belajar div button:last-child,
     .row3 div button:last-child,
     .row4 div button:last-child {
         font-size: 12px;
@@ -501,6 +537,8 @@ header {
     .row1 h3,
     .row2 p,
     .row2 div,
+    .row2-belajar p,
+    .row2-belajar div,
     .row3 p,
     .row3 div,
     .row4 p,
@@ -512,6 +550,7 @@ header {
     }
 
     .row2 div,
+    .row2-belajar div,
     .row3 div,
     .row4 div {
         display: flex;
@@ -520,6 +559,7 @@ header {
 
     .row1 div button:first-child,
     .row2 div button:first-child,
+    .row2-belajar div button:first-child,
     .row3 div button:first-child,
     .row4 div button:first-child {
         font-size: 10px;
@@ -528,6 +568,7 @@ header {
 
     .row1 div button:last-child,
     .row2 div button:last-child,
+    .row2-belajar div button:last-child
     .row3 div button:last-child,
     .row4 div button:last-child {
         font-size: 10px;

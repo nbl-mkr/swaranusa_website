@@ -9,10 +9,10 @@ require_once "../koneksi.php";
 $user_id = $_SESSION["user_id"];
 
 $stmt_jelajahi = $conn->prepare("
-    SELECT k.id, k.judul, k.daerah, k.kategori, k.deskripsi, k.gambar, h.dilihat_pada
+    SELECT k.judul, k.daerah, k.kategori, k.deskripsi, k.gambar, h.dilihat_pada
     FROM histori h
     JOIN konten k ON h.konten_id = k.id
-    WHERE h.user_id = ?
+    WHERE h.user_id = ? AND h.tipe = 'jelajahi'
     ORDER BY h.dilihat_pada DESC
 ");
 $stmt_jelajahi->bind_param("i", $user_id);
@@ -21,10 +21,10 @@ $histori_jelajahi = $stmt_jelajahi->get_result()->fetch_all(MYSQLI_ASSOC);
 $stmt_jelajahi->close();
 
 $stmt_belajar = $conn->prepare("
-    SELECT kb.id, kb.judul, kb.daerah, kb.kategori, kb.pengertian, kb.gambar, h.dilihat_pada
+    SELECT kb.judul, kb.daerah, kb.kategori, kb.pengertian, kb.gambar, h.dilihat_pada
     FROM histori h
     JOIN konten_belajar kb ON h.konten_id = kb.konten_id
-    WHERE h.user_id = ?
+    WHERE h.user_id = ? AND h.tipe = 'belajar'
     ORDER BY h.dilihat_pada DESC
 ");
 $stmt_belajar->bind_param("i", $user_id);

@@ -12,7 +12,7 @@ $stmt_jelajahi = $conn->prepare("
     SELECT k.judul, k.daerah, k.kategori, k.deskripsi, k.gambar, h.dilihat_pada
     FROM histori h
     JOIN konten k ON h.konten_id = k.id
-    WHERE h.user_id = ?
+    WHERE h.user_id = ? AND h.tipe = 'jelajahi'
     ORDER BY h.dilihat_pada DESC
 ");
 $stmt_jelajahi->bind_param("i", $user_id);
@@ -24,7 +24,7 @@ $stmt_belajar = $conn->prepare("
     SELECT kb.judul, kb.daerah, kb.kategori, kb.pengertian, kb.gambar, h.dilihat_pada
     FROM histori h
     JOIN konten_belajar kb ON h.konten_id = kb.konten_id
-    WHERE h.user_id = ?
+    WHERE h.user_id = ? AND h.tipe = 'belajar'
     ORDER BY h.dilihat_pada DESC
 ");
 $stmt_belajar->bind_param("i", $user_id);
@@ -107,7 +107,8 @@ function waktu_lalu($datetime)
                                         <div class="card-top">
                                             <h3><?= htmlspecialchars($item["judul"]) ?></h3>
                                             <p><?= htmlspecialchars($item["kategori"]) ?> •
-                                                <?= waktu_lalu($item["dilihat_pada"]) ?></p>
+                                                <?= waktu_lalu($item["dilihat_pada"]) ?>
+                                            </p>
                                             <p><?= htmlspecialchars($item["deskripsi"]) ?></p>
                                         </div>
                                         <div class="card-bottom">
@@ -134,7 +135,8 @@ function waktu_lalu($datetime)
                                         <div class="card-top">
                                             <h3><?= htmlspecialchars($item["judul"]) ?></h3>
                                             <p><?= htmlspecialchars($item["kategori"]) ?> •
-                                                <?= waktu_lalu($item["dilihat_pada"]) ?></p>
+                                                <?= waktu_lalu($item["dilihat_pada"]) ?>
+                                            </p>
                                             <p><?= htmlspecialchars($item["pengertian"]) ?></p>
                                         </div>
                                         <div class="card-bottom">
