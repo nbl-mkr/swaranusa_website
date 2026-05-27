@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
     $gambar_bagian = implode(",", $gambar_bagian_files);
 
-    $stmt = $conn->prepare("UPDATE konten_belajar SET konten_id=?, judul=?, daerah=?, kategori=?, gambar=?, pengertian=?, cara_main=?, gambar_bagian=?, keterangan_bagian=?, audio=?, video=?, diperbarui=? WHERE id=?");
+    $stmt = $conn->prepare("UPDATE belajar SET konten_id=?, judul=?, daerah=?, kategori=?, gambar=?, pengertian=?, cara_main=?, gambar_bagian=?, keterangan_bagian=?, audio=?, video=?, diperbarui=? WHERE id=?");
     $stmt->bind_param("issssssssssi", $konten_id, $judul, $daerah, $kategori, $gambar, $pengertian, $cara_main, $gambar_bagian, $keterangan_bagian, $audio, $video, $diperbarui, $id);
     $stmt->execute();
     $stmt->close();
@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     exit;
 }
 
-$stmt = $conn->prepare("SELECT * FROM konten_belajar WHERE id = ?");
+$stmt = $conn->prepare("SELECT * FROM belajar WHERE id = ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();
 $konten = $stmt->get_result()->fetch_assoc();
@@ -68,7 +68,7 @@ if (!$konten) {
     exit;
 }
 
-$konten_list = $conn->query("SELECT id, judul FROM konten ORDER BY judul ASC")->fetch_all(MYSQLI_ASSOC);
+$konten_list = $conn->query("SELECT id, judul FROM jelajahi ORDER BY judul ASC")->fetch_all(MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -136,8 +136,18 @@ $konten_list = $conn->query("SELECT id, judul FROM konten ORDER BY judul ASC")->
                         </div>
                         <div class="form-group">
                             <label>Kategori</label>
-                            <input type="text" name="kategori" value="<?= htmlspecialchars($konten['kategori']) ?>"
-                                required />
+                            <select name="kategori" required>
+                                <option value="">Pilih kategori</option>
+                                <option value="Ansambel" <?= $konten['kategori'] === 'Ansambel' ? 'selected' : '' ?>>
+                                    Ansambel</option>
+                                <option value="Gesek" <?= $konten['kategori'] === 'Gesek' ? 'selected' : '' ?>>Gesek
+                                </option>
+                                <option value="Petik" <?= $konten['kategori'] === 'Petik' ? 'selected' : '' ?>>Petik
+                                </option>
+                                <option value="Tiup" <?= $konten['kategori'] === 'Tiup' ? 'selected' : '' ?>>Tiup</option>
+                                <option value="Pukul" <?= $konten['kategori'] === 'Pukul' ? 'selected' : '' ?>>Pukul
+                                </option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label>Pengertian</label>

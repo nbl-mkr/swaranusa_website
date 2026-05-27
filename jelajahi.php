@@ -3,7 +3,7 @@
 $daerah_filter = isset($_GET["daerah"]) ? $_GET["daerah"] : "";
 $search = isset($_GET["search"]) ? $_GET["search"] : "";
 
-$query = "SELECT * FROM konten WHERE 1=1";
+$query = "SELECT * FROM jelajahi WHERE 1=1";
 $params = [];
 $types = "";
 
@@ -104,7 +104,7 @@ $stmt->close();
                 <h3 class="card-title"><?= htmlspecialchars($konten['judul']) ?></h3>
                 <p class="card-description"><?= htmlspecialchars($konten['deskripsi']) ?></p>
                 <a href="konten_jelajahi.php?id=<?= $konten['id'] ?>">
-                  <button class="btn-learn">Pelajari</button>
+                  <button class="btn-learn">Detail</button>
                 </a>
               </div>
             </div>

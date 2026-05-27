@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
     $gambar_bagian = implode(",", $gambar_bagian_files);
 
-    $stmt = $conn->prepare("INSERT INTO konten_belajar (konten_id, judul, daerah, kategori, gambar, pengertian, cara_main, gambar_bagian, keterangan_bagian, audio, video, diperbarui) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO belajar (konten_id, judul, daerah, kategori, gambar, pengertian, cara_main, gambar_bagian, keterangan_bagian, audio, video, diperbarui) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $stmt->bind_param("issssssssss s", $konten_id, $judul, $daerah, $kategori, $gambar, $pengertian, $cara_main, $gambar_bagian, $keterangan_bagian, $audio, $video, $diperbarui);
     $stmt->execute();
     $stmt->close();
@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     exit;
 }
 
-$konten_list = $conn->query("SELECT id, judul FROM konten ORDER BY judul ASC")->fetch_all(MYSQLI_ASSOC);
+$konten_list = $conn->query("SELECT id, judul FROM jelajahi ORDER BY judul ASC")->fetch_all(MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -113,7 +113,14 @@ $konten_list = $conn->query("SELECT id, judul FROM konten ORDER BY judul ASC")->
                         </div>
                         <div class="form-group">
                             <label>Kategori</label>
-                            <input type="text" name="kategori" required />
+                            <select name="kategori" required>
+                                <option value="">Pilih kategori</option>
+                                <option value="Ansambel">Ansambel</option>
+                                <option value="Gesek">Gesek</option>
+                                <option value="Petik">Petik</option>
+                                <option value="Tiup">Tiup</option>
+                                <option value="Pukul">Pukul</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label>Pengertian</label>

@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
     $galeri = implode(",", $galeri_files);
 
-    $stmt = $conn->prepare("INSERT INTO konten (judul, subjudul, daerah, kategori, deskripsi, informasi_umum, sejarah, instrumen, galeri, nilai_budaya, gambar, diperbarui) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO jelajahi (judul, subjudul, daerah, kategori, deskripsi, informasi_umum, sejarah, instrumen, galeri, nilai_budaya, gambar, diperbarui) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $stmt->bind_param("ssssssssssss", $judul, $subjudul, $daerah, $kategori, $deskripsi, $informasi_umum, $sejarah, $instrumen, $galeri, $nilai_budaya, $gambar, $diperbarui);
     $stmt->execute();
     $stmt->close();
@@ -103,7 +103,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         </div>
                         <div class="form-group">
                             <label>Kategori</label>
-                            <input type="text" name="kategori" required />
+                            <select name="kategori" required>
+                                <option value="">Pilih kategori</option>
+                                <option value="Ansambel">Ansambel</option>
+                                <option value="Gesek">Gesek</option>
+                                <option value="Petik">Petik</option>
+                                <option value="Tiup">Tiup</option>
+                                <option value="Pukul">Pukul</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label>Deskripsi Singkat</label>

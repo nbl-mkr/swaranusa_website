@@ -9,9 +9,9 @@ require_once "koneksi.php";
 $user_id = $_SESSION["user_id"];
 
 $stmt_jelajahi = $conn->prepare("
-    SELECT k.judul, k.daerah, k.kategori, k.deskripsi, k.gambar, h.dilihat_pada
+    SELECT j.judul, j.daerah, j.kategori, j.deskripsi, j.gambar, h.dilihat_pada
     FROM histori h
-    JOIN konten k ON h.konten_id = k.id
+    JOIN jelajahi j ON h.konten_id = j.id
     WHERE h.user_id = ? AND h.tipe = 'jelajahi'
     ORDER BY h.dilihat_pada DESC
 ");
@@ -21,9 +21,9 @@ $histori_jelajahi = $stmt_jelajahi->get_result()->fetch_all(MYSQLI_ASSOC);
 $stmt_jelajahi->close();
 
 $stmt_belajar = $conn->prepare("
-    SELECT kb.judul, kb.daerah, kb.kategori, kb.pengertian, kb.gambar, h.dilihat_pada
+    SELECT b.judul, b.daerah, b.kategori, b.pengertian, b.gambar, h.dilihat_pada
     FROM histori h
-    JOIN konten_belajar kb ON h.konten_id = kb.konten_id
+    JOIN belajar b ON h.konten_id = b.konten_id
     WHERE h.user_id = ? AND h.tipe = 'belajar'
     ORDER BY h.dilihat_pada DESC
 ");

@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
     $galeri = implode(",", $galeri_files);
 
-    $stmt = $conn->prepare("UPDATE konten SET judul=?, subjudul=?, daerah=?, kategori=?, deskripsi=?, informasi_umum=?, sejarah=?, instrumen=?, galeri=?, nilai_budaya=?, gambar=?, diperbarui=? WHERE id=?");
+    $stmt = $conn->prepare("UPDATE jelajahi SET judul=?, subjudul=?, daerah=?, kategori=?, deskripsi=?, informasi_umum=?, sejarah=?, instrumen=?, galeri=?, nilai_budaya=?, gambar=?, diperbarui=? WHERE id=?");
     $stmt->bind_param("ssssssssssssi", $judul, $subjudul, $daerah, $kategori, $deskripsi, $informasi_umum, $sejarah, $instrumen, $galeri, $nilai_budaya, $gambar, $diperbarui, $id);
     $stmt->execute();
     $stmt->close();
@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     exit;
 }
 
-$stmt = $conn->prepare("SELECT * FROM konten WHERE id = ?");
+$stmt = $conn->prepare("SELECT * FROM jelajahi WHERE id = ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();
 $konten = $stmt->get_result()->fetch_assoc();
@@ -127,8 +127,18 @@ if (!$konten) {
                         </div>
                         <div class="form-group">
                             <label>Kategori</label>
-                            <input type="text" name="kategori" value="<?= htmlspecialchars($konten['kategori']) ?>"
-                                required />
+                            <select name="kategori" required>
+                                <option value="">Pilih kategori</option>
+                                <option value="Ansambel" <?= $konten['kategori'] === 'Ansambel' ? 'selected' : '' ?>>
+                                    Ansambel</option>
+                                <option value="Gesek" <?= $konten['kategori'] === 'Gesek' ? 'selected' : '' ?>>Gesek
+                                </option>
+                                <option value="Petik" <?= $konten['kategori'] === 'Petik' ? 'selected' : '' ?>>Petik
+                                </option>
+                                <option value="Tiup" <?= $konten['kategori'] === 'Tiup' ? 'selected' : '' ?>>Tiup</option>
+                                <option value="Pukul" <?= $konten['kategori'] === 'Pukul' ? 'selected' : '' ?>>Pukul
+                                </option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label>Deskripsi Singkat</label>

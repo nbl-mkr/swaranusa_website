@@ -9,9 +9,9 @@ require_once "../koneksi.php";
 $user_id = $_SESSION["user_id"];
 
 $stmt_jelajahi = $conn->prepare("
-    SELECT k.judul, k.daerah, k.kategori, k.deskripsi, k.gambar, h.dilihat_pada
+    SELECT j.judul, j.daerah, j.kategori, j.deskripsi, j.gambar, h.dilihat_pada
     FROM histori h
-    JOIN konten k ON h.konten_id = k.id
+    JOIN jelajahi j ON h.konten_id = j.id
     WHERE h.user_id = ? AND h.tipe = 'jelajahi'
     ORDER BY h.dilihat_pada DESC
 ");
@@ -21,9 +21,9 @@ $histori_jelajahi = $stmt_jelajahi->get_result()->fetch_all(MYSQLI_ASSOC);
 $stmt_jelajahi->close();
 
 $stmt_belajar = $conn->prepare("
-    SELECT kb.judul, kb.daerah, kb.kategori, kb.pengertian, kb.gambar, h.dilihat_pada
+    SELECT b.judul, b.daerah, b.kategori, b.pengertian, b.gambar, h.dilihat_pada
     FROM histori h
-    JOIN konten_belajar kb ON h.konten_id = kb.konten_id
+    JOIN belajar b ON h.konten_id = b.konten_id
     WHERE h.user_id = ? AND h.tipe = 'belajar'
     ORDER BY h.dilihat_pada DESC
 ");
@@ -56,103 +56,93 @@ function waktu_lalu($datetime)
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Menu - Histori</title>
+  <title>Histori</title>
   <link rel="stylesheet" href="../navbar.css" />
   <link rel="stylesheet" href="histori_user.css" />
 </head>
 
 <body>
-  <div class="menu-container">
-    <div class="left-side">
-      <div class="logo-text">
-        <img src="../assets/logo_white.png" alt="Logo SwaraNusa" />
-        <h1>SwaraNusa</h1>
+  <main class="main-content">
+    <header>
+      <ul class="logo-navbar">
+        <li><img src="../assets/logo.svg" width="20px" height="30px" /></li>
+        <li>
+          <h1>SwaraNusa</h1>
+        </li>
+      </ul>
+      <div class="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
       </div>
-      <?php include 'sidebar_user.php'; ?>
-    </div>
+      <?php include '../navbar_menu_user.php'; ?>
+    </header>
 
-    <main class="main-content">
-      <header>
-        <ul class="logo-navbar">
-          <li></li>
-          <li>
-            <h1></h1>
-          </li>
-        </ul>
-        <div class="hamburger" onclick="toggleMenu()">
-          <span></span><span></span><span></span>
-        </div>
-        <?php include '../navbar_menu_user.php'; ?>
-      </header>
+    <section class="content-area">
+      <h1>Histori</h1>
+      <div class="tab">
+        <button class="tab-btn active" onclick="gantiTab('jelajahi', this)">Jelajahi</button>
+        <button class="tab-btn" onclick="gantiTab('belajar', this)">Belajar</button>
+      </div>
 
-      <section class="content-area">
-        <h1>Histori</h1>
-        <div class="tab">
-          <button class="tab-btn active" onclick="gantiTab('jelajahi')">Jelajahi</button>
-          <button class="tab-btn" onclick="gantiTab('belajar')">Belajar</button>
-        </div>
-
-        <div id="tab-jelajahi" class="tab-konten">
-          <div class="cards-container">
-            <?php if (empty($histori_jelajahi)): ?>
-              <p>Belum ada histori jelajahi.</p>
-            <?php else: ?>
-              <?php foreach ($histori_jelajahi as $item): ?>
-                <div class="card">
-                  <img src="../gmbr_kontenjljh/<?= htmlspecialchars($item["gambar"]) ?>"
-                    alt="<?= htmlspecialchars($item["judul"]) ?>" />
-                  <div class="card-content">
-                    <div class="card-top">
-                      <h3><?= htmlspecialchars($item["judul"]) ?></h3>
-                      <p><?= htmlspecialchars($item["kategori"]) ?> • <?= waktu_lalu($item["dilihat_pada"]) ?></p>
-                      <p><?= htmlspecialchars($item["deskripsi"]) ?></p>
-                    </div>
-                    <div class="card-bottom">
-                      <p><?= htmlspecialchars($item["daerah"]) ?></p>
-                      <a href="../konten_jelajahi.php?id=<?= $item['id'] ?>" class="btn-pelajari">Pelajari</a>
-                    </div>
+      <div id="tab-jelajahi" class="tab-konten">
+        <div class="cards-container">
+          <?php if (empty($histori_jelajahi)): ?>
+            <p>Belum ada histori jelajahi.</p>
+          <?php else: ?>
+            <?php foreach ($histori_jelajahi as $item): ?>
+              <div class="card">
+                <img src="../gmbr_kontenjljh/<?= htmlspecialchars($item["gambar"]) ?>"
+                  alt="<?= htmlspecialchars($item["judul"]) ?>" />
+                <div class="card-content">
+                  <div class="card-top">
+                    <h3><?= htmlspecialchars($item["judul"]) ?></h3>
+                    <p><?= htmlspecialchars($item["kategori"]) ?> • <?= waktu_lalu($item["dilihat_pada"]) ?></p>
+                    <p><?= htmlspecialchars($item["deskripsi"]) ?></p>
+                  </div>
+                  <div class="card-bottom">
+                    <p><?= htmlspecialchars($item["daerah"]) ?></p>
+                    <a href="../konten_jelajahi.php?id=<?= $item['id'] ?>" class="btn-pelajari">Pelajari</a>
                   </div>
                 </div>
-              <?php endforeach; ?>
-            <?php endif; ?>
-          </div>
+              </div>
+            <?php endforeach; ?>
+          <?php endif; ?>
         </div>
+      </div>
 
-        <div id="tab-belajar" class="tab-konten" style="display: none;">
-          <div class="cards-container">
-            <?php if (empty($histori_belajar)): ?>
-              <p>Belum ada histori belajar.</p>
-            <?php else: ?>
-              <?php foreach ($histori_belajar as $item): ?>
-                <div class="card">
-                  <img src="../gmbr_kontenbljr/<?= htmlspecialchars($item["gambar"]) ?>"
-                    alt="<?= htmlspecialchars($item["judul"]) ?>" />
-                  <div class="card-content">
-                    <div class="card-top">
-                      <h3><?= htmlspecialchars($item["judul"]) ?></h3>
-                      <p><?= htmlspecialchars($item["kategori"]) ?> • <?= waktu_lalu($item["dilihat_pada"]) ?></p>
-                      <p><?= htmlspecialchars($item["pengertian"]) ?></p>
-                    </div>
-                    <div class="card-bottom">
-                      <p><?= htmlspecialchars($item["daerah"]) ?></p>
-                      <a href="../konten_belajar.php?id=<?= $item['id'] ?>" class="btn-pelajari">Pelajari</a>
-                    </div>
+      <div id="tab-belajar" class="tab-konten" style="display: none;">
+        <div class="cards-container">
+          <?php if (empty($histori_belajar)): ?>
+            <p>Belum ada histori belajar.</p>
+          <?php else: ?>
+            <?php foreach ($histori_belajar as $item): ?>
+              <div class="card">
+                <img src="../gmbr_kontenbljr/<?= htmlspecialchars($item["gambar"]) ?>"
+                  alt="<?= htmlspecialchars($item["judul"]) ?>" />
+                <div class="card-content">
+                  <div class="card-top">
+                    <h3><?= htmlspecialchars($item["judul"]) ?></h3>
+                    <p><?= htmlspecialchars($item["kategori"]) ?> • <?= waktu_lalu($item["dilihat_pada"]) ?></p>
+                    <p><?= htmlspecialchars($item["pengertian"]) ?></p>
+                  </div>
+                  <div class="card-bottom">
+                    <p><?= htmlspecialchars($item["daerah"]) ?></p>
+                    <a href="../konten_belajar.php?id=<?= $item['id'] ?>" class="btn-pelajari">Pelajari</a>
                   </div>
                 </div>
-              <?php endforeach; ?>
-            <?php endif; ?>
-          </div>
+              </div>
+            <?php endforeach; ?>
+          <?php endif; ?>
         </div>
-      </section>
-    </main>
-  </div>
+      </div>
+    </section>
+  </main>
 
   <script>
-    function gantiTab(tab) {
+    function gantiTab(tab, btn) {
       document.querySelectorAll(".tab-konten").forEach(el => el.style.display = "none");
       document.querySelectorAll(".tab-btn").forEach(el => el.classList.remove("active"));
       document.getElementById("tab-" + tab).style.display = "block";
-      event.target.classList.add("active");
+      btn.classList.add("active");
     }
 
     function toggleMenu() {

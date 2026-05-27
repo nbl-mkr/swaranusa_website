@@ -4,9 +4,9 @@
         <img src="assets/logo_dashboard.png" alt="Logo Dashboard" />
         <a href="dashboard.php">Dashboard</a>
     </div>
-    <div class="<?= $halaman === 'analisis.php' ? 'active' : '' ?>">
-        <img src="assets/logo_analisis.png" alt="Logo Analisis" />
-        <a href="analisis.php">Analisis</a>
+    <div class="<?= $halaman === 'konten.php' ? 'active' : '' ?>">
+        <img src="assets/logo_analisis.png" alt="Logo Konten" />
+        <a href="konten.php">Konten</a>
     </div>
     <div class="<?= $halaman === 'histori.php' ? 'active' : '' ?>">
         <img src="assets/logo_histori.png" alt="Logo Histori" />
