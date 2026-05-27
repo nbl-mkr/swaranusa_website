@@ -37,7 +37,7 @@ function setActivePage() {
   navLinks.forEach((link) => {
     link.classList.remove("active");
 
-    const linkHref = link.getAttribute("href");
+    const linkHref = link.getAttribute("href").split("/").pop();
 
     if (linkHref === currentPage) {
       link.classList.add("active");
