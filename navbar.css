@@ -87,6 +87,24 @@ nav ul::after {
     font-weight: 500;
 }
 
+.user-dropdown {
+    display: none;
+    position: absolute;
+    top: 30px;
+    right: 0;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    min-width: 140px;
+    z-index: 2002;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.user-dropdown.open {
+    display: flex;
+}
+
 /* Hamburger */
 
 .hamburger {

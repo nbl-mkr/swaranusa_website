@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once "koneksi.php";
 
 if (!isset($_GET["id"])) {
@@ -144,6 +143,7 @@ $galeri_list = $konten['galeri'] ? explode(",", $konten['galeri']) : [];
 
     <?php include 'footer.php'; ?>
     <script src="burger.js"></script>
+    <script src="navbar.js"></script>
 </body>
 
 </html>

@@ -1,4 +1,5 @@
-<?php require_once "koneksi.php";
+<?php
+require_once "koneksi.php";
 
 $daerah_filter = isset($_GET["daerah"]) ? $_GET["daerah"] : "";
 $search = isset($_GET["search"]) ? $_GET["search"] : "";
@@ -116,6 +117,7 @@ $stmt->close();
 
   <?php include 'footer.php'; ?>
   <script src="burger.js"></script>
+  <script src="navbar.js"></script>
   <script src="jelajahi.js"></script>
 </body>
 

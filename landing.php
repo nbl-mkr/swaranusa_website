@@ -1,3 +1,4 @@
+<?php require_once "koneksi.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -174,6 +175,7 @@
 
   <?php include 'footer.php'; ?>
   <script src="burger.js"></script>
+  <script src="navbar.js"></script>
 </body>
 
 </html>

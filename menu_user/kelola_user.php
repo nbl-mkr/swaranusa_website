@@ -1,10 +1,10 @@
 <?php
-session_start();
+require_once "../koneksi.php";
+
 if (!isset($_SESSION["isLoggedIn"]) || $_SESSION["role"] !== "user") {
   header("Location: /belajar_html/swaranusa_website/login.php");
   exit;
 }
-require_once "../koneksi.php";
 
 $stmt = $conn->prepare("SELECT username, email FROM users WHERE id = ?");
 $stmt->bind_param("i", $_SESSION["user_id"]);
@@ -29,7 +29,7 @@ $stmt->close();
   <main class="main-content">
     <header>
       <ul class="logo-navbar">
-        <li><img src="../assets/logo.svg" width="20px" height="30px" /></li>
+        <li><img src="../gmbr_gnrl/logo.svg" width="20px" height="30px" /></li>
         <li>
           <h1>SwaraNusa</h1>
         </li>
@@ -37,7 +37,7 @@ $stmt->close();
       <div class="hamburger" onclick="toggleMenu()">
         <span></span><span></span><span></span>
       </div>
-      <?php include '../navbar_menu_user.php'; ?>
+      <?php include '../navbar.php'; ?>
     </header>
 
     <section class="content-area">

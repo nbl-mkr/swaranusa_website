@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once "koneksi.php";
 
 if (!isset($_GET["id"])) {
@@ -140,6 +139,7 @@ $audio_list = $konten['audio'] ? explode(",", $konten['audio']) : [];
 
   <?php include 'footer.php'; ?>
   <script src="burger.js"></script>
+  <script src="navbar.js"></script>
 </body>
 
 </html>

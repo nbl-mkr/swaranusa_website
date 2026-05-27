@@ -1,10 +1,10 @@
 <?php
-session_start();
+require_once "koneksi.php";
+
 if (!isset($_SESSION["isLoggedIn"]) || $_SESSION["role"] !== "admin") {
     header("Location: /belajar_html/swaranusa_website/login.php");
     exit;
 }
-require_once "koneksi.php";
 
 if (isset($_POST["hapus_id"])) {
     $hapus = $conn->prepare("DELETE FROM jelajahi WHERE id = ?");

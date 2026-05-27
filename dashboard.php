@@ -1,10 +1,10 @@
 <?php
-session_start();
+require_once "koneksi.php";
+
 if (!isset($_SESSION["isLoggedIn"]) || $_SESSION["role"] !== "admin") {
     header("Location: /belajar_html/swaranusa_website/login.php");
     exit;
 }
-require_once "koneksi.php";
 
 $total_konten = $conn->query("SELECT COUNT(*) as total FROM jelajahi")->fetch_assoc()["total"];
 $total_user = $conn->query("SELECT COUNT(*) as total FROM users WHERE role = 'user'")->fetch_assoc()["total"];
