@@ -81,77 +81,79 @@ body {
 }
 
 .dropdown-btn {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 20px;
-  background: #ffffff;
-  border: 2px solid #e5e5e5;
-  border-radius: 10px;
-  cursor: pointer;
-  font-family: "Coolvetica", sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  color: #131010;
-  transition: all 0.3s ease;
-  min-width: 150px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    background: #ffffff;
+    border: 2px solid #e5e5e5;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #131010;
+    transition: 0.3s;
+    min-width: 150px;
 }
 
 .dropdown-btn:hover {
-  background: #fffbf5;
+    background-color: #f0bb78;
 }
 
 .dropdown-btn.active {
-  border-color: #f59e0b;
-  background: #fffbf5;
+    background-color: #f0bb78;
+    border-color: #f0bb78;
 }
 
 .dropdown-menu {
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
-  min-width: 200px;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-10px);
-  transition: all 0.3s ease;
-  z-index: 1000;
-  padding: 8px;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    left: auto;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    padding: 0;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
 }
 
 .dropdown-menu.show {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 
 .dropdown-item {
-  padding: 12px 20px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  color: #131010;
-  font-size: 14px;
-  font-family: "Coolvetica", sans-serif;
-  font-weight: 400;
-  border-radius: 10px;
-  margin-bottom: 6px;
-  background-color: #ffffff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    color: #131010;
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    background-color: #ffffff;
 }
 
 .dropdown-item:last-child {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .dropdown-item:hover {
-  background: #f5e3cc;
-  color: #543a14;
+    background-color: #f0bb78;
+    color: #131010;
 }
 
 .dropdown-item.selected {
-  background: #f59e0b;
-  color: #ffffff;
-  font-weight: 600;
+    background-color: #f0bb78;
+    color: #131010;
+    font-weight: 700;
 }
 
 /* Isi */

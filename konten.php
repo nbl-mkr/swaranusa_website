@@ -91,17 +91,11 @@ $next_order = $order === "ASC" ? "DESC" : "ASC";
 
             <section class="content-area">
                 <h1>Konten</h1>
-                <div class="tab">
-                    <button class="tab-btn <?= $tab === 'jelajahi' ? 'active' : '' ?>"
-                        onclick="window.location.href='konten.php?tab=jelajahi'">Jelajahi</button>
-                    <button class="tab-btn <?= $tab === 'belajar' ? 'active' : '' ?>"
-                        onclick="window.location.href='konten.php?tab=belajar'">Belajar</button>
-                </div>
 
                 <div class="konten-container">
                     <?php if ($tab === 'jelajahi'): ?>
                         <div class="container-bottom">
-                            <h3>Manajemen Konten Jelajahi</h3>
+                            <h3>Manajemen Konten</h3>
                             <a href="tambah_konten.php" class="btn-tambah">+ Tambah Konten Baru</a>
 
                             <div class="table-controls">
@@ -195,7 +189,7 @@ $next_order = $order === "ASC" ? "DESC" : "ASC";
 
                     <?php else: ?>
                         <div class="container-bottom">
-                            <h3>Manajemen Konten Belajar</h3>
+                            <h3>Manajemen Konten</h3>
                             <a href="tambah_konten_belajar.php" class="btn-tambah">+ Tambah Konten Baru</a>
 
                             <div class="table-controls">

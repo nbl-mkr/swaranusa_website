@@ -175,6 +175,7 @@ header {
     font-weight: 400;
     border-bottom: 1px solid #6c6c6c;
     padding-bottom: 10px;
+    width: 100%;
     cursor: pointer;
 }
 
@@ -186,6 +187,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
 .image-wrapper img {

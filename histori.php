@@ -7,6 +7,7 @@ if (!isset($_SESSION["isLoggedIn"]) || $_SESSION["role"] !== "admin") {
 }
 
 $user_id = $_SESSION["user_id"];
+$tab = isset($_GET["tab"]) ? $_GET["tab"] : "jelajahi";
 
 $stmt_jelajahi = $conn->prepare("
     SELECT j.judul, j.daerah, j.kategori, j.deskripsi, j.gambar, h.dilihat_pada
@@ -89,13 +90,8 @@ function waktu_lalu($datetime)
 
             <section class="content-area">
                 <h1>Histori</h1>
-                <div class="tab">
-                    <button class="tab-btn active" onclick="gantiTab('jelajahi')">Jelajahi</button>
-                    <button class="tab-btn" onclick="gantiTab('belajar')">Belajar</button>
-                </div>
-
-                <div id="tab-jelajahi" class="tab-konten">
-                    <div class="cards-container">
+                <div class="cards-container">
+                    <?php if ($tab === 'jelajahi'): ?>
                         <?php if (empty($histori_jelajahi)): ?>
                             <p>Belum ada histori jelajahi.</p>
                         <?php else: ?>
@@ -106,8 +102,7 @@ function waktu_lalu($datetime)
                                     <div class="card-content">
                                         <div class="card-top">
                                             <h3><?= htmlspecialchars($item["judul"]) ?></h3>
-                                            <p><?= htmlspecialchars($item["kategori"]) ?> •
-                                                <?= waktu_lalu($item["dilihat_pada"]) ?>
+                                            <p><?= htmlspecialchars($item["kategori"]) ?> • <?= waktu_lalu($item["dilihat_pada"]) ?>
                                             </p>
                                             <p><?= htmlspecialchars($item["deskripsi"]) ?></p>
                                         </div>
@@ -119,11 +114,7 @@ function waktu_lalu($datetime)
                                 </div>
                             <?php endforeach; ?>
                         <?php endif; ?>
-                    </div>
-                </div>
-
-                <div id="tab-belajar" class="tab-konten" style="display: none;">
-                    <div class="cards-container">
+                    <?php else: ?>
                         <?php if (empty($histori_belajar)): ?>
                             <p>Belum ada histori belajar.</p>
                         <?php else: ?>
@@ -134,8 +125,7 @@ function waktu_lalu($datetime)
                                     <div class="card-content">
                                         <div class="card-top">
                                             <h3><?= htmlspecialchars($item["judul"]) ?></h3>
-                                            <p><?= htmlspecialchars($item["kategori"]) ?> •
-                                                <?= waktu_lalu($item["dilihat_pada"]) ?>
+                                            <p><?= htmlspecialchars($item["kategori"]) ?> • <?= waktu_lalu($item["dilihat_pada"]) ?>
                                             </p>
                                             <p><?= htmlspecialchars($item["pengertian"]) ?></p>
                                         </div>
@@ -147,20 +137,13 @@ function waktu_lalu($datetime)
                                 </div>
                             <?php endforeach; ?>
                         <?php endif; ?>
-                    </div>
+                    <?php endif; ?>
                 </div>
             </section>
         </main>
     </div>
 
     <script>
-        function gantiTab(tab) {
-            document.querySelectorAll(".tab-konten").forEach(el => el.style.display = "none");
-            document.querySelectorAll(".tab-btn").forEach(el => el.classList.remove("active"));
-            document.getElementById("tab-" + tab).style.display = "block";
-            event.target.classList.add("active");
-        }
-
         function toggleMenu() {
             const nav = document.getElementById("navMenu");
             const hamburger = document.querySelector(".hamburger");
@@ -180,7 +163,6 @@ function waktu_lalu($datetime)
             const hamburger = document.querySelector(".hamburger");
             const isClickInsideNav = nav.contains(event.target);
             const isClickOnHamburger = hamburger.contains(event.target);
-
             if (!isClickInsideNav && !isClickOnHamburger && nav.classList.contains("active")) {
                 closeMenu();
             }
