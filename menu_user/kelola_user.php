@@ -102,6 +102,7 @@ $stmt->close();
       }
     });
   </script>
+  <script src="../navbar.js"></script>
 </body>
 
 </html>

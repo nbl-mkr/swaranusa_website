@@ -190,6 +190,7 @@ $konten_list = $conn->query("SELECT id, judul FROM jelajahi ORDER BY judul ASC")
             }
         });
     </script>
+    <script src="navbar.js"></script>
 </body>
 
 </html>

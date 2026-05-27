@@ -360,6 +360,7 @@ $next_order = $order === "ASC" ? "DESC" : "ASC";
             filterKategoriBelajar.addEventListener("change", filterTableBelajar);
         }
     </script>
+    <script src="navbar.js"></script>
 </body>
 
 </html>

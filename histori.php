@@ -186,6 +186,7 @@ function waktu_lalu($datetime)
             }
         });
     </script>
+    <script src="navbar.js"></script>
 </body>
 
 </html>

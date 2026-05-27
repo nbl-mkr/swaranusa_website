@@ -178,6 +178,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             }
         });
     </script>
+    <script src="navbar.js"></script>
 </body>
 
 </html>

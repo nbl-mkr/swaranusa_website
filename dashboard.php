@@ -130,6 +130,7 @@ $konten_terbaru = $conn->query("SELECT judul, daerah FROM jelajahi ORDER BY dipe
             }
         });
     </script>
+    <script src="navbar.js"></script>
 </body>
 
 </html>

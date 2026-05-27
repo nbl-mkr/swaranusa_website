@@ -220,6 +220,7 @@ if (!$konten) {
             }
         });
     </script>
+    <script src="navbar.js"></script>
 </body>
 
 </html>
