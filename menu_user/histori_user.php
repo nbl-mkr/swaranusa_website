@@ -7,9 +7,10 @@ if (!isset($_SESSION["isLoggedIn"]) || $_SESSION["role"] !== "user") {
 }
 
 $user_id = $_SESSION["user_id"];
+$tab = isset($_GET["tab"]) ? $_GET["tab"] : "jelajahi";
 
 $stmt_jelajahi = $conn->prepare("
-    SELECT j.judul, j.daerah, j.kategori, j.deskripsi, j.gambar, h.dilihat_pada
+    SELECT j.id, j.judul, j.daerah, j.kategori, j.deskripsi, j.gambar, h.dilihat_pada
     FROM histori h
     JOIN jelajahi j ON h.konten_id = j.id
     WHERE h.user_id = ? AND h.tipe = 'jelajahi'
@@ -21,7 +22,7 @@ $histori_jelajahi = $stmt_jelajahi->get_result()->fetch_all(MYSQLI_ASSOC);
 $stmt_jelajahi->close();
 
 $stmt_belajar = $conn->prepare("
-    SELECT b.judul, b.daerah, b.kategori, b.pengertian, b.gambar, h.dilihat_pada
+    SELECT b.id, b.judul, b.daerah, b.kategori, b.pengertian, b.gambar, h.dilihat_pada
     FROM histori h
     JOIN belajar b ON h.konten_id = b.konten_id
     WHERE h.user_id = ? AND h.tipe = 'belajar'
@@ -79,12 +80,12 @@ function waktu_lalu($datetime)
     <section class="content-area">
       <h1>Histori</h1>
       <div class="tab">
-        <button class="tab-btn active" onclick="gantiTab('jelajahi', this)">Jelajahi</button>
-        <button class="tab-btn" onclick="gantiTab('belajar', this)">Belajar</button>
+        <a href="histori_user.php?tab=jelajahi" class="tab-btn <?= $tab === 'jelajahi' ? 'active' : '' ?>">Jelajahi</a>
+        <a href="histori_user.php?tab=belajar" class="tab-btn <?= $tab === 'belajar' ? 'active' : '' ?>">Belajar</a>
       </div>
 
-      <div id="tab-jelajahi" class="tab-konten">
-        <div class="cards-container">
+      <div class="cards-container">
+        <?php if ($tab === 'jelajahi'): ?>
           <?php if (empty($histori_jelajahi)): ?>
             <p>Belum ada histori jelajahi.</p>
           <?php else: ?>
@@ -106,11 +107,7 @@ function waktu_lalu($datetime)
               </div>
             <?php endforeach; ?>
           <?php endif; ?>
-        </div>
-      </div>
-
-      <div id="tab-belajar" class="tab-konten" style="display: none;">
-        <div class="cards-container">
+        <?php else: ?>
           <?php if (empty($histori_belajar)): ?>
             <p>Belum ada histori belajar.</p>
           <?php else: ?>
@@ -132,19 +129,12 @@ function waktu_lalu($datetime)
               </div>
             <?php endforeach; ?>
           <?php endif; ?>
-        </div>
+        <?php endif; ?>
       </div>
     </section>
   </main>
 
   <script>
-    function gantiTab(tab, btn) {
-      document.querySelectorAll(".tab-konten").forEach(el => el.style.display = "none");
-      document.querySelectorAll(".tab-btn").forEach(el => el.classList.remove("active"));
-      document.getElementById("tab-" + tab).style.display = "block";
-      btn.classList.add("active");
-    }
-
     function toggleMenu() {
       const nav = document.getElementById("navMenu");
       const hamburger = document.querySelector(".hamburger");

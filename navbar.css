@@ -150,8 +150,7 @@ nav ul::after {
     background-color: transparent;
 }
 
-.sidebar-menu div:hover a,
-.sidebar-menu div:hover span {
+.sidebar-item:hover a {
     color: #f0bb78;
 }
 

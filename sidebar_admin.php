@@ -1,6 +1,6 @@
 <?php $halaman = basename($_SERVER['PHP_SELF']); ?>
 <nav class="sidebar-menu">
-    <div class="<?= $halaman === 'dashboard.php' ? 'active' : '' ?>">
+    <div class="sidebar-item <?= $halaman === 'dashboard.php' ? 'active' : '' ?>">
         <img src="assets/logo_dashboard.png" alt="Logo Dashboard" />
         <a href="dashboard.php">Dashboard</a>
     </div>
@@ -31,7 +31,7 @@
             class="<?= ($halaman === 'histori.php' && ($_GET['tab'] ?? '') === 'belajar') ? 'active' : '' ?>">Belajar</a>
     </div>
 
-    <div class="<?= $halaman === 'kelola.php' ? 'active' : '' ?>">
+    <div class="sidebar-item <?= $halaman === 'kelola.php' ? 'active' : '' ?>">
         <img src="assets/logo_kelola.png" alt="Logo Kelola" width="15px" height="15px" />
         <a href="kelola.php">Kelola Akun</a>
     </div>

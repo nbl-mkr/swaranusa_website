@@ -47,6 +47,7 @@ header {
 
 .tab-btn {
     background-color: #f0bb78;
+    color: #000000;
     border: none;
     border-radius: 10px;
     font-size: 14px;
@@ -55,14 +56,16 @@ header {
     padding: 6px 20px;
     cursor: pointer;
     transition: 0.3s;
+    text-decoration: none;
+    display: inline-block;
 }
 
-.tab-btn.active {
+.tab-btn:hover {
     background-color: #543a14;
     color: #ffffff;
 }
 
-.tab-btn:hover {
+.tab-btn.active {
     background-color: #543a14;
     color: #ffffff;
 }
