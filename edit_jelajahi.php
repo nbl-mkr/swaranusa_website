@@ -108,8 +108,8 @@ if (!$konten) {
             <section class="content-area">
                 <h1>Edit Konten</h1>
                 <div class="form-container">
-                    <form method="POST" action="edit_konten.php?id=<?= $id ?>" enctype="multipart/form-data">
-                        <input type="hidden" name="gambar_lama" value="<?= htmlspecialchars($konten['gambar']) ?>" />
+                    <form method="POST" action="edit_jelajahi.php?id=<?= $id ?>" enctype="multipart/form-data"> <input
+                            type="hidden" name="gambar_lama" value="<?= htmlspecialchars($konten['gambar']) ?>" />
                         <input type="hidden" name="galeri_lama" value="<?= htmlspecialchars($konten['galeri']) ?>" />
                         <div class="form-group">
                             <label>Judul</label>

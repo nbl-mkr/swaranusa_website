@@ -96,8 +96,7 @@ $next_order = $order === "ASC" ? "DESC" : "ASC";
                     <?php if ($tab === 'jelajahi'): ?>
                         <div class="container-bottom">
                             <h3>Manajemen Konten</h3>
-                            <a href="tambah_konten.php" class="btn-tambah">+ Tambah Konten Baru</a>
-
+                            <a href="tambah_jelajahi.php" class="btn-tambah">+ Tambah Konten Baru</a>
                             <div class="table-controls">
                                 <input type="text" id="search-input" placeholder="Cari judul, daerah, kategori..." />
                                 <select id="filter-kategori">
@@ -153,7 +152,7 @@ $next_order = $order === "ASC" ? "DESC" : "ASC";
                                         <p><?= htmlspecialchars($konten["kategori"]) ?></p>
                                         <p><?= date("d/m/Y", strtotime($konten["diperbarui"])) ?></p>
                                         <div>
-                                            <a href="edit_konten.php?id=<?= $konten['id'] ?>"><button
+                                            <a href="edit_jelajahi.php?id=<?= $konten['id'] ?>"><button
                                                     class="btn-edit">Edit</button></a>
                                             <form method="POST" style="display:inline">
                                                 <input type="hidden" name="hapus_id" value="<?= $konten['id'] ?>" />
@@ -190,8 +189,7 @@ $next_order = $order === "ASC" ? "DESC" : "ASC";
                     <?php else: ?>
                         <div class="container-bottom">
                             <h3>Manajemen Konten</h3>
-                            <a href="tambah_konten_belajar.php" class="btn-tambah">+ Tambah Konten Baru</a>
-
+                            <a href="tambah_belajar.php" class="btn-tambah">+ Tambah Konten Baru</a>
                             <div class="table-controls">
                                 <input type="text" id="search-input-belajar"
                                     placeholder="Cari judul, daerah, kategori..." />
@@ -248,7 +246,7 @@ $next_order = $order === "ASC" ? "DESC" : "ASC";
                                         <p><?= htmlspecialchars($konten["kategori"]) ?></p>
                                         <p><?= date("d/m/Y", strtotime($konten["diperbarui"])) ?></p>
                                         <div>
-                                            <a href="edit_konten_belajar.php?id=<?= $konten['id'] ?>"><button
+                                            <a href="edit_belajar.php?id=<?= $konten['id'] ?>"><button
                                                     class="btn-edit">Edit</button></a>
                                             <form method="POST" style="display:inline">
                                                 <input type="hidden" name="hapus_belajar_id" value="<?= $konten['id'] ?>" />

@@ -88,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <section class="content-area">
                 <h1>Tambah Konten Baru</h1>
                 <div class="form-container">
-                    <form method="POST" action="tambah_konten.php" enctype="multipart/form-data">
+                    <form method="POST" action="tambah_jelajahi.php" enctype="multipart/form-data">
                         <div class="form-group">
                             <label>Judul</label>
                             <input type="text" name="judul" required />
