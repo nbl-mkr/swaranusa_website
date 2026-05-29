@@ -5,8 +5,6 @@
   src: url("../assets/Coolvetica\ Rg.otf") format("opentype");
 }
 
-/* Reset default browser */
-
 * {
   margin: 0;
   padding: 0;
@@ -18,8 +16,6 @@ body {
   font-family: "Coolvetica", "Montserrat", sans-serif;
   line-height: 1.6;
 }
-
-/* Hero */
 
 .hero {
   height: 90vh;
@@ -74,8 +70,6 @@ body {
 .hero-right img {
   height: 90vh;
 }
-
-/* Section */
 
 .section {
   padding: 50px 50px 0 50px;
@@ -153,21 +147,21 @@ body {
 }
 
 .populer-bottom > a .img-wrapper img {
-    width: 400px;
-    height: 425px;
-    object-fit: cover;
+  width: 400px;
+  height: 425px;
+  object-fit: cover;
 }
 
 .bottom-right-top a .img-wrapper img {
-    width: 300px;
-    height: 200px;
-    object-fit: cover;
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
 }
 
 .bottom-container > a .img-wrapper img {
-    width: 625px;
-    height: 200px;
-    object-fit: cover;
+  width: 625px;
+  height: 200px;
+  object-fit: cover;
 }
 
 .populer-top {
@@ -253,40 +247,112 @@ body {
   margin-top: 40px;
 }
 
-.pelajari-card {
+.pelajari-cards .card {
   display: flex;
+  align-items: stretch;
   background-color: #ffffff;
-  border-radius: 10px;
+  border-radius: 15px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   max-width: 1000px;
-  max-height: 175px;
+  width: 100%;
+  height: 175px;
+  overflow: hidden;
   transition: transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
-.pelajari-card:hover {
+.pelajari-cards .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-.pelajari-left img {
-  border-radius: 10px 0 0 10px;
-  height: 100%;
+.pelajari-cards .card > img {
+  display: block;
+  width: 208px;
+  min-height: 100%;
+  object-fit: cover;
+  flex-shrink: 0;
+  align-self: stretch;
 }
 
-.pelajari-right {
+.pelajari-cards .card-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px;
+}
+
+.pelajari-cards .card-top {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.pelajari-cards .card-top h3 {
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
   text-align: left;
-  margin: 10px 20px 20px 20px;
+  margin: 0;
+}
+
+.pelajari-cards .card-top p {
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  text-align: left;
+  margin: 0;
+  max-width: none;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+}
+
+.pelajari-cards .card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pelajari-cards .card-bottom p {
+  color: #000000;
+  background-color: rgba(240, 180, 127, 0.2);
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  text-align: left;
+  margin: 0;
+  max-width: none;
+  padding: 5px 10px;
+}
+
+.pelajari-cards .btn-pelajari {
+  color: #000000;
+  background-color: #f0bb78;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.pelajari-cards .btn-pelajari:hover {
+  background-color: #d9a76a;
 }
 
 #pelajari {
-    padding-bottom: 50px;
+  padding-bottom: 50px;
 }
 
-/* Desktop */
-@media (min-width: 1024px) {
-}
-
-/* Tablet */
 @media (max-width: 1024px) {
   .hero {
     flex-direction: column;
@@ -336,24 +402,23 @@ body {
     height: auto;
   }
 
-  .pelajari-card {
+  .pelajari-cards .card {
     flex-direction: column;
-    max-height: none;
+    height: auto;
     width: 90%;
   }
 
-  .pelajari-left img {
+  .pelajari-cards .card > img {
     width: 100%;
-    height: auto;
-    border-radius: 10px 10px 0 0;
+    height: 200px;
+    border-radius: 0;
   }
 
-  .pelajari-right {
+  .pelajari-cards .card-content {
     margin: 15px;
   }
 }
 
-/* Mobile */
 @media (max-width: 600px) {
   .section h3 {
     font-size: 22px;
@@ -391,7 +456,31 @@ body {
     font-size: 14px;
   }
 
-  .pelajari-right p {
-    font-size: 14px;
+  .pelajari-cards .card {
+    flex-direction: row;
+    height: auto;
+    width: 100%;
+  }
+
+  .pelajari-cards .card > img {
+    width: 100px;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .pelajari-cards .card-content {
+    margin: 0;
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .pelajari-cards .card-top p {
+    font-size: 12px;
+  }
+
+  .pelajari-cards .card-bottom p,
+  .pelajari-cards .btn-pelajari {
+    font-size: 12px;
+    padding: 4px 7px;
   }
 }

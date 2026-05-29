@@ -128,46 +128,49 @@
   <section class="section" id="pelajari">
     <h3>Pelajari Sekarang!</h3>
     <div class="pelajari-cards">
-      <div class="pelajari-card">
-        <div class="pelajari-left">
-          <img src="assets/sasando.png" alt="Sasando image" />
-        </div>
-        <div class="pelajari-right">
-          <h4>Sasando</h4>
-          <p>Alat musik tradisional NTT - 2 hari lalu</p>
-          <p>
-            Sasando berasal dari Pulau Rote, Nusa Tenggara Timur yang memiliki
-            suara khas. Alat musik ini memiliki bentuk unik yang dimainkan
-            dengan cara dipetik dan berasal dari NTT.
-          </p>
-        </div>
-      </div>
-      <div class="pelajari-card">
-        <div class="pelajari-left">
-          <img src="assets/gendang.png" alt="Gendang image" />
-        </div>
-        <div class="pelajari-right">
-          <h4>Gendang</h4>
-          <p>Alat musik tradisional Jawa Barat - 2 hari lalu</p>
-          <p>
-            Gendang adalah alat musik yang terbuat dari kayu berongga dengan
-            bagian rongga yang ditutup kulit dan digunakan dalam ansambel.
-            Gendang merupakan alat musik yang berasal dari Jawa Barat.
-          </p>
+      <div class="card">
+        <img src="assets/sasando.png" alt="Sasando" />
+        <div class="card-content">
+          <div class="card-top">
+            <h3>Sasando</h3>
+            <p>Alat Musik Petik • 2 hari lalu</p>
+            <p>Sasando berasal dari Pulau Rote, Nusa Tenggara Timur yang memiliki suara khas. Alat musik ini memiliki
+              bentuk unik yang dimainkan dengan cara dipetik dan berasal dari NTT.</p>
+          </div>
+          <div class="card-bottom">
+            <p>Nusa Tenggara Timur</p>
+            <a href="konten_belajar.php" class="btn-pelajari">Pelajari</a>
+          </div>
         </div>
       </div>
-      <div class="pelajari-card">
-        <div class="pelajari-left">
-          <img src="assets/kecapi.png" alt="Kecapi image" />
+      <div class="card">
+        <img src="assets/gendang.png" alt="Gendang" />
+        <div class="card-content">
+          <div class="card-top">
+            <h3>Gendang</h3>
+            <p>Alat Musik Pukul • 2 hari lalu</p>
+            <p>Gendang adalah alat musik yang terbuat dari kayu berongga dengan bagian rongga yang ditutup kulit dan
+              digunakan dalam ansambel. Gendang merupakan alat musik yang berasal dari Jawa Barat.</p>
+          </div>
+          <div class="card-bottom">
+            <p>Jawa Barat</p>
+            <a href="konten_belajar.php" class="btn-pelajari">Pelajari</a>
+          </div>
         </div>
-        <div class="pelajari-right">
-          <h4>Kecapi</h4>
-          <p>Alat musik tradisional Jawa Barat - 2 hari lalu</p>
-          <p>
-            Kecapi merupakan alat musik yang dimainkan dengan cara dipetik,
-            biasanya digunakan dalam pertunjukan musik dan upacara adat. Alat
-            musik ini berasal dari Jawa Barat.
-          </p>
+      </div>
+      <div class="card">
+        <img src="assets/kecapi.png" alt="Kecapi" />
+        <div class="card-content">
+          <div class="card-top">
+            <h3>Kecapi</h3>
+            <p>Alat Musik Petik • 2 hari lalu</p>
+            <p>Kecapi merupakan alat musik yang dimainkan dengan cara dipetik, biasanya digunakan dalam pertunjukan
+              musik dan upacara adat. Alat musik ini berasal dari Jawa Barat.</p>
+          </div>
+          <div class="card-bottom">
+            <p>Jawa Barat</p>
+            <a href="konten_belajar.php" class="btn-pelajari">Pelajari</a>
+          </div>
         </div>
       </div>
     </div>
