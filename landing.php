@@ -50,10 +50,10 @@
         <div class="populer-top">
           <a href="konten_jelajahi.php?id=8">
             <div class="img-wrapper">
-              <img src="assets/original-hero/gambar-kolintang.png" alt="Gambar Kolintang" />
+              <img src="assets/original-hero/gambar-gamelan.jpg" alt="Gambar Gamelan" />
               <div class="img-overlay">
-                <h3>Kolintang</h3>
-                <p>Sulawesi Utara</p>
+                <h3>Gamelan</h3>
+                <p>Jawa Tengah</p>
               </div>
             </div>
           </a>
@@ -103,10 +103,10 @@
               </a>
               <a href="konten_jelajahi.php?id=1">
                 <div class="img-wrapper">
-                  <img src="assets/original-hero/gambar-gamelan.jpg" alt="Gambar Gamelan" />
+                  <img src="assets/original-hero/gambar-keroncong.png" alt="Gambar Keroncong" />
                   <div class="img-overlay">
-                    <h3>Gamelan</h3>
-                    <p>Jawa Tengah</p>
+                    <h3>Keroncong</h3>
+                    <p>Jawa Barat</p>
                   </div>
                 </div>
               </a>
@@ -163,15 +163,15 @@
         </div>
       </div>
       <div class="card">
-        <img src="assets/keroncong.png" alt="Keroncong" />
+        <img src="assets/kolintang.png" alt="Kolintang" />
         <div class="card-content">
           <div class="card-top">
-            <h3>Keroncong</h3>
-            <p>Ansambel • 2 hari lalu</p>
-            <p>Keroncong merupakan genre musik asli Indonesia yang berkembang dari pengaruh musik Portugis pada abad
-              ke-16. Musik ini ditandai dengan penggunaan ukulele, cello, biola, seruling, dan vokal yang khas.
-              Keroncong memiliki karakter melodi yang lembut dan syahdu, sering dimainkan dalam pertunjukan budaya dan
-              perayaan nasional.</p>
+            <h3>Kolintang</h3>
+            <p>Alat Musik Pukul • 2 hari lalu</p>
+            <p>Kolintang adalah alat musik pukul tradisional masyarakat Minahasa di Sulawesi Utara. Terbuat dari kayu
+              khusus yang disusun secara horizontal dan dipukul menggunakan stik, kolintang menghasilkan nada yang
+              jernih dan merdu. Kolintang biasanya dimainkan dalam ansambel yang terdiri dari beberapa ukuran kolintang
+              berbeda untuk menghasilkan harmoni yang kaya.</p>
           </div>
           <div class="card-bottom">
             <p>Jawa Barat</p>
