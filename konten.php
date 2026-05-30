@@ -99,17 +99,21 @@ $next_order = $order === "ASC" ? "DESC" : "ASC";
                             <a href="tambah_jelajahi.php" class="btn-tambah">+ Tambah Konten Baru</a>
                             <div class="table-controls">
                                 <input type="text" id="search-input" placeholder="Cari judul, daerah, kategori..." />
-                                <select id="filter-kategori">
-                                    <option value="">Semua Kategori</option>
-                                    <?php
-                                    $kategori_list = $conn->query("SELECT DISTINCT kategori FROM jelajahi ORDER BY kategori ASC");
-                                    while ($k = $kategori_list->fetch_assoc()):
-                                        ?>
-                                        <option value="<?= htmlspecialchars($k['kategori']) ?>">
-                                            <?= htmlspecialchars($k['kategori']) ?>
-                                        </option>
-                                    <?php endwhile; ?>
-                                </select>
+                                <div class="custom-select" id="custom-kategori">
+                                    <div class="custom-select-selected" onclick="toggleSelect('custom-kategori')">Semua
+                                        Kategori</div>
+                                    <div class="custom-select-options" id="options-kategori">
+                                        <div class="custom-option" data-value="">Semua Kategori</div>
+                                        <?php
+                                        $kategori_list = $conn->query("SELECT DISTINCT kategori FROM jelajahi ORDER BY kategori ASC");
+                                        while ($k = $kategori_list->fetch_assoc()):
+                                            ?>
+                                            <div class="custom-option" data-value="<?= htmlspecialchars($k['kategori']) ?>">
+                                                <?= htmlspecialchars($k['kategori']) ?>
+                                            </div>
+                                        <?php endwhile; ?>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="container-flex">
@@ -193,17 +197,21 @@ $next_order = $order === "ASC" ? "DESC" : "ASC";
                             <div class="table-controls">
                                 <input type="text" id="search-input-belajar"
                                     placeholder="Cari judul, daerah, kategori..." />
-                                <select id="filter-kategori-belajar">
-                                    <option value="">Semua Kategori</option>
-                                    <?php
-                                    $kategori_belajar_list = $conn->query("SELECT DISTINCT kategori FROM belajar ORDER BY kategori ASC");
-                                    while ($k = $kategori_belajar_list->fetch_assoc()):
-                                        ?>
-                                        <option value="<?= htmlspecialchars($k['kategori']) ?>">
-                                            <?= htmlspecialchars($k['kategori']) ?>
-                                        </option>
-                                    <?php endwhile; ?>
-                                </select>
+                                <div class="custom-select" id="custom-kategori">
+                                    <div class="custom-select-selected" onclick="toggleSelect('custom-kategori')">Semua
+                                        Kategori</div>
+                                    <div class="custom-select-options" id="options-kategori">
+                                        <div class="custom-option" data-value="">Semua Kategori</div>
+                                        <?php
+                                        $kategori_list = $conn->query("SELECT DISTINCT kategori FROM jelajahi ORDER BY kategori ASC");
+                                        while ($k = $kategori_list->fetch_assoc()):
+                                            ?>
+                                            <div class="custom-option" data-value="<?= htmlspecialchars($k['kategori']) ?>">
+                                                <?= htmlspecialchars($k['kategori']) ?>
+                                            </div>
+                                        <?php endwhile; ?>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="container-flex">
@@ -351,6 +359,33 @@ $next_order = $order === "ASC" ? "DESC" : "ASC";
             searchInputBelajar.addEventListener("input", filterTableBelajar);
             filterKategoriBelajar.addEventListener("change", filterTableBelajar);
         }
+
+        function toggleSelect(id) {
+            const options = document.getElementById("options-" + id.replace("custom-", ""));
+            options.classList.toggle("open");
+        }
+
+        document.addEventListener("click", function (e) {
+            if (!e.target.closest(".custom-select")) {
+                document.querySelectorAll(".custom-select-options").forEach(el => el.classList.remove("open"));
+            }
+        });
+
+        document.querySelectorAll("#options-kategori .custom-option").forEach(function (option) {
+            option.addEventListener("click", function () {
+                const val = this.dataset.value;
+                document.querySelector("#custom-kategori .custom-select-selected").textContent = this.textContent.trim();
+                document.getElementById("options-kategori").classList.remove("open");
+
+                document.querySelectorAll(".row2").forEach(function (row) {
+                    const rowKategori = row.dataset.kategori;
+                    const keyword = document.getElementById("search-input") ? document.getElementById("search-input").value.toLowerCase() : "";
+                    const matchKategori = val === "" || rowKategori === val.toLowerCase();
+                    const matchSearch = rowKategori.includes(keyword) || row.dataset.judul.includes(keyword) || row.dataset.daerah.includes(keyword);
+                    row.style.display = matchKategori && matchSearch ? "flex" : "none";
+                });
+            });
+        });
     </script>
     <script src="navbar.js"></script>
 </body>
