@@ -37,7 +37,7 @@
         Platform Pembelajaran seni musik tradisional yang menyediakan media
         literatur, audio, dan video.
       </p>
-      <a href="belajar.php"> <button>Ayo Belajar!</button></a>
+      <a href="belajar.php"> <button>Pelajari</button></a>
     </div>
     <div class="hero-right">
       <img src="assets/hero.png" alt="Hero image" />
