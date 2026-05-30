@@ -349,6 +349,13 @@ header {
     max-width: 40px;
 }
 
+.row2-belajar .col-no-angka {
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    padding-left: 10px;
+    max-width: 40px;
+}
+
 .col-sort a {
     color: #6c6c6c;
     text-decoration: none;
