@@ -134,12 +134,14 @@
           <div class="card-top">
             <h3>Sasando</h3>
             <p>Alat Musik Petik • 2 hari lalu</p>
-            <p>Sasando berasal dari Pulau Rote, Nusa Tenggara Timur yang memiliki suara khas. Alat musik ini memiliki
-              bentuk unik yang dimainkan dengan cara dipetik dan berasal dari NTT.</p>
+            <p>Sasando adalah alat musik petik tradisional yang berasal dari Pulau Rote, Nusa Tenggara Timur. Alat musik
+              ini terbuat dari bambu sebagai resonator utama yang dikelilingi daun lontar berbentuk setengah lingkaran,
+              dengan senar-senar yang dipetik untuk menghasilkan bunyi. Sasando memiliki suara yang khas, lembut, dan
+              merdu sehingga sering disebut harpa dari Timur.</p>
           </div>
           <div class="card-bottom">
             <p>Nusa Tenggara Timur</p>
-            <a href="konten_belajar.php" class="btn-pelajari">Pelajari</a>
+            <a href="konten_belajar.php" class="btn-pelajari">Detail</a>
           </div>
         </div>
       </div>
@@ -149,12 +151,14 @@
           <div class="card-top">
             <h3>Gendang</h3>
             <p>Alat Musik Pukul • 2 hari lalu</p>
-            <p>Gendang adalah alat musik yang terbuat dari kayu berongga dengan bagian rongga yang ditutup kulit dan
-              digunakan dalam ansambel. Gendang merupakan alat musik yang berasal dari Jawa Barat.</p>
+            <p>Gendang adalah alat musik membranofon tradisional yang terbuat dari kayu berongga dengan bagian ujungnya
+              ditutup kulit binatang. Alat musik ini berfungsi sebagai pengatur irama dan tempo dalam ansambel musik
+              tradisional Sunda dan Jawa. Gendang dimainkan dengan cara dipukul menggunakan telapak tangan atau stik
+              kayu.</p>
           </div>
           <div class="card-bottom">
             <p>Jawa Barat</p>
-            <a href="konten_belajar.php" class="btn-pelajari">Pelajari</a>
+            <a href="konten_belajar.php" class="btn-pelajari">Detail</a>
           </div>
         </div>
       </div>
@@ -162,14 +166,14 @@
         <img src="assets/kecapi.png" alt="Kecapi" />
         <div class="card-content">
           <div class="card-top">
-            <h3>Kecapi</h3>
+            <h3>Keroncong</h3>
             <p>Alat Musik Petik • 2 hari lalu</p>
             <p>Kecapi merupakan alat musik yang dimainkan dengan cara dipetik, biasanya digunakan dalam pertunjukan
               musik dan upacara adat. Alat musik ini berasal dari Jawa Barat.</p>
           </div>
           <div class="card-bottom">
             <p>Jawa Barat</p>
-            <a href="konten_belajar.php" class="btn-pelajari">Pelajari</a>
+            <a href="konten_belajar.php" class="btn-pelajari">Detail</a>
           </div>
         </div>
       </div>
