@@ -92,12 +92,12 @@
 
           <div class="bottom-container">
             <div class="bottom-right-top">
-              <a href="konten_jelajahi.php">
+              <a href="konten_jelajahi.php?id=4">
                 <div class="img-wrapper">
-                  <img src="assets/original-hero/gambar-rebab.png" alt="Gambar Rebab" />
+                  <img src="assets/original-hero/gambar-karawitan.png" alt="Gambar Karawitan" />
                   <div class="img-overlay">
-                    <h3>Rebab</h3>
-                    <p>Jawa Barat</p>
+                    <h3>Karawitan</h3>
+                    <p>Jawa Tengah</p>
                   </div>
                 </div>
               </a>

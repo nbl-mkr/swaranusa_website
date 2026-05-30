@@ -89,12 +89,17 @@
   flex-wrap: wrap;
 }
 
+.galeri-karawitan li {
+  flex: 1;
+}
+
 .galeri-karawitan .gambar1 img,
 .galeri-karawitan .gambar2 img,
 .galeri-karawitan .gambar3 img {
   border-radius: 10px;
-  max-width: 100%;
-  height: auto;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
 }
 
 /* Tablet */

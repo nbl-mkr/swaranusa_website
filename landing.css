@@ -146,6 +146,18 @@ body {
   font-family: "Coolvetica", sans-serif;
 }
 
+.populer-top > a .img-wrapper img {
+  width: 675px;
+  height: 425px;
+  object-fit: cover;
+}
+
+.top-right .img-wrapper img {
+  width: 350px;
+  height: 200px;
+  object-fit: cover;
+}
+
 .populer-bottom > a .img-wrapper img {
   width: 400px;
   height: 425px;
