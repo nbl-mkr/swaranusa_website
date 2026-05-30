@@ -163,13 +163,15 @@
         </div>
       </div>
       <div class="card">
-        <img src="assets/kecapi.png" alt="Kecapi" />
+        <img src="assets/keroncong.png" alt="Keroncong" />
         <div class="card-content">
           <div class="card-top">
             <h3>Keroncong</h3>
-            <p>Alat Musik Petik • 2 hari lalu</p>
-            <p>Kecapi merupakan alat musik yang dimainkan dengan cara dipetik, biasanya digunakan dalam pertunjukan
-              musik dan upacara adat. Alat musik ini berasal dari Jawa Barat.</p>
+            <p>Ansambel • 2 hari lalu</p>
+            <p>Keroncong merupakan genre musik asli Indonesia yang berkembang dari pengaruh musik Portugis pada abad
+              ke-16. Musik ini ditandai dengan penggunaan ukulele, cello, biola, seruling, dan vokal yang khas.
+              Keroncong memiliki karakter melodi yang lembut dan syahdu, sering dimainkan dalam pertunjukan budaya dan
+              perayaan nasional.</p>
           </div>
           <div class="card-bottom">
             <p>Jawa Barat</p>
