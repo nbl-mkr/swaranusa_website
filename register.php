@@ -77,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
           <input type="text" name="lastname" placeholder="Last Name" required />
         </div>
 
-        <input type="email" name="email" placeholder="Email" required />
+        <input type="email" name="email" placeholder="Example@gmail.com" required />
         <input type="password" name="password" placeholder="Password" required />
 
         <button type="submit" class="submit-button">Buat Akun</button>
