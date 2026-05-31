@@ -140,7 +140,7 @@
               merdu sehingga sering disebut harpa dari Timur.</p>
           </div>
           <div class="card-bottom">
-            <p>Nusa Tenggara Timur</p>
+            <p>NTT</p>
             <a href="konten_belajar.php" class="btn-pelajari">Detail</a>
           </div>
         </div>
