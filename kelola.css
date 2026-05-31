@@ -131,7 +131,7 @@ header {
     margin-bottom: 20px;
 }
 
-.kelola-profile img {
+.kelola-profile > img {
     border-radius: 50%;
     object-fit: cover;
     width: 100px;
@@ -148,6 +148,43 @@ header {
     font-size: 16px;
     font-family: "Montserrat", sans-serif;
     font-weight: 400;
+}
+
+.foto-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.foto-wrapper > img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.btn-edit-foto {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 28px;
+    height: 28px;
+    background-color: #f0bb78;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.btn-edit-foto img {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+}
+
+.btn-edit-foto:hover {
+    background-color: #d9a76a;
 }
 
 .kelola-content {
@@ -302,7 +339,7 @@ header {
         padding: 20px;
     }
 
-    .kelola-profile img {
+    .foto-wrapper > img {
         width: 85px;
         height: 85px;
     }
@@ -344,7 +381,7 @@ header {
         padding: 16px;
     }
 
-    .kelola-profile img {
+    .foto-wrapper > img {
         width: 70px;
         height: 70px;
     }

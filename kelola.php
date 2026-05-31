@@ -6,12 +6,27 @@ if (!isset($_SESSION["isLoggedIn"]) || $_SESSION["role"] !== "admin") {
   exit;
 }
 
-$stmt = $conn->prepare("SELECT username, email FROM users WHERE id = ?");
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_FILES["foto"]) && $_FILES["foto"]["error"] === 0) {
+  $ext = pathinfo($_FILES["foto"]["name"], PATHINFO_EXTENSION);
+  $nama_foto = "foto_" . $_SESSION["user_id"] . "." . $ext;
+  move_uploaded_file($_FILES["foto"]["tmp_name"], "profile_photos/" . $nama_foto);
+
+  $stmt = $conn->prepare("UPDATE users SET foto = ? WHERE id = ?");
+  $stmt->bind_param("si", $nama_foto, $_SESSION["user_id"]);
+  $stmt->execute();
+  $stmt->close();
+
+  header("Location: kelola.php");
+  exit;
+}
+
+$stmt = $conn->prepare("SELECT username, email, foto FROM users WHERE id = ?");
 $stmt->bind_param("i", $_SESSION["user_id"]);
 $stmt->execute();
-$result = $stmt->get_result();
-$user = $result->fetch_assoc();
+$user = $stmt->get_result()->fetch_assoc();
 $stmt->close();
+
+$foto = $user["foto"] ? "profile_photos/" . $user["foto"] : "assets/profile.png";
 ?>
 
 <!DOCTYPE html>
@@ -57,10 +72,17 @@ $stmt->close();
         <h1>Kelola Akun</h1>
         <div class="kelola-container">
           <div class="kelola-profile">
-            <img src="assets/profile.png" alt="Profile Photo" />
-            <h2>
-              <?= htmlspecialchars($user["username"]) ?>
-            </h2>
+            <div class="foto-wrapper">
+              <img src="<?= htmlspecialchars($foto) ?>" alt="Profile Photo" />
+              <form method="POST" action="kelola.php" enctype="multipart/form-data">
+                <label for="foto" class="btn-edit-foto">
+                  <img src="assets/pencil.png" alt="edit" />
+                </label>
+                <input type="file" name="foto" id="foto" accept="image/*" style="display:none"
+                  onchange="this.form.submit()" />
+              </form>
+            </div>
+            <h2><?= htmlspecialchars($user["username"]) ?></h2>
             <p>Kelola data privasi untuk kenyamanan Anda.</p>
           </div>
 
