@@ -13,6 +13,20 @@ $total_histori_belajar = $conn->query("SELECT COUNT(*) as total FROM histori WHE
 $konten_bulan_ini = $conn->query("SELECT COUNT(*) as total FROM jelajahi WHERE DATE_FORMAT(diperbarui, '%Y-%m') = DATE_FORMAT(NOW(), '%Y-%m')")->fetch_assoc()["total"];
 
 $konten_terbaru = $conn->query("SELECT judul, daerah FROM jelajahi ORDER BY diperbarui DESC LIMIT 3")->fetch_all(MYSQLI_ASSOC);
+
+$data_histori = $conn->query("
+    SELECT tipe, COUNT(*) as total 
+    FROM histori 
+    GROUP BY tipe
+")->fetch_all(MYSQLI_ASSOC);
+
+$data_bulanan = $conn->query("
+    SELECT DATE_FORMAT(diperbarui, '%b') as bulan, COUNT(*) as total 
+    FROM jelajahi 
+    WHERE YEAR(diperbarui) = YEAR(NOW()) 
+    GROUP BY DATE_FORMAT(diperbarui, '%Y-%m') 
+    ORDER BY diperbarui ASC
+")->fetch_all(MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -76,9 +90,7 @@ $konten_terbaru = $conn->query("SELECT judul, daerah FROM jelajahi ORDER BY dipe
                     <div class="container-left">
                         <div class="card">
                             <h3>Data Statistik</h3>
-                            <div class="image-wrapper">
-                                <img src="assets/data_statistik.png" alt="Gambar Data Statistik" />
-                            </div>
+                            <canvas id="chartBulanan"></canvas>
                         </div>
                         <div class="card">
                             <h3>Data Bulan Ini</h3>
@@ -90,9 +102,7 @@ $konten_terbaru = $conn->query("SELECT judul, daerah FROM jelajahi ORDER BY dipe
                     <div class="container-right">
                         <div class="card">
                             <h3>Distribusi Konten</h3>
-                            <div class="image-wrapper">
-                                <img src="assets/distribusi_konten.png" alt="Gambar Distribusi Konten" />
-                            </div>
+                            <canvas id="chartDistribusi"></canvas>
                         </div>
                         <div class="card">
                             <h3>Apa yang bisa ditemukan disini?</h3>
@@ -127,6 +137,54 @@ $konten_terbaru = $conn->query("SELECT judul, daerah FROM jelajahi ORDER BY dipe
             const isClickOnHamburger = hamburger.contains(event.target);
             if (!isClickInsideNav && !isClickOnHamburger && nav.classList.contains("active")) {
                 closeMenu();
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const bulanMap = {
+            'Jan': 'Jan', 'Feb': 'Feb', 'Mar': 'Mar', 'Apr': 'Apr', 'May': 'Mei',
+            'Jun': 'Jun', 'Jul': 'Jul', 'Aug': 'Agu', 'Sep': 'Sep', 'Oct': 'Okt',
+            'Nov': 'Nov', 'Dec': 'Des'
+        };
+
+        const tipeMap = { 'jelajahi': 'Jelajahi', 'belajar': 'Belajar' };
+
+        const bulananLabel = <?= json_encode(array_column($data_bulanan, 'bulan')) ?>.map(b => bulanMap[b] || b);
+        const bulananData = <?= json_encode(array_column($data_bulanan, 'total')) ?>;
+
+        const distribusiLabel = <?= json_encode(array_column($data_histori, 'tipe')) ?>.map(t => tipeMap[t] || t);
+        const distribusiData = <?= json_encode(array_column($data_histori, 'total')) ?>;
+
+        new Chart(document.getElementById('chartBulanan'), {
+            type: 'bar',
+            data: {
+                labels: bulananLabel,
+                datasets: [{
+                    label: 'Konten per Bulan',
+                    data: bulananData,
+                    backgroundColor: '#543a14',
+                    barPercentage: 0.3,
+                    categoryPercentage: 0.5
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        new Chart(document.getElementById('chartDistribusi'), {
+            type: 'doughnut',
+            data: {
+                labels: distribusiLabel,
+                datasets: [{
+                    data: distribusiData,
+                    backgroundColor: ['#543a14', '#c49a6c']
+                }]
+            },
+            options: {
+                responsive: true
             }
         });
     </script>

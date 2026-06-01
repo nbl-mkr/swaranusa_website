@@ -183,18 +183,9 @@ header {
     border-bottom: none;
 }
 
-.image-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-.image-wrapper img {
-    width: 100%;
-    max-width: 240px;
-    min-width: 160px;
-    height: auto;
+canvas {
+    width: 100% !important;
+    max-height: 220px;
 }
 
 @media (max-width: 1024px) {
