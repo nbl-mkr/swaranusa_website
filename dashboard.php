@@ -141,6 +141,7 @@ $data_bulanan = $conn->query("
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <script>
         const bulanMap = {
             'Jan': 'Jan', 'Feb': 'Feb', 'Mar': 'Mar', 'Apr': 'Apr', 'May': 'Mei',
@@ -154,14 +155,13 @@ $data_bulanan = $conn->query("
         const bulananData = <?= json_encode(array_column($data_bulanan, 'total')) ?>;
 
         const distribusiLabel = <?= json_encode(array_column($data_histori, 'tipe')) ?>.map(t => tipeMap[t] || t);
-        const distribusiData = <?= json_encode(array_column($data_histori, 'total')) ?>;
-
+        const distribusiData = <?= json_encode(array_column($data_histori, 'total')) ?>.map(Number);
         new Chart(document.getElementById('chartBulanan'), {
             type: 'bar',
             data: {
                 labels: bulananLabel,
                 datasets: [{
-                    label: 'Konten per Bulan',
+                    label: 'Konten per bulan',
                     data: bulananData,
                     backgroundColor: '#543a14',
                     barPercentage: 0.3,
@@ -180,12 +180,22 @@ $data_bulanan = $conn->query("
                 labels: distribusiLabel,
                 datasets: [{
                     data: distribusiData,
-                    backgroundColor: ['#543a14', '#c49a6c']
+                    backgroundColor: ['#543a14', '#f0bb78']
                 }]
             },
             options: {
-                responsive: true
-            }
+                responsive: true,
+                plugins: {
+                    datalabels: {
+                        color: '#ffffff',
+                        formatter: (value, ctx) => {
+                            const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                            return ((value / total) * 100).toFixed(1) + '%';
+                        }
+                    }
+                }
+            },
+            plugins: [ChartDataLabels]
         });
     </script>
     <script src="navbar.js"></script>
