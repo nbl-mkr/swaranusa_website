@@ -2,7 +2,7 @@
 <nav id="navMenu">
     <ul>
         <li><a href="/belajar_html/swaranusa_website/landing.php"
-                class="<?= $halaman === 'landing.php' ? 'active' : '' ?>" onclick="closeMenu()">Beranda</a></li>
+                class="<?= $halaman === 'index.php' ? 'active' : '' ?>" onclick="closeMenu()">Beranda</a></li>
         <li><a href="/belajar_html/swaranusa_website/jelajahi.php"
                 class="<?= $halaman === 'jelajahi.php' ? 'active' : '' ?>" onclick="closeMenu()">Jelajahi</a></li>
         <li><a href="/belajar_html/swaranusa_website/belajar.php"
