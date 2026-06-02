@@ -7,7 +7,7 @@ if (!isset($_SESSION["isLoggedIn"]) || $_SESSION["role"] !== "admin") {
 }
 
 if (!isset($_GET["id"])) {
-    header("Location: dashboard.php?tab=belajar");
+    header("Location: konten.php?tab=belajar");
     exit;
 }
 
@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->execute();
     $stmt->close();
 
-    header("Location: dashboard.php?tab=belajar");
+    header("Location: konten.php?tab=belajar");
     exit;
 }
 
@@ -90,7 +90,7 @@ $konten = $stmt->get_result()->fetch_assoc();
 $stmt->close();
 
 if (!$konten) {
-    header("Location: dashboard.php?tab=belajar");
+    header("Location: konten.php?tab=belajar");
     exit;
 }
 
@@ -241,7 +241,7 @@ $konten_list = $conn->query("SELECT id, judul FROM jelajahi ORDER BY judul ASC")
                         </div>
                         <div class="form-btn">
                             <button type="submit">Simpan</button>
-                            <a href="dashboard.php?tab=belajar"><button type="button">Batal</button></a>
+                            <a href="konten.php?tab=belajar"><button type="button">Batal</button></a>
                         </div>
                     </form>
                 </div>
