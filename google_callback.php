@@ -28,7 +28,9 @@ if (isset($_GET['code'])) {
 
     if ($result->num_rows === 1) {
         $user = $result->fetch_assoc();
-        $conn->prepare("UPDATE users SET google_id = ? WHERE id = ?")->execute();
+        $update = $conn->prepare("UPDATE users SET google_id = ? WHERE id = ?");
+        $update->bind_param("si", $google_id, $user['id']);
+        $update->execute();
     } else {
         $insert = $conn->prepare("INSERT INTO users (username, email, google_id, role) VALUES (?, ?, ?, 'user')");
         $insert->bind_param("sss", $name, $email, $google_id);
