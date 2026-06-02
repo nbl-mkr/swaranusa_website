@@ -7,15 +7,13 @@ if (!isset($_SESSION["isLoggedIn"]) || $_SESSION["role"] !== "admin") {
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $konten_id = trim($_POST["konten_id"]);
+    $konten_id = 0;
     $judul = trim($_POST["judul"]);
     $daerah = trim($_POST["daerah"]);
     $kategori = trim($_POST["kategori"]);
     $pengertian = trim($_POST["pengertian"]);
     $cara_main = trim($_POST["cara_main"]);
     $keterangan_bagian = trim($_POST["keterangan_bagian"]);
-    $audio = trim($_POST["audio"]);
-    $video = trim($_POST["video"]);
     $diperbarui = date("Y-m-d");
 
     $gambar = "";
@@ -39,16 +37,38 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
     $gambar_bagian = implode(",", $gambar_bagian_files);
 
+    $audio_files = [];
+    if (isset($_FILES["audio"])) {
+        foreach ($_FILES["audio"]["tmp_name"] as $i => $tmp) {
+            if ($_FILES["audio"]["error"][$i] === 0) {
+                $nama_audio = $_FILES["audio"]["name"][$i];
+                move_uploaded_file($tmp, "gmbr_kontenbljr/" . $nama_audio);
+                $audio_files[] = $nama_audio;
+            }
+        }
+    }
+    $audio = implode(",", $audio_files);
+
+    $video_files = [];
+    if (isset($_FILES["video"])) {
+        foreach ($_FILES["video"]["tmp_name"] as $i => $tmp) {
+            if ($_FILES["video"]["error"][$i] === 0) {
+                $nama_video = $_FILES["video"]["name"][$i];
+                move_uploaded_file($tmp, "gmbr_kontenbljr/" . $nama_video);
+                $video_files[] = $nama_video;
+            }
+        }
+    }
+    $video = implode(",", $video_files);
+
     $stmt = $conn->prepare("INSERT INTO belajar (konten_id, judul, daerah, kategori, gambar, pengertian, cara_main, gambar_bagian, keterangan_bagian, audio, video, diperbarui) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("issssssssss s", $konten_id, $judul, $daerah, $kategori, $gambar, $pengertian, $cara_main, $gambar_bagian, $keterangan_bagian, $audio, $video, $diperbarui);
+    $stmt->bind_param("isssssssssss", $konten_id, $judul, $daerah, $kategori, $gambar, $pengertian, $cara_main, $gambar_bagian, $keterangan_bagian, $audio, $video, $diperbarui);
     $stmt->execute();
     $stmt->close();
 
     header("Location: dashboard.php?tab=belajar");
     exit;
 }
-
-$konten_list = $conn->query("SELECT id, judul FROM jelajahi ORDER BY judul ASC")->fetch_all(MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -91,7 +111,6 @@ $konten_list = $conn->query("SELECT id, judul FROM jelajahi ORDER BY judul ASC")
                 <h1>Tambah Konten Belajar</h1>
                 <div class="form-container">
                     <form method="POST" action="tambah_belajar.php" enctype="multipart/form-data">
-                        <input type="hidden" name="konten_id" value="<?= $konten['konten_id'] ?>" />
                         <div class="form-group">
                             <label>Judul</label>
                             <input type="text" name="judul" required />
@@ -122,7 +141,6 @@ $konten_list = $conn->query("SELECT id, judul FROM jelajahi ORDER BY judul ASC")
                         <div class="form-group">
                             <label>Gambar Hero</label>
                             <input type="file" name="gambar" accept="image/*" />
-                            <p>Contoh nama file: gambarAngklung</p>
                         </div>
                         <div class="form-group">
                             <label>Gambar Bagian (maks. 2 gambar)</label>
@@ -137,12 +155,11 @@ $konten_list = $conn->query("SELECT id, judul FROM jelajahi ORDER BY judul ASC")
                         </div>
                         <div class="form-group">
                             <label>Audio</label>
-                            <input type="text" name="audio" placeholder="Contoh: audio1.mp3,audio2.mp3" />
-                            <p>Pisahkan nama file dengan koma tanpa spasi</p>
+                            <input type="file" name="audio[]" accept="audio/*" multiple />
                         </div>
                         <div class="form-group">
                             <label>Video</label>
-                            <input type="text" name="video" placeholder="Contoh: video.mp4" />
+                            <input type="file" name="video[]" accept="video/*" multiple />
                         </div>
                         <div class="form-btn">
                             <button type="submit">Simpan</button>
