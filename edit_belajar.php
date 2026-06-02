@@ -190,7 +190,6 @@ $konten_list = $conn->query("SELECT id, judul FROM jelajahi ORDER BY judul ASC")
                             <label>Audio</label>
                             <input type="text" name="audio" value="<?= htmlspecialchars($konten['audio']) ?>"
                                 placeholder="Contoh: audio1.mp3,audio2.mp3" />
-                            <p>Pisahkan nama file dengan koma tanpa spasi</p>
                         </div>
                         <div class="form-group">
                             <label>Video</label>
