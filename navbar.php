@@ -1,8 +1,8 @@
 <?php $halaman = basename($_SERVER['PHP_SELF']); ?>
 <nav id="navMenu">
     <ul>
-        <li><a href="/belajar_html/swaranusa_website/landing.php"
-                class="<?= $halaman === 'index.php' ? 'active' : '' ?>" onclick="closeMenu()">Beranda</a></li>
+        <li><a href="/belajar_html/swaranusa_website/index.php" class="<?= $halaman === 'index.php' ? 'active' : '' ?>"
+                onclick="closeMenu()">Beranda</a></li>
         <li><a href="/belajar_html/swaranusa_website/jelajahi.php"
                 class="<?= $halaman === 'jelajahi.php' ? 'active' : '' ?>" onclick="closeMenu()">Jelajahi</a></li>
         <li><a href="/belajar_html/swaranusa_website/belajar.php"
