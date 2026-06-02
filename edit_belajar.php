@@ -143,16 +143,7 @@ $konten_list = $conn->query("SELECT id, judul FROM jelajahi ORDER BY judul ASC")
                         <input type="hidden" name="audio_lama" value="<?= htmlspecialchars($konten['audio']) ?>" />
                         <input type="hidden" name="video_lama" value="<?= htmlspecialchars($konten['video']) ?>" />
 
-                        <div class="form-group">
-                            <label>Konten Jelajahi Terkait</label>
-                            <select name="konten_id">
-                                <?php foreach ($konten_list as $k): ?>
-                                    <option value="<?= $k['id'] ?>" <?= $k['id'] == $konten['konten_id'] ? 'selected' : '' ?>>
-                                        <?= htmlspecialchars($k['judul']) ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
+                        <input type="hidden" name="konten_id" value="<?= $konten['konten_id'] ?>" />
                         <div class="form-group">
                             <label>Judul</label>
                             <input type="text" name="judul" value="<?= htmlspecialchars($konten['judul']) ?>"
