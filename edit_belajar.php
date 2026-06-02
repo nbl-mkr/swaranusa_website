@@ -21,8 +21,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $pengertian = trim($_POST["pengertian"]);
     $cara_main = trim($_POST["cara_main"]);
     $keterangan_bagian = trim($_POST["keterangan_bagian"]);
-    $audio = trim($_POST["audio"]);
-    $video = trim($_POST["video"]);
     $diperbarui = date("Y-m-d");
     $gambar = trim($_POST["gambar_lama"]);
 
@@ -47,6 +45,34 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
     $gambar_bagian = implode(",", $gambar_bagian_files);
+
+    $audio = trim($_POST["audio_lama"]);
+    $audio_files = $audio ? explode(",", $audio) : [];
+
+    if (isset($_FILES["audio"])) {
+        foreach ($_FILES["audio"]["tmp_name"] as $i => $tmp) {
+            if ($_FILES["audio"]["error"][$i] === 0) {
+                $nama_audio = $_FILES["audio"]["name"][$i];
+                move_uploaded_file($tmp, "audio_kontenbljr/" . $nama_audio);
+                $audio_files[] = $nama_audio;
+            }
+        }
+    }
+    $audio = implode(",", $audio_files);
+
+    $video = trim($_POST["video_lama"]);
+    $video_files = $video ? explode(",", $video) : [];
+
+    if (isset($_FILES["video"])) {
+        foreach ($_FILES["video"]["tmp_name"] as $i => $tmp) {
+            if ($_FILES["video"]["error"][$i] === 0) {
+                $nama_video = $_FILES["video"]["name"][$i];
+                move_uploaded_file($tmp, "video_kontenbljr/" . $nama_video);
+                $video_files[] = $nama_video;
+            }
+        }
+    }
+    $video = implode(",", $video_files);
 
     $stmt = $conn->prepare("UPDATE belajar SET konten_id=?, judul=?, daerah=?, kategori=?, gambar=?, pengertian=?, cara_main=?, gambar_bagian=?, keterangan_bagian=?, audio=?, video=?, diperbarui=? WHERE id=?");
     $stmt->bind_param("issssssssssi", $konten_id, $judul, $daerah, $kategori, $gambar, $pengertian, $cara_main, $gambar_bagian, $keterangan_bagian, $audio, $video, $diperbarui, $id);
@@ -110,10 +136,13 @@ $konten_list = $conn->query("SELECT id, judul FROM jelajahi ORDER BY judul ASC")
             <section class="content-area">
                 <h1>Edit Konten Belajar</h1>
                 <div class="form-container">
-                    <form method="POST" action="edit_belajar.php?id=<?= $id ?>" enctype="multipart/form-data"> <input
-                            type="hidden" name="gambar_lama" value="<?= htmlspecialchars($konten['gambar']) ?>" />
+                    <form method="POST" action="edit_belajar.php?id=<?= $id ?>" enctype="multipart/form-data">
+                        <input type="hidden" name="gambar_lama" value="<?= htmlspecialchars($konten['gambar']) ?>" />
                         <input type="hidden" name="gambar_bagian_lama"
                             value="<?= htmlspecialchars($konten['gambar_bagian']) ?>" />
+                        <input type="hidden" name="audio_lama" value="<?= htmlspecialchars($konten['audio']) ?>" />
+                        <input type="hidden" name="video_lama" value="<?= htmlspecialchars($konten['video']) ?>" />
+
                         <div class="form-group">
                             <label>Konten Jelajahi Terkait</label>
                             <select name="konten_id">
@@ -188,13 +217,36 @@ $konten_list = $conn->query("SELECT id, judul FROM jelajahi ORDER BY judul ASC")
                         </div>
                         <div class="form-group">
                             <label>Audio</label>
-                            <input type="text" name="audio" value="<?= htmlspecialchars($konten['audio']) ?>"
-                                placeholder="Contoh: audio1.mp3,audio2.mp3" />
+                            <?php if ($konten['audio']): ?>
+                                <div class="preview-audio">
+                                    <?php foreach (explode(",", $konten['audio']) as $a): ?>
+                                        <?php $a = trim($a); ?>
+                                        <div class="audio-item">
+                                            <span><?= htmlspecialchars($a) ?></span>
+                                            <audio controls src="audio_kontenbljr/<?= htmlspecialchars($a) ?>"></audio>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            <?php endif; ?>
+                            <input type="file" name="audio[]" accept="audio/*" multiple />
+                            <p>Upload file audio baru untuk menambah audio</p>
                         </div>
                         <div class="form-group">
                             <label>Video</label>
-                            <input type="text" name="video" value="<?= htmlspecialchars($konten['video']) ?>"
-                                placeholder="Contoh: video.mp4" />
+                            <?php if ($konten['video']): ?>
+                                <div class="preview-video">
+                                    <?php foreach (explode(",", $konten['video']) as $v): ?>
+                                        <?php $v = trim($v); ?>
+                                        <div class="video-item">
+                                            <span><?= htmlspecialchars($v) ?></span>
+                                            <video controls width="300"
+                                                src="video_kontenbljr/<?= htmlspecialchars($v) ?>"></video>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            <?php endif; ?>
+                            <input type="file" name="video[]" accept="video/*" multiple />
+                            <p>Upload file video baru untuk menambah video</p>
                         </div>
                         <div class="form-btn">
                             <button type="submit">Simpan</button>
