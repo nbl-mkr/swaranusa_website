@@ -91,18 +91,7 @@ $konten_list = $conn->query("SELECT id, judul FROM jelajahi ORDER BY judul ASC")
                 <h1>Tambah Konten Belajar</h1>
                 <div class="form-container">
                     <form method="POST" action="tambah_belajar.php" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label>Konten Jelajahi Terkait</label>
-                            <select name="konten_id">
-                                <option value="">Pilih konten jelajahi</option>
-                                <?php foreach ($konten_list as $k): ?>
-                                    <option value="<?= $k['id'] ?>">
-                                        <?= htmlspecialchars($k['judul']) ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
-                            <p>Pilih konten jelajahi yang berkaitan dengan konten belajar ini</p>
-                        </div>
+                        <input type="hidden" name="konten_id" value="<?= $konten['konten_id'] ?>" />
                         <div class="form-group">
                             <label>Judul</label>
                             <input type="text" name="judul" required />
