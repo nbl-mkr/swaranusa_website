@@ -203,8 +203,6 @@ $konten_list = $conn->query("SELECT id, judul FROM jelajahi ORDER BY judul ASC")
                             <label>Keterangan Bagian</label>
                             <textarea name="keterangan_bagian"
                                 rows="3"><?= htmlspecialchars($konten['keterangan_bagian']) ?></textarea>
-                            <p>Pisahkan keterangan tiap gambar dengan tanda | contoh: Keterangan gambar 1|Keterangan
-                                gambar 2</p>
                         </div>
                         <div class="form-group">
                             <label>Audio</label>
