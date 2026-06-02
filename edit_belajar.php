@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         foreach ($_FILES["audio"]["tmp_name"] as $i => $tmp) {
             if ($_FILES["audio"]["error"][$i] === 0) {
                 $nama_audio = $_FILES["audio"]["name"][$i];
-                move_uploaded_file($tmp, "audio_kontenbljr/" . $nama_audio);
+                move_uploaded_file($tmp, "gmbr_kontenbljr/" . $nama_audio);
                 $audio_files[] = $nama_audio;
             }
         }
@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         foreach ($_FILES["video"]["tmp_name"] as $i => $tmp) {
             if ($_FILES["video"]["error"][$i] === 0) {
                 $nama_video = $_FILES["video"]["name"][$i];
-                move_uploaded_file($tmp, "video_kontenbljr/" . $nama_video);
+                move_uploaded_file($tmp, "gmbr_kontenbljr/" . $nama_video);
                 $video_files[] = $nama_video;
             }
         }
@@ -223,7 +223,7 @@ $konten_list = $conn->query("SELECT id, judul FROM jelajahi ORDER BY judul ASC")
                                         <?php $a = trim($a); ?>
                                         <div class="audio-item">
                                             <span><?= htmlspecialchars($a) ?></span>
-                                            <audio controls src="audio_kontenbljr/<?= htmlspecialchars($a) ?>"></audio>
+                                            <audio controls src="gmbr_kontenbljr/<?= htmlspecialchars($a) ?>"></audio>
                                         </div>
                                     <?php endforeach; ?>
                                 </div>
@@ -240,7 +240,7 @@ $konten_list = $conn->query("SELECT id, judul FROM jelajahi ORDER BY judul ASC")
                                         <div class="video-item">
                                             <span><?= htmlspecialchars($v) ?></span>
                                             <video controls width="300"
-                                                src="video_kontenbljr/<?= htmlspecialchars($v) ?>"></video>
+                                                src="gmbr_kontenbljr/<?= htmlspecialchars($v) ?>"></video>
                                         </div>
                                     <?php endforeach; ?>
                                 </div>
