@@ -66,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->execute();
     $stmt->close();
 
-    header("Location: dashboard.php?tab=belajar");
+    header("Location: konten.php?tab=belajar");
     exit;
 }
 ?>
@@ -163,7 +163,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         </div>
                         <div class="form-btn">
                             <button type="submit">Simpan</button>
-                            <a href="dashboard.php?tab=belajar"><button type="button">Batal</button></a>
+                            <a href="konten.php?tab=belajar"><button type="button">Batal</button></a>
                         </div>
                     </form>
                 </div>
