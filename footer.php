@@ -11,7 +11,7 @@
         <div class="footer-section nav">
             <h2>Navigasi</h2>
             <ul>
-                <li><a href="landing.php">Beranda</a></li>
+                <li><a href="index.php">Beranda</a></li>
                 <li><a href="jelajahi.php">Jelajahi</a></li>
                 <li><a href="belajar.php">Belajar</a></li>
                 <li><a href="tentang.php">Tentang</a></li>
