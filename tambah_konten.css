@@ -19,12 +19,6 @@
     font-weight: 700;
 }
 
-.form-group p {
-    font-size: 12px;
-    font-family: "Montserrat", sans-serif;
-    color: #6c6c6c;
-}
-
 .form-group input[type="text"],
 .form-group textarea {
     border: 1.5px solid #ccc;
