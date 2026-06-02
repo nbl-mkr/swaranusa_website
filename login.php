@@ -82,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
 
         <div class="social-buttons">
-          <button class="google-button">
+          <button type="button" class="google-button" onclick="window.location.href='google_auth.php'">
             <img src="assets/google.png" alt="Google" />
             Google
           </button>
