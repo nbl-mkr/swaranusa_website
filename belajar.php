@@ -1,4 +1,8 @@
-<?php require_once "koneksi.php"; ?>
+<?php
+require_once "koneksi.php";
+
+$konten_list = $conn->query("SELECT * FROM belajar ORDER BY id ASC")->fetch_all(MYSQLI_ASSOC);
+?>
 <!DOCTYPE html>
 <html lang="id">
 
@@ -20,13 +24,11 @@
         <h1>SwaraNusa</h1>
       </li>
     </ul>
-
     <div class="hamburger" onclick="toggleMenu()">
       <span></span>
       <span></span>
       <span></span>
     </div>
-
     <?php include 'navbar.php'; ?>
   </header>
 
@@ -40,69 +42,33 @@
   </section>
 
   <div class="container">
-    <div class="card">
-      <img src="gmbr_bljr/kolintang.png" alt="Kolintang" />
-      <div class="card-content">
-        <h3>Kolintang</h3>
-        <p>
-          Pelajari harmoni kolintang, mulai dari laras, pola ketukan, hingga
-          kolaborasi antar-instrumen.
-        </p>
-        <div class="progress-bar">
-          <div class="progress"></div>
-        </div>
-        <a href="konten_belajar.php?id=1"><button class="btn">Pelajari</button>
-        </a>
+    <?php foreach ($konten_list as $i => $konten): ?>
+      <div class="card">
+        <?php if ($i % 2 === 0): ?>
+          <img src="gmbr_kontenbljr/<?= htmlspecialchars($konten['gambar']) ?>"
+            alt="<?= htmlspecialchars($konten['judul']) ?>" />
+          <div class="card-content">
+            <h3><?= htmlspecialchars($konten['judul']) ?></h3>
+            <p><?= htmlspecialchars($konten['pengertian']) ?></p>
+            <div class="progress-bar">
+              <div class="progress"></div>
+            </div>
+            <a href="konten_belajar.php?id=<?= $konten['id'] ?>"><button class="btn">Pelajari</button></a>
+          </div>
+        <?php else: ?>
+          <div class="card-content">
+            <h3><?= htmlspecialchars($konten['judul']) ?></h3>
+            <p><?= htmlspecialchars($konten['pengertian']) ?></p>
+            <div class="progress-bar">
+              <div class="progress"></div>
+            </div>
+            <a href="konten_belajar.php?id=<?= $konten['id'] ?>"><button class="btn">Pelajari</button></a>
+          </div>
+          <img src="gmbr_kontenbljr/<?= htmlspecialchars($konten['gambar']) ?>"
+            alt="<?= htmlspecialchars($konten['judul']) ?>" />
+        <?php endif; ?>
       </div>
-    </div>
-
-    <div class="card">
-      <div class="card-content">
-        <h3>Angklung</h3>
-        <p>
-          Pelajari teknik goyang angklung, harmoni ansambel, dan repertoar
-          angklung modern dengan cara yang menyenangkan.
-        </p>
-        <div class="progress-bar">
-          <div class="progress" style="width: 65%"></div>
-        </div>
-        <a href="konten_belajar.php?id=2"><button class="btn">Pelajari</button>
-        </a>
-      </div>
-      <img src="gmbr_bljr/angklung.jpg" alt="Angklung" />
-    </div>
-
-    <div class="card">
-      <img src="gmbr_bljr/sasando.png" alt="Sasando" />
-      <div class="card-content">
-        <h3>Sasando</h3>
-        <p>
-          Kuasai teknik petikan dan irama khas dari alat musik petik
-          tradisional Sasando yang unik.
-        </p>
-        <div class="progress-bar">
-          <div class="progress" style="width: 20%"></div>
-        </div>
-        <a href="konten_belajar.php?id=3"><button class="btn">Pelajari</button>
-        </a>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-content">
-        <h3>Gamelan</h3>
-        <p>
-          Pelajari harmoni gamelan Jawa, mulai dari laras, pola tabuhan,
-          hingga ansambel instrumen.
-        </p>
-        <div class="progress-bar">
-          <div class="progress" style="width: 60%"></div>
-        </div>
-        <a href="konten_belajar.php?id=4"><button class="btn">Pelajari</button>
-        </a>
-      </div>
-      <img src="gmbr_bljr/gamelan.jpg" alt="Gamelan" />
-    </div>
+    <?php endforeach; ?>
   </div>
 
   <div class="cta">

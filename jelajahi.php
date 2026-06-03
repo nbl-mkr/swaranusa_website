@@ -97,8 +97,8 @@ $stmt->close();
           <?php foreach ($konten_list as $konten): ?>
             <div class="card">
               <div class="image-wrapper">
-                <img src="gmbr_jljh/Gambar <?= htmlspecialchars($konten['judul']) ?>.png"
-                  onerror="this.src='gmbr_jljh/Gambar <?= htmlspecialchars($konten['judul']) ?>.jpg'" />
+                <img src="gmbr_kontenjljh/<?= htmlspecialchars($konten['gambar']) ?>"
+                  onerror="this.src='gmbr_jljh/placeholder.png'" />
                 <div class="region-tag"><?= htmlspecialchars($konten['daerah']) ?></div>
               </div>
               <div class="card-content">

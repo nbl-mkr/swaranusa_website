@@ -113,6 +113,18 @@ body {
   width: 55%;
 }
 
+.card-content {
+    width: 55%;
+}
+
+.card-content p {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-clamp: 2;
+}
+
 .card h3 {
   margin: 0 0 8px;
   font-size: 14px;
