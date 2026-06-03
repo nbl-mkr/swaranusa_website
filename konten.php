@@ -7,6 +7,21 @@ if (!isset($_SESSION["isLoggedIn"]) || $_SESSION["role"] !== "admin") {
 }
 
 if (isset($_POST["hapus_id"])) {
+    $stmt = $conn->prepare("SELECT gambar, galeri FROM jelajahi WHERE id = ?");
+    $stmt->bind_param("i", $_POST["hapus_id"]);
+    $stmt->execute();
+    $data = $stmt->get_result()->fetch_assoc();
+    $stmt->close();
+
+    if ($data['gambar']) {
+        unlink("gmbr_kontenjljh/" . $data['gambar']);
+    }
+    if ($data['galeri']) {
+        foreach (explode(",", $data['galeri']) as $g) {
+            unlink("gmbr_kontenjljh/" . trim($g));
+        }
+    }
+
     $hapus = $conn->prepare("DELETE FROM jelajahi WHERE id = ?");
     $hapus->bind_param("i", $_POST["hapus_id"]);
     $hapus->execute();
@@ -16,6 +31,31 @@ if (isset($_POST["hapus_id"])) {
 }
 
 if (isset($_POST["hapus_belajar_id"])) {
+    $stmt = $conn->prepare("SELECT gambar, gambar_bagian, audio, video FROM belajar WHERE id = ?");
+    $stmt->bind_param("i", $_POST["hapus_belajar_id"]);
+    $stmt->execute();
+    $data = $stmt->get_result()->fetch_assoc();
+    $stmt->close();
+
+    if ($data['gambar']) {
+        unlink("gmbr_kontenbljr/" . $data['gambar']);
+    }
+    if ($data['gambar_bagian']) {
+        foreach (explode(",", $data['gambar_bagian']) as $g) {
+            unlink("gmbr_kontenbljr/" . trim($g));
+        }
+    }
+    if ($data['audio']) {
+        foreach (explode(",", $data['audio']) as $a) {
+            unlink("gmbr_kontenbljr/" . trim($a));
+        }
+    }
+    if ($data['video']) {
+        foreach (explode(",", $data['video']) as $v) {
+            unlink("gmbr_kontenbljr/" . trim($v));
+        }
+    }
+
     $hapus = $conn->prepare("DELETE FROM belajar WHERE id = ?");
     $hapus->bind_param("i", $_POST["hapus_belajar_id"]);
     $hapus->execute();
