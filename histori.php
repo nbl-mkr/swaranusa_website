@@ -104,7 +104,7 @@ function waktu_lalu($datetime)
                                             <h3><?= htmlspecialchars($item["judul"]) ?></h3>
                                             <p><?= htmlspecialchars($item["kategori"]) ?> • <?= waktu_lalu($item["dilihat_pada"]) ?>
                                             </p>
-                                            <p><?= htmlspecialchars($item["deskripsi"]) ?></p>
+                                            <p><?= htmlspecialchars($item["informasi_umum"]) ?></p>
                                         </div>
                                         <div class="card-bottom">
                                             <p><?= htmlspecialchars($item["daerah"]) ?></p>
