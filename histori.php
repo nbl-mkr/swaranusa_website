@@ -10,7 +10,7 @@ $user_id = $_SESSION["user_id"];
 $tab = isset($_GET["tab"]) ? $_GET["tab"] : "jelajahi";
 
 $stmt_jelajahi = $conn->prepare("
-    SELECT j.judul, j.daerah, j.kategori, j.deskripsi, j.gambar, h.dilihat_pada
+    SELECT j.judul, j.daerah, j.kategori, j.informasi_umum, j.gambar, h.dilihat_pada
     FROM histori h
     JOIN jelajahi j ON h.konten_id = j.id
     WHERE h.user_id = ? AND h.tipe = 'jelajahi'
