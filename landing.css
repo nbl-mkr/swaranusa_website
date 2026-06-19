@@ -18,7 +18,7 @@ body {
 }
 
 .hero {
-  height: 90vh;
+  height: 95vh;
   background: #543a14 center/cover no-repeat;
   display: flex;
   justify-content: center;
@@ -68,7 +68,7 @@ body {
 }
 
 .hero-right img {
-  height: 90vh;
+  height: 95vh;
 }
 
 .section {
